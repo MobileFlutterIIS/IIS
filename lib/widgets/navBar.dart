@@ -4,7 +4,7 @@ import 'package:iis/pages/additional/AdditionalFunctions.dart';
 import 'package:iis/pages/schedulechoice/ChooseSchedule.dart';
 import 'package:iis/pages/disciplinlist/DisciplinList.dart';
 import 'package:iis/pages/studentscale/StudentScale.dart';
-import 'package:iis/pages/userlogin/UserLogin.dart';
+import 'package:iis/pages/userlogin/LoginUI/UserLogin.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -32,6 +32,7 @@ class _MyNavBar extends State<NavBar> {
       Icon(Icons.settings)
     ];
     return Scaffold(
+      backgroundColor: Colors.white,
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
           iconTheme: IconThemeData(color: Colors.white),
@@ -56,38 +57,3 @@ class _MyNavBar extends State<NavBar> {
   }
 }
 
-// Container (
-// color: Color.fromRGBO(251, 150, 158, 0.9),
-// child: Padding(
-// padding: const EdgeInsets.symmetric(
-// horizontal: 5.0,
-// vertical: 1.5,
-// ),
-// child: GNav(
-// gap: 4,
-// padding: EdgeInsets.all(18),
-// backgroundColor: Color.fromRGBO(251, 150, 158, 0.9),
-// tabBackgroundColor: Color.fromRGBO(214, 112, 120, 0.9),
-// color: Colors.white,
-// activeColor: Colors.white,
-// tabs: const [
-// GButton(
-// icon: Icons.schedule,
-// text: 'Расписание',
-// ),
-// GButton(
-// icon: Icons.book,
-// text: 'Зачётка',
-// ),
-// GButton(
-// icon: Icons.rate_review,
-// text: 'Рейтинг',
-// ),
-// GButton(
-// icon: Icons.settings,
-// text: 'Ещё',
-// ),
-// ],
-// ),
-// ),
-// ),

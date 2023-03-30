@@ -15,6 +15,7 @@ class _MySchedule extends State<ChooseSchedule> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    backgroundColor: Colors.white,
     body: Center(
       child: Align(
         alignment: FractionalOffset(0.93,0.97),
