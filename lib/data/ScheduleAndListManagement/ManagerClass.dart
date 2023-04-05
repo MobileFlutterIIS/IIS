@@ -99,6 +99,37 @@ class ManagerClass
       logger.d('no shcedule for u bruv :(');
   }
 
+  static Future<void> UpdateAll() async
+  {
+    ///
+    /// ADD WIDGET TO LOAD
+    ///
+    bool gtg = await InternetInfo.GetConnect();
+    if (gtg)
+    {
+      List<Group>? temp1 = [];
+      temp1 = await InternetInfo.GetGroupsNet();
+      if (temp1!.isNotEmpty) { groups.clearAll() ;await groups.fillAll(temp1);}
+      List<Post>? temp2 =[];
+      temp2 = await InternetInfo.GetPostsNet();
+      if (temp2!.isNotEmpty) { tutors.clearAll() ;await tutors.fillAll(temp2);}
+      List<ScheduleInfo>? temp3;
+      temp3 = await schedules.getSchedules();
+      if (temp3 != null)
+      temp3.forEach((element) {
+        if (element.employeeDto != null)
+          {
+            getTutorScheduleToBase(element.employeeDto!);
+          }
+        else
+          {
+            getGroupsScheduleToBase(element.studentGroupDto!.name!);
+          }
+        logger.i("Done Updating");
+      });
+    }
+  }
+
 
 
 }

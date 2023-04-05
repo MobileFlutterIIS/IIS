@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:iis/widgets/LoginScreenComponents/UserName.dart';
-import 'package:iis/widgets/LoginScreenComponents/SignInButton.dart';
 import 'package:iis/widgets/LoginScreenComponents/Password.dart';
+import 'package:iis/widgets/LoginScreenComponents/SignInButton.dart';
+import 'package:iis/widgets/LoginScreenComponents/UserName.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/GetUserNameAndPassword.dart';
-import 'package:iis/services/CheckValidatingUserAndPassword/SendRequest.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/api_service.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
+import 'package:dio/dio.dart';
+import 'package:retrofit/retrofit.dart';
 import 'package:iis/screens/AccountPage.dart';
 
 class UserLogin extends StatelessWidget{
@@ -16,28 +19,33 @@ class UserLogin extends StatelessWidget{
   String? password;
 
   String GetUsername(){
-    //print(userNameController.text);
     return setUsername(userNameController);
   }
   String GetPassword(){
-    //print(passwordController.text);
     return setPassword(passwordController);
   }
 
-  void signUserIn() async {
-    //final userProfile = await post(setUsername(userNameController), setPassword(passwordController));
-
-    // final userProfile = await getUserProfile(GetUsername(), GetPassword());
-    // if (userProfile == null) {
-    //   print('rr');
-    // } else {
-    //   final a = userProfile;
-    //   AccountPage();
-    // }
-    Session cookieResponse = new Session();
-    final reasponseCookie = await cookieResponse.post('https://iis.bsuir.by/api/v1/auth/login', getData(GetUsername(), GetPassword()));
-    print(reasponseCookie.toString());
-    
+  void signUserIn(BuildContext context) async {
+    final dio = Dio();
+    final apiService = ApiService(dio);
+    final loginResponse = await loginToAccount(GetUsername(), GetPassword());
+    String cookie = "";
+    dio.interceptors.add(
+        InterceptorsWrapper(onRequest: (options, handler) {
+          cookie =loginResponse.cookie.toString();
+          options.headers.addAll({"cookie": cookie});
+          return handler.next(options);
+        })
+    );
+    try {
+      final response = await apiService.getUserProfile(cookie);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AccountPage(user: response)),
+      );
+    } on DioError catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -59,7 +67,7 @@ class UserLogin extends StatelessWidget{
             Password(
               controller: passwordController,
               hintText: 'Пароль',
-              obsecureText: false,
+              obsecureText: true,
             ),
 
             const SizedBox(height: 10),
@@ -78,7 +86,7 @@ class UserLogin extends StatelessWidget{
 
             const SizedBox(height: 25),
             SignInButton(
-              onTap: signUserIn,
+              onTap: () => signUserIn(context), // Передаем контекст в функцию
             ),
           ],
         ),

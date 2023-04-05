@@ -130,6 +130,14 @@ class _NavigationScreenState extends State<NavigationScreen> {
                     MaterialPageRoute(builder: (context) => Lists(),),).then((_) => getlist());
                 }, child: Icon(Icons.add),)
             ),
+            Container(
+                child: ElevatedButton(onPressed: () async {
+                  await ManagerClass.UpdateAll();
+                  setState(() {
+                    getlist();
+                  });
+                }, child: Icon(Icons.update_outlined),)
+            ),
           ],
         ),
       ),
