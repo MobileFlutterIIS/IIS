@@ -1,9 +1,17 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:iis/widgets/navBar.dart';
+import 'package:iis/widgets/NavigationBar.dart';
+import 'package:dio/dio.dart';
+import 'package:iis/data/HiveDatabase.dart';
+import 'package:iis/services/ScheduleAndListFromNet/Api.dart';
 
-void main() {
+Future<void> main() async {
+  final dio = Dio(); // Provide a dio instance
+  dio.options.headers["Demo-Header"] = "demo header"; // config your dio headers globally
+  final client = RestClient(dio);
+  await HiveInjector.setup();
+
   runApp(const MyApp());
 }
 

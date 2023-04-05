@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:iis/pages/userlogin/LoginUI/Components/UserName.dart';
-import 'package:iis/pages/userlogin/LoginUI/Components/Password.dart';
-import 'package:iis/pages/userlogin/LoginUI/Components/SignInButton.dart';
-import 'package:iis/pages/userlogin/CheckValidatingUserAndPassword/GetUserNameAndPassword.dart';
-import 'package:iis/pages/userlogin/CheckValidatingUserAndPassword/SendRequest.dart';
-import 'package:iis/pages/AccPage/AccountPage.dart';
+import 'package:iis/widgets/LoginScreenComponents/UserName.dart';
+import 'package:iis/widgets/LoginScreenComponents/SignInButton.dart';
+import 'package:iis/widgets/LoginScreenComponents/Password.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/GetUserNameAndPassword.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/SendRequest.dart';
+import 'package:iis/screens/AccountPage.dart';
 
 class UserLogin extends StatelessWidget{
   UserLogin({super.key});

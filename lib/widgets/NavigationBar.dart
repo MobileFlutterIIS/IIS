@@ -1,10 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:iis/pages/additional/AdditionalFunctions.dart';
-import 'package:iis/pages/schedulechoice/ChooseSchedule.dart';
-import 'package:iis/pages/disciplinlist/DisciplinList.dart';
-import 'package:iis/pages/studentscale/StudentScale.dart';
-import 'package:iis/pages/userlogin/LoginUI/UserLogin.dart';
+import 'package:iis/screens/AdditionalFunctions.dart';
+import 'package:iis/screens/DisciplinList.dart';
+import 'package:iis/screens/StudentScale.dart';
+import 'package:iis/screens/UserLogin.dart';
+import 'package:iis/screens/AccountPage.dart';
+import 'package:iis/screens/Schedule/NavigationBetween.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class NavBar extends StatefulWidget {
 class _MyNavBar extends State<NavBar> {
   int pageNum = 0;
   final pages = [
-    ChooseSchedule(),
+    NavigationScreen(),
     DisciplinList(),
     UserLogin(),
     StudentScale(),
