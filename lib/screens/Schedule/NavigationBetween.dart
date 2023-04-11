@@ -8,6 +8,7 @@ import 'package:iis/screens/Schedule/Schedudel.dart';
 import 'package:iis/screens/Schedule/Lists.dart';
 import 'package:iis/data/ScheduleAndListManagement/ManagerClass.dart';
 import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 
 final logger = Logger();
 
@@ -21,7 +22,7 @@ class NavigationScreen extends StatefulWidget {
 
 class _NavigationScreenState extends State<NavigationScreen> {
 
-
+   ManagerClass manager = ManagerClass();
   ScheduleInfo? whatscedule;
   String? lastopened;
   List<ScheduleInfo> list = [];
@@ -64,15 +65,16 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Schedule'),
-        //leading: IconButton(icon: Icon(Icons.menu), onPressed: () {
-        //
-        //},),
-      ),
-      drawer: drawer(context, list),
-      body: Center(child: SafeArea(child: ((whatscedule != null) ? Schedule(whatscedule!) : Center(child: Icon(Icons.downloading),)))),
+    return  Scaffold(
+        appBar: AppBar(
+          title: Text('Schedule'),
+          //leading: IconButton(icon: Icon(Icons.menu), onPressed: () {
+          //
+          //},),
+        ),
+        drawer: drawer(context, list),
+        body: Center(child: SafeArea(child: ((whatscedule != null) ? Schedule(whatscedule!) : Center(child: Icon(Icons.downloading),)))),
+
     );
   }
 
@@ -132,7 +134,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
             ),
             Container(
                 child: ElevatedButton(onPressed: () async {
-                  await ManagerClass.UpdateAll();
+                  await manager.UpdateAll();
                   setState(() {
                     getlist();
                   });

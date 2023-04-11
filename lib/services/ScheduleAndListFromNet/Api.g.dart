@@ -17,9 +17,9 @@ class PostAdapter extends TypeAdapter<Post> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Post(
-      fields[1] as String,
-      fields[2] as String,
-      fields[3] as String,
+      fields[1] as String?,
+      fields[2] as String?,
+      fields[3] as String?,
       fields[4] as String?,
       fields[5] as String?,
       fields[6] as String,
@@ -130,9 +130,9 @@ class GroupAdapter extends TypeAdapter<Group> {
 // **************************************************************************
 
 Post _$PostFromJson(Map<String, dynamic> json) => Post(
-      json['firstName'] as String,
-      json['lastName'] as String,
-      json['middleName'] as String,
+      json['firstName'] as String?,
+      json['lastName'] as String?,
+      json['middleName'] as String?,
       json['degree'] as String?,
       json['rank'] as String?,
       json['photoLink'] as String,
@@ -205,7 +205,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<Post>>(Options(
       method: 'GET',
@@ -230,7 +230,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<Group>>(Options(
       method: 'GET',
@@ -255,7 +255,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<ScheduleInfo>(Options(
       method: 'GET',
@@ -278,7 +278,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<ScheduleInfo>(Options(
       method: 'GET',

@@ -24,11 +24,11 @@ abstract class RestClient {
 @HiveType(typeId: 0)
 class Post{
  @HiveField(1)
-  String firstName;
+  String? firstName;
  @HiveField(2)
-  String lastName;
+  String? lastName;
  @HiveField(3)
-  String middleName;
+  String? middleName;
  @HiveField(4)
   String? degree;
  @HiveField(5)

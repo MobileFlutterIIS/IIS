@@ -1,4 +1,5 @@
 
+import 'package:flutter/material.dart';
 import 'package:iis/services/ScheduleAndListFromNet/Api.dart';
 import 'package:iis/services/ScheduleAndListFromNet/ApiSchedule.dart';
 import 'package:iis/data/ScheduleAndListManagement/Schedules.dart';
@@ -9,7 +10,7 @@ import 'package:logger/logger.dart';
 
 final logger = new Logger();
 
-class ManagerClass
+class ManagerClass with ChangeNotifier
 {
   static Tutorsdatabase tutors = Tutorsdatabase();
   static Groupsdatabase groups = Groupsdatabase();
@@ -26,7 +27,7 @@ class ManagerClass
     List<Post>? temp =[];
     //temp = await InternetInfo.GetPostsNet();
     if (temp!.isNotEmpty) { tutors.clearAll() ;await tutors.fillAll(temp); logger.d ('Not empty');}
-    else {temp = tutors.getPosts(); temp!.sort((a, b) => a.lastName.compareTo(b.lastName) ) ; logger.d ('Empty');}
+    else {temp = tutors.getPosts(); temp!.sort((a, b) => a.lastName!.compareTo(b.lastName!) ) ; logger.d ('Empty');}
     return temp;
   }
 
@@ -99,7 +100,7 @@ class ManagerClass
       logger.d('no shcedule for u bruv :(');
   }
 
-  static Future<void> UpdateAll() async
+  Future<void> UpdateAll() async
   {
     ///
     /// ADD WIDGET TO LOAD
@@ -128,8 +129,8 @@ class ManagerClass
         logger.i("Done Updating");
       });
     }
+    notifyListeners();
   }
 
-
-
 }
+

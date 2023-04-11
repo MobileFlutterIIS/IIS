@@ -8,6 +8,10 @@ import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:iis/screens/AccountPage.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart';
+import 'package:logger/logger.dart';
+
+final logger = Logger();
 
 class UserLogin extends StatelessWidget{
   UserLogin({super.key});
@@ -25,23 +29,39 @@ class UserLogin extends StatelessWidget{
     return setPassword(passwordController);
   }
 
+  // void signUserIn(BuildContext context) async {
+  //   final dio = Dio();
+  //   final apiService = ApiService(dio);
+  //   final loginResponse = await loginToAccount(GetUsername(), GetPassword());
+  //   String cookie = "";
+  //   dio.interceptors.add(
+  //       InterceptorsWrapper(onRequest: (options, handler) {
+  //         cookie =loginResponse.cookie.toString();
+  //         options.headers.addAll({"cookie": cookie});
+  //         return handler.next(options);
+  //       })
+  //   );
+  //   try {
+  //     final response = await apiService.getUserProfile(cookie);
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => AccountPage(user: response, cookie: cookie)),
+  //     );
+  //   } on DioError catch (e) {
+  //     print(e);
+  //   }
+  // }
+
   void signUserIn(BuildContext context) async {
-    final dio = Dio();
-    final apiService = ApiService(dio);
-    final loginResponse = await loginToAccount(GetUsername(), GetPassword());
-    String cookie = "";
-    dio.interceptors.add(
-        InterceptorsWrapper(onRequest: (options, handler) {
-          cookie =loginResponse.cookie.toString();
-          options.headers.addAll({"cookie": cookie});
-          return handler.next(options);
-        })
-    );
     try {
-      final response = await apiService.getUserProfile(cookie);
+      final response = await AccountManager.signIn(GetUsername(), GetPassword());
+      if (response == null) throw 'e';
+      logger.d(await AccountManager.UserCetificate());
+      logger.d(await AccountManager.UserGroupInfo());
+      logger.d(await AccountManager.UserNotifications());
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => AccountPage(user: response)),
+        MaterialPageRoute(builder: (context) => AccountPage(user: response!)),
       );
     } on DioError catch (e) {
       print(e);

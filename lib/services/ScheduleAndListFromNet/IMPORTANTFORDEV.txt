@@ -1,0 +1,51 @@
+
+///
+/// Заменить в файле ApiSchedule.d.dart
+/// при пересборке файлов генератором
+/// иначе не будет работать обновление расписания
+///
+
+/// flutter pub run build_runner build --delete-conflicting-outputs
+
+ScheduleWeek _$ScheduleWeekFromJson(Map<String, dynamic> json) => ScheduleWeek(
+  (json['Понедельник'] as List<dynamic>?)
+      ?.map((e) => e == null
+      ? null
+      : ScheduleDay.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  (json['Вторник'] as List<dynamic>?)
+      ?.map((e) => e == null
+      ? null
+      : ScheduleDay.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  (json['Среда'] as List<dynamic>?)
+      ?.map((e) => e == null
+      ? null
+      : ScheduleDay.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  (json['Четверг'] as List<dynamic>?)
+      ?.map((e) => e == null
+      ? null
+      : ScheduleDay.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  (json['Пятница'] as List<dynamic>?)
+      ?.map((e) => e == null
+      ? null
+      : ScheduleDay.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  (json['Суббота'] as List<dynamic>?)
+      ?.map((e) => e == null
+      ? null
+      : ScheduleDay.fromJson(e as Map<String, dynamic>))
+      .toList(),
+);
+
+Map<String, dynamic> _$ScheduleWeekToJson(ScheduleWeek instance) =>
+    <String, dynamic>{
+      'Понедельник': instance.Monday,
+      'Вторник': instance.Tuesday,
+      'Среда': instance.Wednesday,
+      'Четверг': instance.Thursday,
+      'Пятница': instance.Friday,
+      'Суббота': instance.Saturday,
+    };

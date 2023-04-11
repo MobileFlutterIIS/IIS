@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/api_service.dart';
+import 'package:dio/dio.dart';
 
 class AccountPage extends StatelessWidget{
   UserEntity user = UserEntity();
@@ -107,7 +109,8 @@ class AccountPage extends StatelessWidget{
               //   ),
               // ),
 
-                  ],
+
+            ],
                 ),
       ),
             );

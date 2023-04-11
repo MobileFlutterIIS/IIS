@@ -350,7 +350,6 @@ Map<String, dynamic> _$ScheduleWeekToJson(ScheduleWeek instance) =>
       'Суббота': instance.Saturday,
     };
 
-
 ScheduleInfo _$ScheduleInfoFromJson(Map<String, dynamic> json) => ScheduleInfo(
       json['employeeDto'] == null
           ? null

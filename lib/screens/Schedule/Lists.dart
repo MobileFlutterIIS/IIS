@@ -8,6 +8,7 @@ import 'package:iis/services/ScheduleAndListFromNet/Api.dart';
 import 'package:iis/data/ScheduleAndListManagement/ManagerClass.dart';
 import 'package:iis/widgets/Lists/TutorsList.dart';
 import 'package:iis/widgets/Lists/GroupsList.dart';
+import 'package:hive/hive.dart';
 
 final logger = Logger();
 
@@ -77,8 +78,8 @@ class _HomeState extends State<Lists> {
                   dummy.forEach((item)
                   {
                     if (item is Post) {
-                      String fullname = '${item.firstName.toLowerCase()}${item
-                          .middleName.toLowerCase()}${item.lastName
+                      String fullname = '${item.firstName!.toLowerCase()}${item
+                          .middleName!.toLowerCase()}${item.lastName!
                           .toLowerCase()}';
                       fullname.toLowerCase();
                       if (fullname.contains(t)) {
