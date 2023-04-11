@@ -6,7 +6,7 @@ import 'package:logger/logger.dart';
 
 final logger = Logger();
 
-
+// Управление всеми запросами данных о пользователе
 class AccountManager
 {
   static final dio = Dio();
