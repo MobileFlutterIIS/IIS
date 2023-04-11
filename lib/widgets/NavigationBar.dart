@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:iis/screens/AdditionalFunctions.dart';
 import 'package:iis/screens/DisciplinList.dart';
 import 'package:iis/screens/StudentScale.dart';
-import 'package:iis/screens/UserLogin.dart';
-import 'package:iis/screens/AccountPage.dart';
+import 'package:iis/screens/Account/UserLogin.dart';
+import 'package:iis/screens/Account/AccountPage.dart';
 import 'package:iis/screens/Schedule/NavigationBetween.dart';
 
 class NavBar extends StatefulWidget {

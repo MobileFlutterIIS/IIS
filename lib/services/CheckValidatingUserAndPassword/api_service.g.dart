@@ -95,14 +95,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<Notification>> getUserNotifications(cookie) async {
+  Future<List<Anouncement>> getUserNotifications(cookie) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'cookie': cookie};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<Notification>>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<Anouncement>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -115,7 +115,33 @@ class _ApiService implements ApiService {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) => Notification.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Anouncement.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<List<MarkSheet>> getUserMarkSheet(cookie) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'cookie': cookie};
+    _headers.removeWhere((k, v) => v == null);
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<MarkSheet>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'mark-sheet',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => MarkSheet.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

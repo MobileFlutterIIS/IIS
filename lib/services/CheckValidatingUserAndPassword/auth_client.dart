@@ -22,7 +22,7 @@ class SkillDto{
   });
 }
 
-@JsonSerializable()
+//@JsonSerializable()
 class UserProfile {
   String birthDate;
   int course;

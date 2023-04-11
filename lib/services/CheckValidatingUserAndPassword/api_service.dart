@@ -1,7 +1,7 @@
 import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
-import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupNotifications.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
 
 part 'api_service.g.dart';
 
@@ -63,5 +63,7 @@ abstract class ApiService {
   @GET('student-groups/user-group-info')
   Future<Groupinfo> getUserGroupInfo(@Header('cookie') String cookie);
   @GET('announcements')
-  Future<List<Notification>> getUserNotifications(@Header('cookie') String cookie);
+  Future<List<Anouncement>> getUserNotifications(@Header('cookie') String cookie);
+  @GET('mark-sheet')
+  Future<List<MarkSheet>> getUserMarkSheet(@Header('cookie') String cookie);
 }

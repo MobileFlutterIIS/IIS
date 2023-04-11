@@ -7,7 +7,7 @@ import 'package:iis/services/CheckValidatingUserAndPassword/api_service.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:iis/screens/AccountPage.dart';
+import 'package:iis/screens/Account/AccountPage.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart';
 import 'package:logger/logger.dart';
 
@@ -56,9 +56,6 @@ class UserLogin extends StatelessWidget{
     try {
       final response = await AccountManager.signIn(GetUsername(), GetPassword());
       if (response == null) throw 'e';
-      logger.d(await AccountManager.UserCetificate());
-      logger.d(await AccountManager.UserGroupInfo());
-      logger.d(await AccountManager.UserNotifications());
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => AccountPage(user: response!)),

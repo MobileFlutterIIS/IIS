@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/api_service.dart';
-import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupNotifications.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
 import 'package:logger/logger.dart';
 
@@ -51,10 +51,20 @@ class AccountManager
     }
   }
 
-  static Future<List<Notification>?> UserNotifications() async{
+  static Future<List<Anouncement>?> UserNotifications() async{
     if (cookie == '' || cookie == null) return null;
     try {
       final response = await apiService.getUserNotifications(cookie);
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
+  static Future<List<MarkSheet>?> UserMarkSheets() async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      final response = await apiService.getUserMarkSheet(cookie);
       return response;
     } on DioError catch (e) {
       return null;
