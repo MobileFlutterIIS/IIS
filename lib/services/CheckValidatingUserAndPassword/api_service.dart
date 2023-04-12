@@ -2,6 +2,7 @@ import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
+import 'package:logger/logger.dart';
 
 part 'api_service.g.dart';
 
@@ -66,4 +67,11 @@ abstract class ApiService {
   Future<List<Anouncement>> getUserNotifications(@Header('cookie') String cookie);
   @GET('mark-sheet')
   Future<List<MarkSheet>> getUserMarkSheet(@Header('cookie') String cookie);
+  @POST('profiles/my-photo')
+  Future<String> setUserImage(
+  @Header('cookie') String cookie,
+  @Body() String photo,{
+  @Header('accept') String accept = 'text/plain',
+  @Header('content-type') String contentType = 'text/plain'});
 }
+

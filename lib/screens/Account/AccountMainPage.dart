@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
 
@@ -36,18 +37,7 @@ class MainPage extends StatelessWidget {
                           ),
                         ),
                         child: ClipOval(
-                          child: user.photoUrl != null
-                              ? Image.network(
-                            user.photoUrl!,
-                            width: 150,
-                            height: 150,
-                            fit: BoxFit.cover,
-                          )
-                              : Icon( //-----------------------ИСПРАВИТЬ--(выглядит фу)
-                            Icons.person,
-                            size: 100,
-                            color: Colors.grey,
-                          ),
+                          child: UserIcon(url :user.photoUrl!),
                           clipBehavior: Clip.antiAlias,
                         ),),
                       const SizedBox(height: 10),
@@ -105,8 +95,58 @@ class MainPage extends StatelessWidget {
         ],
       );
     }
+
   }
 
+  class UserIcon extends StatefulWidget {
+  String url ;
+  UserIcon({Key? key, required this.url}) : super(key: key);
+
+    @override
+    State<UserIcon> createState() => _UserIconState();
+  }
+
+  class _UserIconState extends State<UserIcon> {
+
+
+    @override
+    Widget build(BuildContext context) {
+        return IconButton(
+          icon: (widget.url != null ? Image.network(widget.url!) : Icon(Icons.person)) ,
+          onPressed: () async{
+            final ans = await AccountManager.SetUserImage();
+            logger.d(ans);
+            if (ans != null)
+            setState(() {
+              widget.url = ans!;
+            });
+          },
+        );
+      }
+  }
+
+
+
+ ///
+/// старая иконка которую делал не я
+
+
+// (user.photoUrl != null
+// ? Image.network(
+// user.photoUrl!,
+// width: 150,
+// height: 150,
+// fit: BoxFit.cover,
+// )
+//     : Icon( //-----------------------ИСПРАВИТЬ--(выглядит фу)
+// Icons.person,
+// size: 100,
+// color: Colors.grey,
+// ),
+// ),
+
+///
+///
 
 class CustomShape extends CustomClipper<Path> {
   @override

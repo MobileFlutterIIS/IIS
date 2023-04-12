@@ -146,6 +146,39 @@ class _ApiService implements ApiService {
     return value;
   }
 
+  @override
+  Future<String> setUserImage(
+    cookie,
+    photo, {
+    accept = 'text/plain',
+    contentType = 'text/plain',
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'cookie': cookie,
+      r'accept': accept,
+      r'content-type': contentType,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = photo;
+    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: contentType,
+    )
+        .compose(
+          _dio.options,
+          'profiles/my-photo',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

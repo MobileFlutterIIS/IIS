@@ -3,6 +3,9 @@ import 'package:iis/services/CheckValidatingUserAndPassword/api_service.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
 import 'package:logger/logger.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:convert';
+import 'dart:io';
 
 final logger = Logger();
 
@@ -71,6 +74,40 @@ class AccountManager
     }
   }
 
+  /// из докума по image_picker
+  ///
+  /// No configuration required - the plugin should work out of the box.
+  /// It is however highly recommended to prepare for Android killing the application when low on memory.
+  /// How to prepare for this is discussed in the Handling MainActivity destruction on Android section.
+
+
+  static Future<String?> SetUserImage() async{
+    if (cookie == '' || cookie == null) return null;
+    final image;
+    final ImagePicker picker = ImagePicker();
+    XFile? imgfile = await picker.pickImage(source: ImageSource.gallery);
+    logger.d(imgfile!.path);
+    image = 'data:image/jpeg;base64,${base64Encode(await File(imgfile!.path)!.readAsBytes())}';
+    //${getFileExtension(imgfile!.path)}
+    logger.v(image);
+    logger.v(image[image.length-1]);
+    logger.d(image.length);
+    try {
+      final response = await apiService.setUserImage(cookie,image);
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
+}
+
+String? getFileExtension(String fileName) {
+  try {
+    return fileName.split('.').last;
+  } catch(e){
+    return null;
+  }
 }
 
 // @GET('profiles/personal-cv')
