@@ -58,7 +58,7 @@ class UserLogin extends StatelessWidget{
       if (response == null) throw 'e';
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => AccountPage(user: response!)),
+        MaterialPageRoute(builder: (context) => AccountPage(user: response)),
       );
     } on DioError catch (e) {
       print(e);

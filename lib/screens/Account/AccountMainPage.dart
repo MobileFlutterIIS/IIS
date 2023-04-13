@@ -61,35 +61,6 @@ class MainPage extends StatelessWidget {
               ],
             ),
           ),
-          // const SizedBox(height: 20),
-          // Container(
-          //   height: 400,
-          //   width: MediaQuery.of(context).size.width - 40,
-          //   decoration: BoxDecoration(
-          //     color: const Color.fromRGBO(254, 243, 244, 0.9),
-          //     //color: Colors.white,
-          //     borderRadius: BorderRadius.circular(10),
-          //     // boxShadow: [
-          //     //   BoxShadow(
-          //     //     color: Colors.grey.withOpacity(0.5),
-          //     //     spreadRadius: 2,
-          //     //     blurRadius: 7,
-          //     //     offset: const Offset(0, 3),
-          //     //   ),
-          //     // ],
-          //     // gradient: LinearGradient(
-          //     //   begin: Alignment.bottomCenter,
-          //     //   end: Alignment.topCenter,
-          //     //   colors: [
-          //     //     Colors.white.withOpacity(0),
-          //     //     Colors.white.withOpacity(0.5),
-          //     //     Colors.white.withOpacity(0.8),
-          //     //     Colors.white.withOpacity(0.9),
-          //     //     Colors.white.withOpacity(0.95),
-          //     //   ],
-          //     // ),
-          //   ),
-          // ),
 
 
         ],

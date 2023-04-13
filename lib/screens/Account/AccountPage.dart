@@ -6,6 +6,13 @@ import 'package:iis/screens/Account/AccountMainPage.dart';
 import 'package:iis/screens/Account/GroupInfo.dart';
 import 'package:iis/screens/Account/Notifications.dart';
 import 'package:iis/screens/Account/Study.dart';
+import 'package:iis/screens/Account/MarkBookPage.dart';
+import 'package:iis/screens/Account/GradeBookPage.dart';
+import 'package:iis/screens/Account/OmissionsPage.dart';
+
+import 'package:iis/services/CheckValidatingUserAndPassword/Omissions.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/MarkBook.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/GradeBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart';
 
@@ -31,6 +38,9 @@ class _AccountPageState extends State<AccountPage> {
   List<Anouncement>? anouncements;
   Groupinfo? groupinfo;
   List<MarkSheet>? marksheets;
+  //MarkBook? markbook;
+  //List<GradeBook>? gradebook;
+  List<Omission>? omissions;
   static bool sucs = false;
 
   Future<bool> initall() async{
@@ -39,10 +49,16 @@ class _AccountPageState extends State<AccountPage> {
     groupinfo =(await AccountManager.UserGroupInfo());
     anouncements =(await AccountManager.UserNotifications());
     marksheets = (await AccountManager.UserMarkSheets());
+    //markbook = (await AccountManager.UserMarkBook());
+    //gradebook = (await AccountManager.UserGradeBook());
+    omissions = (await AccountManager.UserOmissions());
     logger.d(certificates);
     logger.d(groupinfo);
     logger.d(anouncements);
     logger.d(marksheets);
+    //logger.d(markbook);
+    //logger.d(gradebook);
+    logger.d(omissions);
     sucs = true;
     return true;
   }
@@ -71,6 +87,9 @@ class _AccountPageState extends State<AccountPage> {
           GroupInfoPage(group: groupinfo!,),
           AnouncementPage(anouncement: anouncements!,),
           StudyPage(certificate: certificates!,),
+          //MarkBookPage(markBook: markbook!,),
+          //GradeBookPage(gradebook: gradebook!,),
+          OmissionsPage(omissions: omissions!,),
         ];
 
         return Scaffold(
@@ -100,6 +119,14 @@ class _AccountPageState extends State<AccountPage> {
               icon: Icon(Icons.announcement,color: Colors.pink,),
               label: 'Объявления',
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.circle, color: Colors.pink),
+              label: 'Пропуски',
+            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(Icons.circle, color: Colors.pink),
+            //   label: 'Пропуски',
+            // ),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.amber[800],

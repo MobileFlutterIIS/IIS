@@ -2,6 +2,9 @@ import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/MarkBook.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/GradeBook.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/Omissions.dart';
 import 'package:logger/logger.dart';
 
 part 'api_service.g.dart';
@@ -67,6 +70,12 @@ abstract class ApiService {
   Future<List<Anouncement>> getUserNotifications(@Header('cookie') String cookie);
   @GET('mark-sheet')
   Future<List<MarkSheet>> getUserMarkSheet(@Header('cookie') String cookie);
+  @GET('markbook')
+  Future<MarkBook> getUserMarkBook(@Header('cookie') String cookie);
+  @GET('grade-book')
+  Future<List<GradeBook>> getUserGradeBook(@Header('cookie') String cookie);
+  @GET('omissions-by-student')
+  Future<List<Omission>> getUserOmissions(@Header('cookie') String cookie);
   @POST('profiles/my-photo')
   Future<String> setUserImage(
   @Header('cookie') String cookie,

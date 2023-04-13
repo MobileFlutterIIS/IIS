@@ -308,46 +308,46 @@ Map<String, dynamic> _$ScheduleDayToJson(ScheduleDay instance) =>
     };
 
 ScheduleWeek _$ScheduleWeekFromJson(Map<String, dynamic> json) => ScheduleWeek(
-  (json['Понедельник'] as List<dynamic>?)
-      ?.map((e) => e == null
-      ? null
-      : ScheduleDay.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  (json['Вторник'] as List<dynamic>?)
-      ?.map((e) => e == null
-      ? null
-      : ScheduleDay.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  (json['Среда'] as List<dynamic>?)
-      ?.map((e) => e == null
-      ? null
-      : ScheduleDay.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  (json['Четверг'] as List<dynamic>?)
-      ?.map((e) => e == null
-      ? null
-      : ScheduleDay.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  (json['Пятница'] as List<dynamic>?)
-      ?.map((e) => e == null
-      ? null
-      : ScheduleDay.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  (json['Суббота'] as List<dynamic>?)
-      ?.map((e) => e == null
-      ? null
-      : ScheduleDay.fromJson(e as Map<String, dynamic>))
-      .toList(),
-);
+      (json['Monday'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : ScheduleDay.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['Tuesday'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : ScheduleDay.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['Wednesday'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : ScheduleDay.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['Thursday'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : ScheduleDay.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['Friday'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : ScheduleDay.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['Saturday'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : ScheduleDay.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$ScheduleWeekToJson(ScheduleWeek instance) =>
     <String, dynamic>{
-      'Понедельник': instance.Monday,
-      'Вторник': instance.Tuesday,
-      'Среда': instance.Wednesday,
-      'Четверг': instance.Thursday,
-      'Пятница': instance.Friday,
-      'Суббота': instance.Saturday,
+      'Monday': instance.Monday,
+      'Tuesday': instance.Tuesday,
+      'Wednesday': instance.Wednesday,
+      'Thursday': instance.Thursday,
+      'Friday': instance.Friday,
+      'Saturday': instance.Saturday,
     };
 
 ScheduleInfo _$ScheduleInfoFromJson(Map<String, dynamic> json) => ScheduleInfo(

@@ -2,6 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/api_service.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/MarkBook.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/GradeBook.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/Omissions.dart';
 import 'package:logger/logger.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:convert';
@@ -68,11 +71,45 @@ class AccountManager
     if (cookie == '' || cookie == null) return null;
     try {
       final response = await apiService.getUserMarkSheet(cookie);
+      print(response.toString());
       return response;
     } on DioError catch (e) {
       return null;
     }
   }
+
+  static Future<MarkBook?> UserMarkBook() async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      final response = await apiService.getUserMarkBook(cookie);
+      print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
+   static Future<List<GradeBook>?> UserGradeBook() async{
+     if (cookie == '' || cookie == null) return null;
+     try {
+       final response = await apiService.getUserGradeBook(cookie);
+       print(response.toString());
+       return response;
+     } on DioError catch (e) {
+       return null;
+     }
+   }
+
+   static Future<List<Omission>?> UserOmissions() async{
+     if (cookie == '' || cookie == null) return null;
+     try {
+       final response = await apiService.getUserOmissions(cookie);
+       print(response.toString());
+       return response;
+     } on DioError catch (e) {
+       return null;
+     }
+   }
 
   /// из докума по image_picker
   ///
