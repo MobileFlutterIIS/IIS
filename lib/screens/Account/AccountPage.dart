@@ -6,7 +6,7 @@ import 'package:iis/screens/Account/AccountMainPage.dart';
 import 'package:iis/screens/Account/GroupInfo.dart';
 import 'package:iis/screens/Account/Notifications.dart';
 import 'package:iis/screens/Account/Study.dart';
-import 'package:iis/screens/Account/MarkBookPage.dart';
+import 'package:iis/screens/Account/MarkBookPages/MarkBookPage.dart';
 import 'package:iis/screens/Account/GradeBookPage.dart';
 import 'package:iis/screens/Account/OmissionsPage.dart';
 
@@ -38,8 +38,8 @@ class _AccountPageState extends State<AccountPage> {
   List<Anouncement>? anouncements;
   Groupinfo? groupinfo;
   List<MarkSheet>? marksheets;
-  //MarkBook? markbook;
-  //List<GradeBook>? gradebook;
+  MarkBook? markbook;
+  List<GradeBook>? gradebook;
   List<Omission>? omissions;
   static bool sucs = false;
 
@@ -49,15 +49,15 @@ class _AccountPageState extends State<AccountPage> {
     groupinfo =(await AccountManager.UserGroupInfo());
     anouncements =(await AccountManager.UserNotifications());
     marksheets = (await AccountManager.UserMarkSheets());
-    //markbook = (await AccountManager.UserMarkBook());
-    //gradebook = (await AccountManager.UserGradeBook());
+    markbook = (await AccountManager.UserMarkBook());
+    gradebook = (await AccountManager.UserGradeBook());
     omissions = (await AccountManager.UserOmissions());
     logger.d(certificates);
     logger.d(groupinfo);
     logger.d(anouncements);
     logger.d(marksheets);
-    //logger.d(markbook);
-    //logger.d(gradebook);
+    logger.d(markbook);
+    logger.d(gradebook);
     logger.d(omissions);
     sucs = true;
     return true;
@@ -87,55 +87,162 @@ class _AccountPageState extends State<AccountPage> {
           GroupInfoPage(group: groupinfo!,),
           AnouncementPage(anouncement: anouncements!,),
           StudyPage(certificate: certificates!,),
-          //MarkBookPage(markBook: markbook!,),
-          //GradeBookPage(gradebook: gradebook!,),
+          MarkBookPage(markBook: markbook!,),
+          GradeBookPage(gradebook: gradebook!,),
           OmissionsPage(omissions: omissions!,),
         ];
 
+        void selectedItem(BuildContext context, int index) {
+
+          Navigator.of(context).pop();
+          switch(index){
+            case 0:
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => GroupInfoPage(group: groupinfo!,),
+              ));
+              break;
+            case 1:
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => AnouncementPage(anouncement: anouncements!,),
+              ));
+              break;
+            case 2:
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => StudyPage(certificate: certificates!,),
+              ));
+              break;
+            case 3:
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => MarkBookPage(markBook: markbook!,),
+              ));
+              break;
+            case 4:
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => GradeBookPage(gradebook: gradebook!,),
+              ));
+              break;
+            case 5:
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => OmissionsPage(omissions: omissions!,),
+              ));
+              break;
+          }
+        }
+
         return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: const Color.fromRGBO(251, 150, 158, 0.9),
-        ),
-        body: SafeArea(
-          child: pages[_selectedIndex],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person,color: Colors.pink,),
-              label: 'Главная',
+          body: MainPage(user: widget.user),
+          drawer: Drawer(
+            child: Material(
+              color: Color.fromRGBO(51, 40, 32, 0.9),
+              child: ListView(
+                children: <Widget>[
+                  const SizedBox(height: 70,),
+                  ListTile(
+                    leading: Icon(Icons.group, color: Colors.white,),
+                    title: Text(
+                      'Группы',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () => selectedItem(context, 0),
+                  ),
+                  const SizedBox(height: 15,),
+                  ListTile(
+                    leading: Icon(Icons.book, color: Colors.white,),
+                    title: Text(
+                      'Учеба',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () => selectedItem(context, 1),
+                  ),
+                  const SizedBox(height: 15,),
+                  ListTile(
+                    leading: Icon(Icons.announcement, color: Colors.white,),
+                    title: Text(
+                      'Объявления',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () => selectedItem(context, 2),
+                  ),
+                  const SizedBox(height: 15,),
+                  ListTile(
+                    leading: Icon(Icons.bookmark, color: Colors.white,),
+                    title: Text(
+                      'Зачётка',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () => selectedItem(context, 3),
+                  ),
+                  const SizedBox(height: 15,),
+                  ListTile(
+                    leading: Icon(Icons.rate_review, color: Colors.white,),
+                    title: Text(
+                      'Рейтинг',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () => selectedItem(context, 4),
+                  ),
+                  const SizedBox(height: 15,),
+                  ListTile(
+                    leading: Icon(Icons.circle_outlined, color: Colors.white,),
+                    title: Text(
+                      'Пропуски',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () => selectedItem(context, 5),
+                  ),
+                ],
+              ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.people,color: Colors.pink,),
-              label: 'Группа',
+          ),
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            elevation: 0.0,
+            backgroundColor: Colors.brown[200],
+            centerTitle: true,
+            title: Text(
+              'И И С   "Б Г У И Р"',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.book,color: Colors.pink,),
-              label: 'Учеба',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.announcement,color: Colors.pink,),
-              label: 'Объявления',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.circle, color: Colors.pink),
-              label: 'Пропуски',
-            ),
-            // BottomNavigationBarItem(
-            //   icon: Icon(Icons.circle, color: Colors.pink),
-            //   label: 'Пропуски',
-            // ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.amber[800],
-          onTap: (currentindex) {
-            setState(() {
-              _selectedIndex = currentindex;
-            });
-          },
-        ),
+          ),
+        //   body: SafeArea(
+        //     child: pages[_selectedIndex],
+        //   ),
+        //   bottomNavigationBar: BottomNavigationBar(
+        //
+        //   items: <BottomNavigationBarItem>[
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.person,color: Color.fromRGBO(51, 40, 32, 0.7),),
+        //       label: 'Главная',
+        //     ),
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.people,color: Color.fromRGBO(51, 40, 32, 0.7),),
+        //       label: 'Группа',
+        //     ),
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.book,color: Color.fromRGBO(51, 40, 32, 0.7),),
+        //       label: 'Учеба',
+        //     ),
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.announcement,color: Color.fromRGBO(51, 40, 32, 0.7),),
+        //       label: 'Объявления',
+        //     ),
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.circle, color: Color.fromRGBO(51, 40, 32, 0.7)),
+        //       label: 'Пропуски',
+        //     ),
+        //     // BottomNavigationBarItem(
+        //     //   icon: Icon(Icons.circle, color: Colors.pink),
+        //     //   label: 'Пропуски',
+        //     // ),
+        //   ],
+        //   currentIndex: _selectedIndex,
+        //   //selectedItemColor: Colors.amber[800],
+        //   selectedItemColor: Colors.black,
+        //   onTap: (currentindex) {
+        //     setState(() {
+        //       _selectedIndex = currentindex;
+        //     });
+        //   },
+        // ),
       );
       }
     );

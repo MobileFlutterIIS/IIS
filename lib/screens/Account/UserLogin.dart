@@ -87,19 +87,19 @@ class UserLogin extends StatelessWidget{
               obsecureText: true,
             ),
 
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 60),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    'Забыли пароль?',
-                    style: TextStyle(color: Colors.grey[600]),
-                  ),
-                ],
-              ),
-            ),
+            // const SizedBox(height: 10),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 60),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.end,
+            //     children: [
+            //       Text(
+            //         'Забыли пароль?',
+            //         style: TextStyle(color: Colors.grey[600]),
+            //       ),
+            //     ],
+            //   ),
+            // ),
 
             const SizedBox(height: 25),
             SignInButton(

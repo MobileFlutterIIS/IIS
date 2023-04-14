@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/GradeBook.dart';
+import 'package:iis/screens/Account/AccountPage.dart';
 
 class GradeBookPage extends StatelessWidget{
   final List<GradeBook> gradebook;
@@ -8,8 +9,12 @@ class GradeBookPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
-        title: Text(gradebook[0].student!.fio.toString()),
+        elevation: 0.0,
+        backgroundColor: Colors.brown[200],
+        centerTitle: true,
+        title: Text('Р Е Й Т И Н Г'),
       ),
     );
   }
