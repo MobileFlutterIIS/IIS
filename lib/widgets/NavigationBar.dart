@@ -47,7 +47,7 @@ class _MyNavBar extends State<NavBar> {
               pageNum = selectedIndex;
             });
           },
-          color: Color.fromRGBO(251, 150, 158, 0.9),
+          color: Color.fromRGBO(22, 49, 99, 0.9),
           backgroundColor: Colors.transparent,
           height: 60,
           items: tabs,

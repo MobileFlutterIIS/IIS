@@ -26,7 +26,7 @@ class Password extends StatelessWidget{
             borderSide: BorderSide(color: Colors.grey[400]!),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color.fromRGBO(251, 150, 158, 0.9)),
+            borderSide: BorderSide(color: Color.fromRGBO(22, 49, 99, 0.9)),
           ),
           fillColor: Colors.white,
           filled: true,

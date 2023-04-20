@@ -78,7 +78,7 @@ class AccountManager
     }
   }
 
-  static Future<MarkBook?> UserMarkBook() async{
+  static Future<Markbook?> UserMarkBook() async{
     if (cookie == '' || cookie == null) return null;
     try {
       final response = await apiService.getUserMarkBook(cookie);

@@ -71,7 +71,7 @@ abstract class ApiService {
   @GET('mark-sheet')
   Future<List<MarkSheet>> getUserMarkSheet(@Header('cookie') String cookie);
   @GET('markbook')
-  Future<MarkBook> getUserMarkBook(@Header('cookie') String cookie);
+  Future<Markbook> getUserMarkBook(@Header('cookie') String cookie);
   @GET('grade-book')
   Future<List<GradeBook>> getUserGradeBook(@Header('cookie') String cookie);
   @GET('omissions-by-student')

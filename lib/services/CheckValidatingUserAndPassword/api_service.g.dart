@@ -147,14 +147,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<MarkBook> getUserMarkBook(cookie) async {
+  Future<Markbook> getUserMarkBook(cookie) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'cookie': cookie};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MarkBook>(Options(
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Markbook>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -166,7 +166,7 @@ class _ApiService implements ApiService {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MarkBook.fromJson(_result.data!);
+    final value = Markbook.fromJson(_result.data!);
     return value;
   }
 

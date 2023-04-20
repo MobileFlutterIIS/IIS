@@ -41,7 +41,7 @@ class MainPage extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(51, 40, 32, 0.9),
+                          color: Color.fromRGBO(22, 49, 99, 0.9),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -82,7 +82,7 @@ class MainPage extends StatelessWidget {
                               :Icon(
                             Icons.filter_vintage,
                             size: 20,
-                            color: Colors.brown[200],
+                            color: Colors.grey[350],
                           ),
                           const SizedBox(width: 10),
                           user.rating! >= 2
@@ -94,7 +94,7 @@ class MainPage extends StatelessWidget {
                               :Icon(
                             Icons.filter_vintage,
                             size: 20,
-                            color: Colors.brown[200],
+                            color: Colors.grey[350],
                           ),
                           const SizedBox(width: 10),
                           user.rating! >= 3
@@ -106,7 +106,7 @@ class MainPage extends StatelessWidget {
                               :Icon(
                             Icons.filter_vintage,
                             size: 20,
-                            color: Colors.brown[200],
+                            color: Colors.grey[350],
                           ),
                           const SizedBox(width: 10),
                           user.rating! >= 4
@@ -118,7 +118,7 @@ class MainPage extends StatelessWidget {
                               :Icon(
                             Icons.filter_vintage,
                             size: 20,
-                            color: Colors.brown[200],
+                            color: Colors.grey[350],
                           ),
                           const SizedBox(width: 10),
                           user.rating! >= 5
@@ -130,7 +130,7 @@ class MainPage extends StatelessWidget {
                               :Icon(
                             Icons.filter_vintage,
                             size: 20,
-                            color: Colors.brown[200],
+                            color: Colors.grey[350],
                           ),
                         ],
                       ),

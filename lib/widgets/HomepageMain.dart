@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Schedule',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: const Color.fromRGBO(251, 150, 158, 0.9),
+          primary: Color.fromRGBO(22, 49, 99, 0.9),
         ),
 
       ),

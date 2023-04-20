@@ -36,94 +36,96 @@ class OmissionsPage extends StatelessWidget{
           ),
           const SizedBox(height: 40,),
           Expanded(
-            child: Container(
-              child: ListView.builder(
-                itemCount: omissions.length,
-                itemBuilder: (context, index)
-                    {
-                      final sortedOmissions = _sortOmissionsByTerm(omissions);
-                      return Container(
-                        height: 300,
-                        width: MediaQuery.of(context).size.width - 20,
-                        child: Card(
-                          color: Colors.white,
-                          elevation: 4,
-                          shape: const RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Colors.black12,
+            child: SafeArea(
+              child: Container(
+                child: ListView.builder(
+                  itemCount: omissions.length,
+                  itemBuilder: (context, index)
+                      {
+                        final sortedOmissions = _sortOmissionsByTerm(omissions);
+                        return Container(
+                          height: 300,
+                          width: MediaQuery.of(context).size.width - 20,
+                          child: Card(
+                            color: Colors.white,
+                            elevation: 4,
+                            shape: const RoundedRectangleBorder(
+                              side: BorderSide(
+                                color: Colors.black12,
+                              ),
+                              borderRadius: const BorderRadius.all(Radius.circular(12)),
                             ),
-                            borderRadius: const BorderRadius.all(Radius.circular(12)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Column(
-                              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 24,),
-                                Text(
-                                  'Тип документа',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color.fromRGBO(51, 40, 32, 0.9),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Column(
+                                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 24,),
+                                  Text(
+                                    'Тип документа',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color.fromRGBO(51, 40, 32, 0.9),
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(height: 8,),
-                                Text(
-                                  sortedOmissions[index].name!,
-                                ),
-                                const SizedBox(height: 20,),
-                                Text(
-                                  'Дата начала действия',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color.fromRGBO(51, 40, 32, 0.9),
+                                  const SizedBox(height: 8,),
+                                  Text(
+                                    sortedOmissions[index].name!,
                                   ),
-                                ),
-                                const SizedBox(height: 8,),
-                                Text(
-                                  sortedOmissions[index].dateFrom!.toString()
-                                      + ', ' +sortedOmissions[index].term! + 'семестр',
-                                ),
-                                const SizedBox(height: 20,),
-                                Text(
-                                  'Дата окончания действия',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color.fromRGBO(51, 40, 32, 0.9),
+                                  const SizedBox(height: 20,),
+                                  Text(
+                                    'Дата начала действия',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color.fromRGBO(51, 40, 32, 0.9),
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(height: 8,),
-                                Text(
-                                  sortedOmissions[index].dateTo!.toString()
-                                      + ', ' +sortedOmissions[index].term! + 'семестр',
-                                ),
-                                const SizedBox(height: 20,),
-                                sortedOmissions[index].note != null
-                                ? Text(
-                                  'Примечание',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color.fromRGBO(51, 40, 32, 0.9),
+                                  const SizedBox(height: 8,),
+                                  Text(
+                                    sortedOmissions[index].dateFrom!.toString()
+                                        + ', ' +sortedOmissions[index].term! + 'семестр',
                                   ),
-                                )
-                                : Text(''),
-                                const SizedBox(height: 8,),
-                                sortedOmissions[index].note != null
-                                ? Text(
-                                  sortedOmissions[index].note!,
-                                )
-                                    : Text(''),
-                              ],
+                                  const SizedBox(height: 20,),
+                                  Text(
+                                    'Дата окончания действия',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color.fromRGBO(51, 40, 32, 0.9),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8,),
+                                  Text(
+                                    sortedOmissions[index].dateTo!.toString()
+                                        + ', ' +sortedOmissions[index].term! + 'семестр',
+                                  ),
+                                  const SizedBox(height: 20,),
+                                  sortedOmissions[index].note != null
+                                  ? Text(
+                                    'Примечание',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color.fromRGBO(51, 40, 32, 0.9),
+                                    ),
+                                  )
+                                  : Text(''),
+                                  const SizedBox(height: 8,),
+                                  sortedOmissions[index].note != null
+                                  ? Text(
+                                    sortedOmissions[index].note!,
+                                  )
+                                      : Text(''),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }
+                        );
+                      }
+                ),
               ),
             ),
           ),

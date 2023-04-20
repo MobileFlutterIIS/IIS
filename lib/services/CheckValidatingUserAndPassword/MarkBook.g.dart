@@ -6,86 +6,88 @@ part of 'MarkBook.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MarkBook _$MarkBookFromJson(Map<String, dynamic> json) => MarkBook(
+Markbook _$MarkbookFromJson(Map<String, dynamic> json) => Markbook(
+      json['number'] as String?,
       (json['averageMark'] as num?)?.toDouble(),
-      json['additionalProp1'] == null
-          ? null
-          : MarkPages.fromJson(json['additionalProp1'] as Map<String, dynamic>),
-      json['additionalProp2'] == null
-          ? null
-          : MarkPages.fromJson(json['additionalProp2'] as Map<String, dynamic>),
+      (json['markPages'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+            int.parse(k), Simestre.fromJson(e as Map<String, dynamic>)),
+      ),
     );
 
-Map<String, dynamic> _$MarkBookToJson(MarkBook instance) => <String, dynamic>{
+Map<String, dynamic> _$MarkbookToJson(Markbook instance) => <String, dynamic>{
+      'number': instance.number,
       'averageMark': instance.averageMark,
-      'additionalProp1': instance.additionalProp1,
-      'additionalProp2': instance.additionalProp2,
+      'markPages': instance.markPages?.map((k, e) => MapEntry(k.toString(), e)),
     };
 
-MarkPages _$MarkPagesFromJson(Map<String, dynamic> json) => MarkPages(
+Simestre _$SimestreFromJson(Map<String, dynamic> json) => Simestre(
       (json['averageMark'] as num?)?.toDouble(),
       (json['marks'] as List<dynamic>?)
           ?.map((e) => Marks.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$MarkPagesToJson(MarkPages instance) => <String, dynamic>{
+Map<String, dynamic> _$SimestreToJson(Simestre instance) => <String, dynamic>{
       'averageMark': instance.averageMark,
       'marks': instance.marks,
     };
 
 Marks _$MarksFromJson(Map<String, dynamic> json) => Marks(
-      json['applicationHasAlreadyBeenSentForAcademicDifferences'] as bool?,
-      json['applicationHasAlreadyBeenSentForParallel'] as bool?,
-      json['canLiquidationAcademicDifferences'] as bool?,
-      json['canStudyInParallel'] as bool?,
-      (json['commonMark'] as num?)?.toDouble(),
-      (json['commonRetakes'] as num?)?.toDouble(),
-      json['date'] as String?,
+      json['subject'] as String?,
       json['formOfControl'] as String?,
       json['fullSubject'] as String?,
       json['hours'] as String?,
-      json['idFormOfControl'] as int?,
-      json['idSubject'] as int?,
       json['mark'] as String?,
+      json['date'] as String?,
+      json['teacher'] as String?,
+      (json['commonMark'] as num?)?.toDouble(),
+      (json['commonRetakes'] as num?)?.toDouble(),
       json['retakesCount'] as int?,
-      json['lmsEducationTerms'] == null
-          ? null
-          : LmsEducationTerms.fromJson(
-              json['lmsEducationTerms'] as Map<String, dynamic>),
+      json['idSubject'] as int?,
+      json['idFormOfControl'] as int?,
+      json['canStudyInParallel'] as bool?,
+      json['applicationHasAlreadyBeenSentForParallel'] as bool?,
+      json['canLiquidationAcademicDifferences'] as bool?,
+      json['applicationHasAlreadyBeenSentForAcademicDifferences'] as bool?,
+      (json['lmsEducationTerms'] as List<dynamic>?)
+          ?.map((e) => LmsEducationTerms.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$MarksToJson(Marks instance) => <String, dynamic>{
-      'applicationHasAlreadyBeenSentForAcademicDifferences':
-          instance.applicationHasAlreadyBeenSentForAcademicDifferences,
+      'subject': instance.subject,
+      'formOfControl': instance.formOfControl,
+      'fullSubject': instance.fullSubject,
+      'hours': instance.hours,
+      'mark': instance.mark,
+      'date': instance.date,
+      'teacher': instance.teacher,
+      'commonMark': instance.commonMark,
+      'commonRetakes': instance.commonRetakes,
+      'retakesCount': instance.retakesCount,
+      'idSubject': instance.idSubject,
+      'idFormOfControl': instance.idFormOfControl,
+      'canStudyInParallel': instance.canStudyInParallel,
       'applicationHasAlreadyBeenSentForParallel':
           instance.applicationHasAlreadyBeenSentForParallel,
       'canLiquidationAcademicDifferences':
           instance.canLiquidationAcademicDifferences,
-      'canStudyInParallel': instance.canStudyInParallel,
-      'commonMark': instance.commonMark,
-      'commonRetakes': instance.commonRetakes,
-      'date': instance.date,
-      'formOfControl': instance.formOfControl,
-      'fullSubject': instance.fullSubject,
-      'hours': instance.hours,
-      'idFormOfControl': instance.idFormOfControl,
-      'idSubject': instance.idSubject,
-      'mark': instance.mark,
-      'retakesCount': instance.retakesCount,
+      'applicationHasAlreadyBeenSentForAcademicDifferences':
+          instance.applicationHasAlreadyBeenSentForAcademicDifferences,
       'lmsEducationTerms': instance.lmsEducationTerms,
     };
 
 LmsEducationTerms _$LmsEducationTermsFromJson(Map<String, dynamic> json) =>
     LmsEducationTerms(
-      json['coincidedForeignLanguage'] as bool?,
       json['idLmsEducationTerm'] as int?,
       json['subjectNameByApi'] as String?,
+      json['coincidedForeignLanguage'] as bool?,
     );
 
 Map<String, dynamic> _$LmsEducationTermsToJson(LmsEducationTerms instance) =>
     <String, dynamic>{
-      'coincidedForeignLanguage': instance.coincidedForeignLanguage,
       'idLmsEducationTerm': instance.idLmsEducationTerm,
       'subjectNameByApi': instance.subjectNameByApi,
+      'coincidedForeignLanguage': instance.coincidedForeignLanguage,
     };

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/MarkBook.dart';
 
-class MarkBookPage extends StatelessWidget {
-  final MarkBook markBook;
+class MarkBookPage extends StatefulWidget {
+  final Markbook markBook;
+
   const MarkBookPage({Key? key, required this.markBook}) : super(key: key);
 
+  @override
+  State<MarkBookPage> createState() => _MarkBookPageState();
+}
 
+class _MarkBookPageState extends State<MarkBookPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -57,70 +62,7 @@ class MarkBookPage extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     Container(
-                      child: ListView.builder(
-                        itemCount: markBook.additionalProp1 == null
-                            ? 0
-                            : markBook.additionalProp1!.marks!.length-1,
-                        padding: const EdgeInsets.all(8),
-                        itemBuilder: (context, index)
-                        {
-                          return Container(
-                            height: 100,
-                            child: Card(
-                              elevation: 4,
-                              shape: const RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color: Colors.black12,
-                                ),
-                                borderRadius: const BorderRadius.all(Radius.circular(12)),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      // Text(
-                                      //   markBook.additionalProp1!.marks![index].fullSubject!=null
-                                      //   ? markBook.additionalProp1!.marks![index].fullSubject!
-                                      //   : "",
-                                      // ),
-                                      Text(
-                                        ' (',
-                                      ),
-                                      // Text(
-                                      //     markBook.additionalProp1!.marks![index].hours != null
-                                      //         ?markBook.additionalProp1!.marks![index].hours!
-                                      //         : ""
-                                      // ),
-                                      Text(
-                                        ', ',
-                                      ),
-                                      // Text(
-                                      //     markBook.additionalProp1!.marks![index].formOfControl != null
-                                      //         ? markBook.additionalProp1!.marks![index].formOfControl!
-                                      //         :"",
-                                      // ),
-                                      Text(
-                                        ')',
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10,),
-                                  Text(
-                                    'Пересдачи'
-                                  ),
-                                  // Text(
-                                  //   markBook.additionalProp1!.marks![index].retakesCount != null
-                                  //   ? markBook.additionalProp1!.marks![index].retakesCount!.toString()
-                                  //   : '0',
-                                  // ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                      child: buildListView(widget.markBook.markPages![1]!),
                     ),
                     Container(
                       // child: ListView.builder(
@@ -134,6 +76,7 @@ class MarkBookPage extends StatelessWidget {
                       // ),
                     ),
                   ],
+
                 ),
             ),
 
@@ -141,5 +84,70 @@ class MarkBookPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  ListView buildListView(Simestre simestre ) {
+    return ListView.builder(
+                      itemCount: simestre.marks!.length,
+                      padding: const EdgeInsets.all(8),
+                      itemBuilder: (context, index)
+                      {
+                        return Container(
+                          height: 100,
+                          child: Card(
+                            elevation: 4,
+                            shape: const RoundedRectangleBorder(
+                              side: BorderSide(
+                                color: Colors.black12,
+                              ),
+                              borderRadius: const BorderRadius.all(Radius.circular(12)),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    // Text(
+                                    //   markBook.additionalProp1!.marks![index].fullSubject!=null
+                                    //   ? markBook.additionalProp1!.marks![index].fullSubject!
+                                    //   : "",
+                                    // ),
+                                    Text(
+                                      ' (',
+                                    ),
+                                    // Text(
+                                    //     markBook.additionalProp1!.marks![index].hours != null
+                                    //         ?markBook.additionalProp1!.marks![index].hours!
+                                    //         : ""
+                                    // ),
+                                    Text(
+                                      ', ',
+                                    ),
+                                    // Text(
+                                    //     markBook.additionalProp1!.marks![index].formOfControl != null
+                                    //         ? markBook.additionalProp1!.marks![index].formOfControl!
+                                    //         :"",
+                                    // ),
+                                    Text(
+                                      ')',
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10,),
+                                Text(
+                                  'Пересдачи'
+                                ),
+                                // Text(
+                                //   markBook.additionalProp1!.marks![index].retakesCount != null
+                                //   ? markBook.additionalProp1!.marks![index].retakesCount!.toString()
+                                //   : '0',
+                                // ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
   }
 }

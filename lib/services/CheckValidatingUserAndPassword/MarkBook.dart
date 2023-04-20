@@ -1,99 +1,97 @@
 import "package:json_annotation/json_annotation.dart";
+
 part 'MarkBook.g.dart';
 
 @JsonSerializable()
-class MarkBook{
+class Markbook {
+  String? number;
   double? averageMark;
-  MarkPages? additionalProp1;
-  MarkPages? additionalProp2;
+  Map<int,Simestre>? markPages;
 
-  MarkBook(
-      this.averageMark,
-      this.additionalProp1,
-      this.additionalProp2
-      );
 
-  factory MarkBook.fromJson(Map<String, dynamic> json) => _$MarkBookFromJson(json);
-  Map<String, dynamic> toJson() => _$MarkBookToJson(this);
+  Markbook(this.number, this.averageMark, this.markPages);
+
+  factory Markbook.fromJson(Map<String, dynamic> json) =>
+      _$MarkbookFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MarkbookToJson(this);
 }
 
 @JsonSerializable()
-class MarkPages{
+class Simestre {
+
   double? averageMark;
   List<Marks>? marks;
 
-  MarkPages(
-      this.averageMark,
-      this.marks
-      );
 
-  factory MarkPages.fromJson(Map<String, dynamic> json) => _$MarkPagesFromJson(json);
-  Map<String, dynamic> toJson() => _$MarkPagesToJson(this);
+  Simestre(this.averageMark, this.marks);
+
+  factory Simestre.fromJson(Map<String, dynamic> json) =>
+      _$SimestreFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SimestreToJson(this);
 }
 
 @JsonSerializable()
-class Marks{
-  bool? applicationHasAlreadyBeenSentForAcademicDifferences;
-  bool? applicationHasAlreadyBeenSentForParallel;
-  bool? canLiquidationAcademicDifferences;
-  bool? canStudyInParallel;
-  double? commonMark;
-  double? commonRetakes;
-  String? date;
+class Marks {
+
+  String? subject;
   String? formOfControl;
   String? fullSubject;
   String? hours;
-  int? idFormOfControl;
-  int? idSubject;
   String? mark;
+  String? date;
+  String? teacher;
+  double? commonMark;
+  double? commonRetakes;
   int? retakesCount;
-  LmsEducationTerms? lmsEducationTerms;
+  int? idSubject;
+  int? idFormOfControl;
+  bool? canStudyInParallel;
+  bool? applicationHasAlreadyBeenSentForParallel;
+  bool? canLiquidationAcademicDifferences;
+  bool? applicationHasAlreadyBeenSentForAcademicDifferences;
+  List<LmsEducationTerms>? lmsEducationTerms;
+
 
   Marks(
-    this.applicationHasAlreadyBeenSentForAcademicDifferences,
-    this.applicationHasAlreadyBeenSentForParallel,
-    this.canLiquidationAcademicDifferences,
-    this.canStudyInParallel,
-    this.commonMark,
-    this.commonRetakes,
-    this.date,
-    this.formOfControl,
-    this.fullSubject,
-    this.hours,
-    this.idFormOfControl,
-    this.idSubject,
-    this.mark,
-    this.retakesCount,
-    this.lmsEducationTerms
-    );
+      this.subject,
+      this.formOfControl,
+      this.fullSubject,
+      this.hours,
+      this.mark,
+      this.date,
+      this.teacher,
+      this.commonMark,
+      this.commonRetakes,
+      this.retakesCount,
+      this.idSubject,
+      this.idFormOfControl,
+      this.canStudyInParallel,
+      this.applicationHasAlreadyBeenSentForParallel,
+      this.canLiquidationAcademicDifferences,
+      this.applicationHasAlreadyBeenSentForAcademicDifferences,
+      this.lmsEducationTerms);
 
-  factory Marks.fromJson(Map<String, dynamic> json) => _$MarksFromJson(json);
+  factory Marks.fromJson(Map<String, dynamic> json) =>
+      _$MarksFromJson(json);
+
   Map<String, dynamic> toJson() => _$MarksToJson(this);
 }
 
 @JsonSerializable()
-class LmsEducationTerms{
-  bool? coincidedForeignLanguage;
+class LmsEducationTerms {
   int? idLmsEducationTerm;
   String? subjectNameByApi;
+  bool? coincidedForeignLanguage;
 
-  LmsEducationTerms(
-      this.coincidedForeignLanguage,
-      this.idLmsEducationTerm,
-      this.subjectNameByApi
-      );
 
-  factory LmsEducationTerms.fromJson(Map<String, dynamic> json) => _$LmsEducationTermsFromJson(json);
+  LmsEducationTerms(this.idLmsEducationTerm, this.subjectNameByApi,
+      this.coincidedForeignLanguage);
+
+  factory LmsEducationTerms.fromJson(Map<String, dynamic> json) =>
+      _$LmsEducationTermsFromJson(json);
+
   Map<String, dynamic> toJson() => _$LmsEducationTermsToJson(this);
+
 }
-
-
-
-
-
-
-
-
-
-
-

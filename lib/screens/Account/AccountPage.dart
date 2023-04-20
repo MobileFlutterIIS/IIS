@@ -10,6 +10,7 @@ import 'package:iis/screens/Account/MarkBookPages/MarkBookPage.dart';
 import 'package:iis/screens/Account/GradeBookPage.dart';
 import 'package:iis/screens/Account/OmissionsPage.dart';
 
+import 'package:iis/services/CheckValidatingUserAndPassword/LessonDto.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/Omissions.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/MarkBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/GradeBook.dart';
@@ -33,12 +34,12 @@ class AccountPage extends StatefulWidget{
 
 
 class _AccountPageState extends State<AccountPage> {
-  int _selectedIndex = 0;
+
   List<Certificate>? certificates;
   List<Anouncement>? anouncements;
   Groupinfo? groupinfo;
   List<MarkSheet>? marksheets;
-  MarkBook? markbook;
+  Markbook? markbook;
   List<GradeBook>? gradebook;
   List<Omission>? omissions;
   static bool sucs = false;
@@ -63,6 +64,8 @@ class _AccountPageState extends State<AccountPage> {
     return true;
   }
 
+
+
   @override
   void initState() {
     super.initState();
@@ -81,6 +84,8 @@ class _AccountPageState extends State<AccountPage> {
       builder: (BuildContext context,AsyncSnapshot<bool> f) {
 
         if(!f.hasData) return CircularProgressIndicator();
+
+
 
         final pages = [
           MainPage(user: widget.user),
@@ -133,7 +138,7 @@ class _AccountPageState extends State<AccountPage> {
           body: MainPage(user: widget.user),
           drawer: Drawer(
             child: Material(
-              color: Color.fromRGBO(51, 40, 32, 0.9),
+              color: Color.fromRGBO(22, 49, 99, 0.9),
               child: ListView(
                 children: <Widget>[
                   const SizedBox(height: 70,),
@@ -197,7 +202,7 @@ class _AccountPageState extends State<AccountPage> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             elevation: 0.0,
-            backgroundColor: Colors.brown[200],
+            backgroundColor: Color.fromRGBO(22, 49, 99, 0.9),
             centerTitle: true,
             title: Text(
               'И И С   "Б Г У И Р"',
