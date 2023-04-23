@@ -6,7 +6,7 @@ import 'package:iis/screens/Account/AccountMainPage.dart';
 import 'package:iis/screens/Account/GroupInfo.dart';
 import 'package:iis/screens/Account/Notifications.dart';
 import 'package:iis/screens/Account/Study.dart';
-import 'package:iis/screens/Account/MarkBookPages/MarkBookPage.dart';
+import 'package:iis/screens/Account/MarkBookPage.dart';
 import 'package:iis/screens/Account/GradeBookPage.dart';
 import 'package:iis/screens/Account/OmissionsPage.dart';
 

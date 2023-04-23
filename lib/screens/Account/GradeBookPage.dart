@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/GradeBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/LessonDto.dart';
@@ -11,6 +12,7 @@ class GradeBookPage extends StatefulWidget{
 }
 
 class _GradeBookPageState extends State<GradeBookPage> {
+
   List<GradeBook> _sortGradeBookByDate(List<GradeBook> gradebook){
     gradebook.sort((a, b) =>
         a.student!.lessons![0].dateString!.compareTo(b.student!.lessons![0].dateString!));
@@ -280,242 +282,426 @@ class _GradeBookPageState extends State<GradeBookPage> {
     List<String>? item = itemsForDropdownButton(lesson!)!;
     String? selected = item[0].toString();
 
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: const Color.fromRGBO(22, 49, 99, 0.9),
-        centerTitle: true,
-        title: const Text('Р Е Й Т И Н Г'),
-      ),
-      body: Column(
-        children: [
-          const SizedBox(height: 30,),
-          const Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text(
-              'Рейтинг по контрольным точкам',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                color: Color.fromRGBO(22, 49, 99, 0.9),
-              ),
-            ),
-          ),
-          const SizedBox(height: 15),
-          SizedBox(
-            width: 220,
-            child: InputDecorator(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.symmetric(horizontal: 10),
-              ),
-              child: DropdownButton<String>(
-                isExpanded: true,
-                value: selected,
-                // style: const TextStyle(
-                //   color: Colors.black,
-                //   fontSize: 16,
-                // ),
-                items: item.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (String? selectedItem) {
-                  setState(() {
-                    selected = selectedItem;
-                  });
-                },
-                iconEnabledColor: const Color.fromRGBO(22, 49, 99, 0.9),
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Expanded(
-            child: SafeArea(
-              child: Container(
-                child: ListView.builder(
-                  itemCount: lesson.isNotEmpty
-                    ?lesson.length
-                    :0,
-                  itemBuilder: (context, index){
-                    return Container(
-                      height: 200,
-                      width: MediaQuery.of(context).size.width - 20,
-                      child: Card(
-                        color: Colors.white,
-                        elevation: 4,
-                        shape: const RoundedRectangleBorder(
-                          side: BorderSide(
-                            color: Colors.black12,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(height: 30),
-                              Center(
-                                child: Text(
-                                  lesson[index].lessonNameAbbrev!,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(22, 49, 99, 0.9),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              Row(
-                                children: [
-                                  Column(
-                                    children: [
-                                      const Text(
-                                        'ПЗ',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 6),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            marksByLesson(index, lesson, 1, selected!)!=null
-                                              ?marksByLesson(index, lesson, 1, selected!)!.length.toString()
-                                              :'0',
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          const Text(
-                                            ' шт.',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            omissionsByLesson(index, lesson, 1, selected!)!=null
-                                              ?omissionsByLesson(index, lesson, 1, selected!)!.toString()
-                                              :'0',
-                                          ),
-                                          const Text(
-                                            ' ч.',
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(width: MediaQuery.of(context).size.width/3),
-                                  Column(
-                                    children: [
-                                      const Text(
-                                        'ЛК',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 6),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            marksByLesson(index, lesson, 2, selected!)!=null
-                                                ?marksByLesson(index, lesson, 2, selected!)!.length.toString()
-                                                :'0',
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          const Text(
-                                            ' шт.',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            omissionsByLesson(index, lesson, 2, selected!)!=null
-                                                ?omissionsByLesson(index, lesson, 2, selected!)!.toString()
-                                                :'0',
-                                          ),
-                                          const Text(
-                                            ' ч.',
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(width: MediaQuery.of(context).size.width/3 - 20),
-                                  Column(
-                                    children: [
-                                      const Text(
-                                        'ЛР',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 6),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            marksByLesson(index, lesson, 3, selected!)!=null
-                                                ?marksByLesson(index, lesson, 3, selected!)!.length.toString()
-                                                :'0',
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          const Text(
-                                            ' шт.',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            omissionsByLesson(index, lesson, 3, selected!)!=null
-                                                ?omissionsByLesson(index, lesson, 3, selected!)!.toString()
-                                                :'0',
-                                          ),
-                                          const Text(
-                                            ' ч.',
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+    return DefaultTabController(
+      length: 4,
+      child:Scaffold(
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: const Color.fromRGBO(22, 49, 99, 0.9),
+          centerTitle: true,
+          title: const Text('Р Е Й Т И Н Г'),
+        ),
+                body: Column(
+                  children: [
+                    TabBar(
+                      isScrollable: true,
+                      labelStyle: const TextStyle(fontSize: 24),
+                      unselectedLabelStyle: const TextStyle(fontSize: 20),
+                      tabs: [
+                        Text(
+                          item[0],
+                          style: const TextStyle(
+                              color: Color.fromRGBO(22, 49, 99, 0.9),
                           ),
                         ),
-                      ),
-                    );
-                  }
+                        Text(
+                          item[1],
+                          style: const TextStyle(
+                            color: Color.fromRGBO(22, 49, 99, 0.9),
+                          ),
+                        ),
+                        Text(
+                          item[2],
+                          style: const TextStyle(
+                            color: Color.fromRGBO(22, 49, 99, 0.9),
+                          ),
+                        ),
+                        Text(
+                          item[3],
+                          style: const TextStyle(
+                            color: Color.fromRGBO(22, 49, 99, 0.9),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30,),
+                    Expanded(
+                        child: TabBarView(
+                          children: [
+                            Container(
+                                child: buildSafeArea(lesson, item[0]),
+                            ),
+                            Container(child: buildSafeArea(lesson, item[1])),
+                            Container(child: buildSafeArea(lesson, item[2])),
+                            Container(child: buildSafeArea(lesson, item[3])),
+                          ],
+                        ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ),
-        ],
-      ),
-    );
+          );
   }
+
+  ListView buildSafeArea(List<LessonDto> lesson, String selected) {
+    return ListView.builder(
+                    itemCount: lesson.isNotEmpty
+                        ?lesson.length
+                        :0,
+                    itemBuilder: (context, index){
+                      return Container(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width - 20,
+                        child: Card(
+                          color: Colors.white,
+                          elevation: 4,
+                          shape: const RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Colors.black12,
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 30),
+                                Center(
+                                  child: Text(
+                                    lesson[index].lessonNameAbbrev!,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(22, 49, 99, 0.9),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                Row(
+                                  children: [
+                                    Column(
+                                      children: [
+                                        const Text(
+                                          'ПЗ',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 6),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              marksByLesson(index, lesson, 1, selected!)!=null
+                                                  ?marksByLesson(index, lesson, 1, selected!)!.length.toString()
+                                                  :'0',
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            const Text(
+                                              ' шт.',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              omissionsByLesson(index, lesson, 1, selected!)!=null
+                                                  ?omissionsByLesson(index, lesson, 1, selected!)!.toString()
+                                                  :'0',
+                                            ),
+                                            const Text(
+                                              ' ч.',
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(width: MediaQuery.of(context).size.width/3),
+                                    Column(
+                                      children: [
+                                        const Text(
+                                          'ЛК',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 6),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              marksByLesson(index, lesson, 2, selected!)!=null
+                                                  ?marksByLesson(index, lesson, 2, selected!)!.length.toString()
+                                                  :'0',
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            const Text(
+                                              ' шт.',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              omissionsByLesson(index, lesson, 2, selected!)!=null
+                                                  ?omissionsByLesson(index, lesson, 2, selected!)!.toString()
+                                                  :'0',
+                                            ),
+                                            const Text(
+                                              ' ч.',
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(width: MediaQuery.of(context).size.width/3 - 20),
+                                    Column(
+                                      children: [
+                                        const Text(
+                                          'ЛР',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 6),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              marksByLesson(index, lesson, 3, selected!)!=null
+                                                  ?marksByLesson(index, lesson, 3, selected!)!.length.toString()
+                                                  :'0',
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            const Text(
+                                              ' шт.',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              omissionsByLesson(index, lesson, 3, selected!)!=null
+                                                  ?omissionsByLesson(index, lesson, 3, selected!)!.toString()
+                                                  :'0',
+                                            ),
+                                            const Text(
+                                              ' ч.',
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                );
+  }
+
+  // SafeArea buildList(List<LessonDto> lesson, String? selected) {
+  //   return SafeArea(
+  //               child: Container(
+  //                 child: ListView.builder(
+  //                     itemCount: lesson.isNotEmpty
+  //                         ?lesson.length
+  //                         :0,
+  //                     itemBuilder: (context, index){
+  //                       return Container(
+  //                         height: 200,
+  //                         width: MediaQuery.of(context).size.width - 20,
+  //                         child: Card(
+  //                           color: Colors.white,
+  //                           elevation: 4,
+  //                           shape: const RoundedRectangleBorder(
+  //                             side: BorderSide(
+  //                               color: Colors.black12,
+  //                             ),
+  //                             borderRadius: BorderRadius.all(Radius.circular(12)),
+  //                           ),
+  //                           child: Padding(
+  //                             padding: const EdgeInsets.only(left: 20),
+  //                             child: Column(
+  //                               crossAxisAlignment: CrossAxisAlignment.start,
+  //                               children: [
+  //                                 const SizedBox(height: 30),
+  //                                 Center(
+  //                                   child: Text(
+  //                                     lesson[index].lessonNameAbbrev!,
+  //                                     style: const TextStyle(
+  //                                       fontSize: 20,
+  //                                       fontWeight: FontWeight.bold,
+  //                                       color: Color.fromRGBO(22, 49, 99, 0.9),
+  //                                     ),
+  //                                   ),
+  //                                 ),
+  //                                 const SizedBox(height: 20),
+  //                                 Row(
+  //                                   children: [
+  //                                     Column(
+  //                                       children: [
+  //                                         const Text(
+  //                                           'ПЗ',
+  //                                           style: TextStyle(
+  //                                             fontSize: 16,
+  //                                             fontWeight: FontWeight.w400,
+  //                                           ),
+  //                                         ),
+  //                                         const SizedBox(height: 6),
+  //                                         Row(
+  //                                           children: [
+  //                                             Text(
+  //                                               marksByLesson(index, lesson, 1, selected!)!=null
+  //                                                   ?marksByLesson(index, lesson, 1, selected!)!.length.toString()
+  //                                                   :'0',
+  //                                               style: const TextStyle(
+  //                                                 fontWeight: FontWeight.bold,
+  //                                               ),
+  //                                             ),
+  //                                             const Text(
+  //                                               ' шт.',
+  //                                               style: TextStyle(
+  //                                                 fontWeight: FontWeight.bold,
+  //                                               ),
+  //                                             ),
+  //                                           ],
+  //                                         ),
+  //                                         const SizedBox(height: 4),
+  //                                         Row(
+  //                                           children: [
+  //                                             Text(
+  //                                               omissionsByLesson(index, lesson, 1, selected!)!=null
+  //                                                   ?omissionsByLesson(index, lesson, 1, selected!)!.toString()
+  //                                                   :'0',
+  //                                             ),
+  //                                             const Text(
+  //                                               ' ч.',
+  //                                             ),
+  //                                           ],
+  //                                         ),
+  //                                       ],
+  //                                     ),
+  //                                     SizedBox(width: MediaQuery.of(context).size.width/3),
+  //                                     Column(
+  //                                       children: [
+  //                                         const Text(
+  //                                           'ЛК',
+  //                                           style: TextStyle(
+  //                                             fontSize: 16,
+  //                                             fontWeight: FontWeight.w400,
+  //                                           ),
+  //                                         ),
+  //                                         const SizedBox(height: 6),
+  //                                         Row(
+  //                                           children: [
+  //                                             Text(
+  //                                               marksByLesson(index, lesson, 2, selected!)!=null
+  //                                                   ?marksByLesson(index, lesson, 2, selected!)!.length.toString()
+  //                                                   :'0',
+  //                                               style: const TextStyle(
+  //                                                 fontWeight: FontWeight.bold,
+  //                                               ),
+  //                                             ),
+  //                                             const Text(
+  //                                               ' шт.',
+  //                                               style: TextStyle(
+  //                                                 fontWeight: FontWeight.bold,
+  //                                               ),
+  //                                             ),
+  //                                           ],
+  //                                         ),
+  //                                         const SizedBox(height: 4),
+  //                                         Row(
+  //                                           children: [
+  //                                             Text(
+  //                                               omissionsByLesson(index, lesson, 2, selected!)!=null
+  //                                                   ?omissionsByLesson(index, lesson, 2, selected!)!.toString()
+  //                                                   :'0',
+  //                                             ),
+  //                                             const Text(
+  //                                               ' ч.',
+  //                                             ),
+  //                                           ],
+  //                                         ),
+  //                                       ],
+  //                                     ),
+  //                                     SizedBox(width: MediaQuery.of(context).size.width/3 - 20),
+  //                                     Column(
+  //                                       children: [
+  //                                         const Text(
+  //                                           'ЛР',
+  //                                           style: TextStyle(
+  //                                             fontSize: 16,
+  //                                             fontWeight: FontWeight.w400,
+  //                                           ),
+  //                                         ),
+  //                                         const SizedBox(height: 6),
+  //                                         Row(
+  //                                           children: [
+  //                                             Text(
+  //                                               marksByLesson(index, lesson, 3, selected!)!=null
+  //                                                   ?marksByLesson(index, lesson, 3, selected!)!.length.toString()
+  //                                                   :'0',
+  //                                               style: const TextStyle(
+  //                                                 fontWeight: FontWeight.bold,
+  //                                               ),
+  //                                             ),
+  //                                             const Text(
+  //                                               ' шт.',
+  //                                               style: TextStyle(
+  //                                                 fontWeight: FontWeight.bold,
+  //                                               ),
+  //                                             ),
+  //                                           ],
+  //                                         ),
+  //                                         const SizedBox(height: 4),
+  //                                         Row(
+  //                                           children: [
+  //                                             Text(
+  //                                               omissionsByLesson(index, lesson, 3, selected!)!=null
+  //                                                   ?omissionsByLesson(index, lesson, 3, selected!)!.toString()
+  //                                                   :'0',
+  //                                             ),
+  //                                             const Text(
+  //                                               ' ч.',
+  //                                             ),
+  //                                           ],
+  //                                         ),
+  //                                       ],
+  //                                     ),
+  //                                   ],
+  //                                 ),
+  //                               ],
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       );
+  //                     }
+  //                 ),
+  //               ),
+  //             );
+  // }
 }
