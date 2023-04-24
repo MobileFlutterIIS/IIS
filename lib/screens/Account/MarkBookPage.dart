@@ -205,7 +205,7 @@ class _MarkBookPageState extends State<MarkBookPage> {
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
-                                      color: Color.fromRGBO(22, 49, 99, 0.9),
+                                      color: const Color.fromRGBO(22, 49, 99, 0.9),
                                       textColor: Colors.white,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10.0),

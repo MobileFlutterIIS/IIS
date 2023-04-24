@@ -364,195 +364,277 @@ class _GradeBookPageState extends State<GradeBookPage> {
             ? lesson.length
             : 0,
         itemBuilder: (context, index) {
-          return Container(
-            height: 200,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width - 20,
-            child: Card(
-              color: Colors.white,
-              elevation: 4,
-              shape: const RoundedRectangleBorder(
-                side: BorderSide(
-                  color: Colors.black12,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 30),
-                    Center(
-                      child: Text(
-                        lesson[index].lessonNameAbbrev!,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(22, 49, 99, 0.9),
-                        ),
+          return GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    title: Text(
+                      lesson[index].lessonNameAbbrev!=null
+                          ?lesson[index].lessonNameAbbrev!
+                          :' ',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(22, 49, 99, 0.9),
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    Row(
+                    content: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Column(
+                        const SizedBox(height: 20,),
+                        const Text('ПЗ'),
+                        Row(
                           children: [
-                            const Text(
-                              'ПЗ',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            const SizedBox(height: 6),
-                            Row(
-                              children: [
-                                Text(
-                                  marksByLesson(index, lesson, 1, selected!) !=
-                                      null
-                                      ? marksByLesson(
-                                      index, lesson, 1, selected)!.length
-                                      .toString()
-                                      : '0',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Text(
-                                  ' шт.',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 4),
-                            Row(
-                              children: [
-                                Text(
-                                  omissionsByLesson(
-                                      index, lesson, 1, selected!) != null
-                                      ? omissionsByLesson(
-                                      index, lesson, 1, selected!)!.toString()
-                                      : '0',
-                                ),
-                                const Text(
-                                  ' ч.',
-                                ),
-                              ],
+                            const Text('Оценки: '),
+                            Text(
+                              marksByLesson(index, lesson, 1, selected)!=null
+                                  ?marksByLesson(index, lesson, 1, selected)!.isNotEmpty
+                                  ?marksByLesson(index, lesson, 1, selected)!.join(', ')
+                                  :''
+                                  :'',
                             ),
                           ],
                         ),
-                        SizedBox(width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 3),
-                        Column(
+                        const SizedBox(height: 20,),
+                        const Text('ЛК'),
+                        Row(
                           children: [
-                            const Text(
-                              'ЛК',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            const SizedBox(height: 6),
-                            Row(
-                              children: [
-                                Text(
-                                  marksByLesson(index, lesson, 2, selected!) !=
-                                      null
-                                      ? marksByLesson(
-                                      index, lesson, 2, selected!)!.length
-                                      .toString()
-                                      : '0',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Text(
-                                  ' шт.',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 4),
-                            Row(
-                              children: [
-                                Text(
-                                  omissionsByLesson(
-                                      index, lesson, 2, selected!) != null
-                                      ? omissionsByLesson(
-                                      index, lesson, 2, selected!)!.toString()
-                                      : '0',
-                                ),
-                                const Text(
-                                  ' ч.',
-                                ),
-                              ],
+                            const Text('Оценки: '),
+                            Text(
+                              marksByLesson(index, lesson, 2, selected)!=null
+                                  ?marksByLesson(index, lesson, 2, selected)!.isNotEmpty
+                                  ?marksByLesson(index, lesson, 2, selected)!.join(', ')
+                                  :''
+                                  :'',
                             ),
                           ],
                         ),
-                        SizedBox(width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 3 - 20),
-                        Column(
+                        const SizedBox(height: 20,),
+                        const Text('ЛР'),
+                        Row(
                           children: [
-                            const Text(
-                              'ЛР',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            const SizedBox(height: 6),
-                            Row(
-                              children: [
-                                Text(
-                                  marksByLesson(index, lesson, 3, selected!) !=
-                                      null
-                                      ? marksByLesson(
-                                      index, lesson, 3, selected!)!.length
-                                      .toString()
-                                      : '0',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Text(
-                                  ' шт.',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 4),
-                            Row(
-                              children: [
-                                Text(
-                                  omissionsByLesson(
-                                      index, lesson, 3, selected!) != null
-                                      ? omissionsByLesson(
-                                      index, lesson, 3, selected!)!.toString()
-                                      : '0',
-                                ),
-                                const Text(
-                                  ' ч.',
-                                ),
-                              ],
+                            const Text('Оценки: '),
+                            Text(
+                              marksByLesson(index, lesson, 3, selected)!=null
+                                  ?marksByLesson(index, lesson, 3, selected)!.isNotEmpty
+                                  ?marksByLesson(index, lesson, 3, selected)!.join(', ')
+                                  :''
+                                  :'',
                             ),
                           ],
                         ),
                       ],
                     ),
-                  ],
+                    actions: [
+                      MaterialButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        color: const Color.fromRGBO(22, 49, 99, 0.9),
+                        textColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: Flexible(
+              fit: FlexFit.loose,
+              child: Card(
+                color: Colors.white,
+                elevation: 4,
+                shape: const RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Colors.black12,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 10),
+                      Center(
+                        child: Text(
+                          lesson[index].lessonNameAbbrev!,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromRGBO(22, 49, 99, 0.9),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Column(
+                            children: [
+                              const Text(
+                                'ПЗ',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Row(
+                                children: [
+                                  Text(
+                                    marksByLesson(index, lesson, 1, selected) !=
+                                        null
+                                        ? marksByLesson(
+                                        index, lesson, 1, selected)!.length
+                                        .toString()
+                                        : '0',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Text(
+                                    ' шт.',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Row(
+                                children: [
+                                  Text(
+                                    omissionsByLesson(
+                                        index, lesson, 1, selected!) != null
+                                        ? omissionsByLesson(
+                                        index, lesson, 1, selected!)!.toString()
+                                        : '0',
+                                  ),
+                                  const Text(
+                                    ' ч.',
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 3),
+                          Column(
+                            children: [
+                              const Text(
+                                'ЛК',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Row(
+                                children: [
+                                  Text(
+                                    marksByLesson(index, lesson, 2, selected!) !=
+                                        null
+                                        ? marksByLesson(
+                                        index, lesson, 2, selected!)!.length
+                                        .toString()
+                                        : '0',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Text(
+                                    ' шт.',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Row(
+                                children: [
+                                  Text(
+                                    omissionsByLesson(
+                                        index, lesson, 2, selected!) != null
+                                        ? omissionsByLesson(
+                                        index, lesson, 2, selected!)!.toString()
+                                        : '0',
+                                  ),
+                                  const Text(
+                                    ' ч.',
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 3 - 20),
+                          Column(
+                            children: [
+                              const Text(
+                                'ЛР',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Row(
+                                children: [
+                                  Text(
+                                    marksByLesson(index, lesson, 3, selected!) !=
+                                        null
+                                        ? marksByLesson(
+                                        index, lesson, 3, selected!)!.length
+                                        .toString()
+                                        : '0',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Text(
+                                    ' шт.',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Row(
+                                children: [
+                                  Text(
+                                    omissionsByLesson(
+                                        index, lesson, 3, selected!) != null
+                                        ? omissionsByLesson(
+                                        index, lesson, 3, selected!)!.toString()
+                                        : '0',
+                                  ),
+                                  const Text(
+                                    ' ч.',
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10,),
+                    ],
+                  ),
                 ),
               ),
             ),
