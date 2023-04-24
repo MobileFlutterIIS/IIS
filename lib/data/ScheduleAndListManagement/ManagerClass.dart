@@ -129,7 +129,7 @@ class ManagerClass with ChangeNotifier
         logger.i("Done Updating");
       });
     }
-    notifyListeners();
+    //notifyListeners();
   }
 
 }

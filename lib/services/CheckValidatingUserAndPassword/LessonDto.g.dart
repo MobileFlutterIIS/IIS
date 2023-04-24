@@ -22,10 +22,10 @@ ControlPoint _$ControlPointFromJson(Map<String, dynamic> json) => ControlPoint(
       (json['pz'] as List<dynamic>?)
           ?.map((e) => SubjectType.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['lw'] as List<dynamic>?)
+      (json['lc'] as List<dynamic>?)
           ?.map((e) => SubjectType.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['lc'] as List<dynamic>?)
+      (json['lw'] as List<dynamic>?)
           ?.map((e) => SubjectType.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -33,8 +33,8 @@ ControlPoint _$ControlPointFromJson(Map<String, dynamic> json) => ControlPoint(
 Map<String, dynamic> _$ControlPointToJson(ControlPoint instance) =>
     <String, dynamic>{
       'pz': instance.pz,
-      'lw': instance.lw,
       'lc': instance.lc,
+      'lw': instance.lw,
     };
 
 SubjectType _$SubjectTypeFromJson(Map<String, dynamic> json) => SubjectType(
