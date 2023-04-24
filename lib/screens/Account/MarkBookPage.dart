@@ -39,7 +39,7 @@ class _MarkBookPageState extends State<MarkBookPage> {
                 );
               }),
             ),
-            const SizedBox(height: 30,),
+            const SizedBox(height: 20,),
             Expanded(
                 child: TabBarView(
                     children: [
@@ -110,75 +110,173 @@ class _MarkBookPageState extends State<MarkBookPage> {
                       itemCount: simestre.marks!.length,
 
                       padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index)
-                      {
-                        return Container(
-                          height: 100,
-                          child: Card(
-                            elevation: 4,
-                            shape: const RoundedRectangleBorder(
-                              side: BorderSide(
-                                color: Colors.black12,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  title: Text(
+                                    simestre.marks![index].fullSubject!,
+                                    style: const TextStyle(
+                                      color: Color.fromRGBO(22, 49, 99, 0.9),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  content: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const SizedBox(height: 20,),
+                                      Text(
+                                        simestre.marks![index].teacher!=null
+                                            ?simestre.marks![index].teacher!=''
+                                            ?simestre.marks![index].teacher!
+                                            :'Преподаватель пока не известен'
+                                            :'Преподаватель пока не известен',
+                                      ),
+                                      const SizedBox(height: 10,),
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            'Средняя оценка: '
+                                          ),
+                                          Text(
+                                            simestre.marks![index].commonMark!=null
+                                                ?simestre.marks![index].commonMark!.toStringAsFixed(2)
+                                                :'??',
+                                            style: const TextStyle(
+                                              fontStyle: FontStyle.italic,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 10,),
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            'Средний процент пересдач: ',
+                                          ),
+                                          Text(
+                                            simestre.marks![index].commonRetakes!=null
+                                                ?simestre.marks![index].commonRetakes!=0
+                                                ?(simestre.marks![index].commonRetakes!*100).toStringAsFixed(2)
+                                                :'0'
+                                                :'0',
+                                            style: const TextStyle(
+                                              fontStyle: FontStyle.italic,
+                                            ),
+                                          ),
+                                          const Text(
+                                            '%',
+                                            style: TextStyle(
+                                              fontStyle: FontStyle.italic,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 10,),
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            'Дата сдачи: ',
+                                          ),
+                                          Text(
+                                            simestre.marks![index].date!=null
+                                                ?simestre.marks![index].date!=''
+                                                ?simestre.marks![index].date!
+                                                :'??'
+                                                :'??',
+                                            style: const TextStyle(
+                                              fontStyle: FontStyle.italic,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  actions: [
+                                    MaterialButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      color: Color.fromRGBO(22, 49, 99, 0.9),
+                                      textColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10.0),
+                                      ),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child: Flexible(
+                            fit: FlexFit.loose,
+                            child: Card(
+                              elevation: 4,
+                              shape: const RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.black12,
+                                ),
+                                borderRadius: const BorderRadius.all(Radius.circular(12)),
                               ),
-                              borderRadius: const BorderRadius.all(Radius.circular(12)),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                      simestre.marks![index].fullSubject!
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        simestre.marks![index].hours!.toString(),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      simestre.marks![index].fullSubject!,
+                                      style: const TextStyle(
+                                        color: Color.fromRGBO(22, 49, 99, 0.9),
+                                        letterSpacing: 2,
                                       ),
-                                      Text(
-                                        ' ч., ',
-                                      ),
-                                      Text(
-                                        simestre.marks![index].formOfControl!,
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        simestre.marks![index].mark!=null
-                                            ? 'Оценка: '+simestre.marks![index].mark!.toString()
-                                            : ''
-                                      ),
-                                      Text(
-                                          simestre.marks![index].formOfControl!='Зач.'
-                                              ?simestre.marks![index].commonMark!=null
-                                              ?' (' + simestre.marks![index].commonMark!.toStringAsFixed(2) + ')'
-                                              :''
-                                              :'',
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Пересдачи: '
-                                      ),
-                                      Text(
-                                        simestre.marks![index].retakesCount!.toString(),
-                                      ),
-                                      Text(
-                                         simestre.marks![index].commonRetakes!=null
-                                              ?simestre.marks![index].commonRetakes!*100 != 0
-                                             ?' (' + (simestre.marks![index].commonRetakes!*100).toStringAsFixed(2) + '%)'
-                                             :''
-                                              : '',
-                                      ),
-                                    ],
-                                  ),
+                                      softWrap: true,
+                                    ),
+                                    const SizedBox(height: 8,),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          simestre.marks![index].hours!.toString(),
+                                        ),
+                                        Text(
+                                          ' ч., ',
+                                        ),
+                                        Text(
+                                          simestre.marks![index].formOfControl!,
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          simestre.marks![index].mark!=null
+                                              ? 'Оценка: '+simestre.marks![index].mark!.toString()
+                                              : ''
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Пересдачи: '
+                                        ),
+                                        Text(
+                                          simestre.marks![index].retakesCount!.toString(),
+                                        ),
+                                      ],
+                                    ),
 
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
