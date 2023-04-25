@@ -306,7 +306,6 @@ Map<String, dynamic> _$ScheduleDayToJson(ScheduleDay instance) =>
       'announcement': instance.announcement,
       'split': instance.split,
     };
-
 ScheduleWeek _$ScheduleWeekFromJson(Map<String, dynamic> json) => ScheduleWeek(
   (json['Понедельник'] as List<dynamic>?)
       ?.map((e) => e == null

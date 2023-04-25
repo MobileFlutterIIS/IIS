@@ -98,6 +98,7 @@ class _DisciplinListState extends State<DisciplinList> {
             ),
             DropdownButton<Speciality>
               (
+              isExpanded: true,
               hint: Text('Speciality'),
               value: dropdownSpecialities,
               items: (Specialities != null ? Specialities!.map<
@@ -110,10 +111,10 @@ class _DisciplinListState extends State<DisciplinList> {
               onChanged: (Speciality? input) async {
                 setState(() {
                   dropdownSpecialities = input;
+                  Disciplines = null;
                 });
                 if (dropdownYear != null) {
-                  final temp = await DisciplineManager.GetDisciplines(
-                      dropdownSpecialities!.id!, dropdownYear!);
+                  final temp = await DisciplineManager.GetDisciplines(input!.id!, dropdownYear!);
                   setState(() {
                     Disciplines = temp;
                     // Disciplines!.sort((a, b) =>

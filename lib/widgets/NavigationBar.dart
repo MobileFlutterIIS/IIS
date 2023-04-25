@@ -6,7 +6,7 @@ import 'package:iis/screens/Rating/StudentScale.dart';
 import 'package:iis/screens/Account/UserLogin.dart';
 import 'package:iis/screens/Account/AccountPage.dart';
 import 'package:iis/screens/Schedule/NavigationBetween.dart';
-import 'package:iis/screens/Students.dart';
+import 'package:iis/screens/Students/Students.dart';
 import 'package:iis/screens/ScheduleDepartment.dart';
 import 'package:iis/screens/Departments.dart';
 

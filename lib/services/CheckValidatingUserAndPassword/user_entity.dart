@@ -24,9 +24,11 @@ class UserEntity {
 	List<UserSkills>? skills;
 	List<UserReferences>? references;
 
+
 	UserEntity();
 
-	factory UserEntity.fromJson(Map<String, dynamic> json) => $UserEntityFromJson(json);
+
+  factory UserEntity.fromJson(Map<String, dynamic> json) => $UserEntityFromJson(json);
 
 	Map<String, dynamic> toJson() => $UserEntityToJson(this);
 

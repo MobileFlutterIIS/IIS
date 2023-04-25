@@ -7,7 +7,7 @@ part 'disciplineapi.g.dart';
 @RestApi(baseUrl: "https://iis.bsuir.by/api/v1/")
 abstract class DisciplineClient {
   factory DisciplineClient(Dio dio, {String baseUrl}) = _DisciplineClient;
-  @GET("list-disciplines?id=20129&year=2022")
+  @GET("list-disciplines")
   Future<List<Discipline>> getDisciplines(@Query('id') int id, @Query('year') int year);
 
 }

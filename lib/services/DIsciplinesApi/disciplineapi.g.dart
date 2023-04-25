@@ -55,7 +55,7 @@ class _DisciplineClient implements DisciplineClient {
     )
             .compose(
               _dio.options,
-              'list-disciplines?id=20129&year=2022',
+              'list-disciplines',
               queryParameters: queryParameters,
               data: _data,
             )
