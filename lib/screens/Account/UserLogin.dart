@@ -13,44 +13,31 @@ import 'package:logger/logger.dart';
 
 final logger = Logger();
 
-class UserLogin extends StatelessWidget{
-  UserLogin({super.key});
+class UserLogin extends StatefulWidget{
+  final Color backgroundcolor;
+  final Color primarycolor;
+  UserLogin({super.key, required this.backgroundcolor, required this.primarycolor});
 
+  @override
+  State<UserLogin> createState() => _UserLoginState();
+}
+
+class _UserLoginState extends State<UserLogin> {
   final userNameController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   String? username;
+
   String? password;
 
   String GetUsername(){
     return setUsername(userNameController);
   }
+
   String GetPassword(){
     return setPassword(passwordController);
   }
-
-  // void signUserIn(BuildContext context) async {
-  //   final dio = Dio();
-  //   final apiService = ApiService(dio);
-  //   final loginResponse = await loginToAccount(GetUsername(), GetPassword());
-  //   String cookie = "";
-  //   dio.interceptors.add(
-  //       InterceptorsWrapper(onRequest: (options, handler) {
-  //         cookie =loginResponse.cookie.toString();
-  //         options.headers.addAll({"cookie": cookie});
-  //         return handler.next(options);
-  //       })
-  //   );
-  //   try {
-  //     final response = await apiService.getUserProfile(cookie);
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => AccountPage(user: response, cookie: cookie)),
-  //     );
-  //   } on DioError catch (e) {
-  //     print(e);
-  //   }
-  // }
 
   void signUserIn(BuildContext context) async {
     try {
@@ -67,7 +54,7 @@ class UserLogin extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: Colors.white,
+    backgroundColor: widget.backgroundcolor,
     body: SafeArea(
       child: Center(
         child: Column(
@@ -78,6 +65,8 @@ class UserLogin extends StatelessWidget{
               nameController: userNameController,
               nameHintText: 'Пользователь',
               nameObsecureText: false,
+              backgroundcolor: widget.backgroundcolor,
+              primarycolor: widget.primarycolor,
             ),
 
             const SizedBox(height: 10),
@@ -85,25 +74,16 @@ class UserLogin extends StatelessWidget{
               controller: passwordController,
               hintText: 'Пароль',
               obsecureText: true,
+              backgroundcolor: widget.backgroundcolor,
+              primarycolor: widget.primarycolor,
             ),
 
-            // const SizedBox(height: 10),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 60),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.end,
-            //     children: [
-            //       Text(
-            //         'Забыли пароль?',
-            //         style: TextStyle(color: Colors.grey[600]),
-            //       ),
-            //     ],
-            //   ),
-            // ),
 
             const SizedBox(height: 25),
             SignInButton(
-              onTap: () => signUserIn(context), // Передаем контекст в функцию
+              onTap: () => signUserIn(context),
+              backgroundcolor: widget.backgroundcolor,
+              primarycolor: widget.primarycolor,
             ),
           ],
         ),

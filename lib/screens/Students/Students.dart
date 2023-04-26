@@ -17,6 +17,10 @@ final logger = Logger();
 /// https://pub.dev/packages/multi_select_flutter
 ///
 class Students extends StatefulWidget{
+  final Color backgroundcolor;
+  final Color primarycolor;
+  Students({super.key, required this.backgroundcolor, required this.primarycolor});
+
   @override
   State<Students> createState() => _StudentsState();
 }
@@ -44,7 +48,7 @@ class _StudentsState extends State<Students> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: Colors.white,
+    backgroundColor: widget.backgroundcolor,
     body: FutureBuilder(
       future: initialize(),
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
@@ -63,7 +67,12 @@ class _StudentsState extends State<Students> {
                     searchjob = bol!;
                   });}
                   ),
-                  Text("Searchjob"),
+                  Text(
+                      "Searchjob",
+                  style: TextStyle(
+                    color: widget.primarycolor,
+                  ),
+                  ),
                 ],
               ),
                 TextField(
@@ -74,9 +83,19 @@ class _StudentsState extends State<Students> {
                 }
                 ),
               MultiSelectDialogField<int>(
-                buttonText: Text('Faculties'),
+                buttonText: Text(
+                    'Faculties',
+                  style: TextStyle(
+                    color: widget.primarycolor,
+                  ),
+                ),
                 searchable: true,
-                title: Text('Faculties'),
+                title: Text(
+                    'Faculties',
+                  style: TextStyle(
+                    color: widget.primarycolor,
+                  ),
+                ),
                 items: Faculties!.map((e) => MultiSelectItem(e.id!, e.text!)).toList(),
                 listType: MultiSelectListType.CHIP,
                 onConfirm: (values) {
@@ -90,9 +109,19 @@ class _StudentsState extends State<Students> {
                 ),
               ),
               MultiSelectDialogField<int>(
-                buttonText: Text('Courses'),
+                buttonText: Text(
+                    'Courses',
+                  style: TextStyle(
+                    color: widget.primarycolor,
+                  ),
+                ),
                 searchable: true,
-                title: Text('Courses'),
+                title: Text(
+                    'Courses',
+                  style: TextStyle(
+                    color: widget.primarycolor,
+                  ),
+                ),
                 items: Courses.map((e) => MultiSelectItem(e, e.toString())).toList(),
                 listType: MultiSelectListType.CHIP,
                 onConfirm: (values) {

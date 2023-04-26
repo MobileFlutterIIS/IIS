@@ -10,6 +10,9 @@ final logger = Logger();
 /// TODO SEARCH
 
 class StudentScale extends StatefulWidget{
+  final Color backgroundcolor;
+  final Color primarycolor;
+  StudentScale({super.key, required this.backgroundcolor, required this.primarycolor});
   @override
   State<StudentScale> createState() => _StudentScaleState();
 }
@@ -59,7 +62,7 @@ class _StudentScaleState extends State<StudentScale> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: Colors.white,
+    backgroundColor: widget.backgroundcolor,
     body: FutureBuilder(
       future: initialize(),
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
@@ -73,7 +76,12 @@ class _StudentScaleState extends State<StudentScale> {
             children: [
               DropdownButton<int>
                 (
-                hint: Text('Year'),
+                hint: Text(
+                    'Year',
+                  style: TextStyle(
+                    color: widget.primarycolor,
+                  ),
+                ),
                 value: dropdownYear,
                 items: Years.map<DropdownMenuItem<int>>((
                     int value) {
@@ -99,7 +107,12 @@ class _StudentScaleState extends State<StudentScale> {
               ),
               DropdownButton<Speciality>
                 (
-                hint: Text('Faculty'),
+                hint: Text(
+                    'Faculty',
+                  style: TextStyle(
+                    color: widget.primarycolor,
+                  ),
+                ),
                 value: dropdownFaculty,
                 items: (Faculties != null ? Faculties!.map<DropdownMenuItem<Speciality>>((
                     Speciality value) {
@@ -125,7 +138,12 @@ class _StudentScaleState extends State<StudentScale> {
               ),
               DropdownButton<Speciality>
                 (
-                hint: Text('Speciality'),
+                hint: Text(
+                    'Speciality',
+                  style: TextStyle(
+                    color: widget.primarycolor,
+                  ),
+                ),
                 value: dropdownSpecialities,
                 items: (Specialities != null ? Specialities!.map<DropdownMenuItem<Speciality>>((
                     Speciality value) {
@@ -150,7 +168,7 @@ class _StudentScaleState extends State<StudentScale> {
               ),
               Expanded(
                 child: (Studentratings == null?
-                Center(child: Icon(Icons.error_outline_rounded),):
+                Center(child: Icon(Icons.error_outline_rounded, color: widget.primarycolor,),):
                 ListView.builder(
                     itemCount: Studentratings!.length,
                     itemBuilder: (context, index)
@@ -165,12 +183,18 @@ class _StudentScaleState extends State<StudentScale> {
                           child: Card(
                             child: Row(children:
                             [
-                              Icon(Icons.person,color: Colors.black12,),
-                              Text(Studentratings![index].studentCardNumber!),
-                              SizedBox(width: 5,),
-                              Text(Studentratings![index].average!.toString()),
-                              SizedBox(width: 5,),
-                              Text(Studentratings![index].averageShift!.toString()),
+                              Icon(Icons.person,color: widget.primarycolor,),
+                              Text(Studentratings![index].studentCardNumber!, style: TextStyle(
+                                color: widget.primarycolor,
+                              ),),
+                              const SizedBox(width: 5,),
+                              Text(Studentratings![index].average!.toString(), style: TextStyle(
+                                color: widget.primarycolor,
+                              ),),
+                              const SizedBox(width: 5,),
+                              Text(Studentratings![index].averageShift!.toString(), style: TextStyle(
+                                color: widget.primarycolor,
+                              ),),
                             ],
                             ),
                           ),

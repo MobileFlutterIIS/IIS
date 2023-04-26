@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Schedule',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: Color.fromRGBO(22, 49, 99, 0.9),
+          primary: const Color.fromRGBO(22, 49, 99, 0.9),
         ),
 
       ),
@@ -42,59 +42,43 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Color backgroundcolor = Colors.white;
+  Color primarycolor = const Color.fromRGBO(20, 31, 51, 0.9);
+  Color? between;
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: backgroundcolor,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(55),
+          preferredSize: const Size.fromHeight(100),
           child: AppBar(
 
-            title: Text('И И C    "Б Г У И Р"'),
+            title: const Text('И И C    "Б Г У И Р"'),
             centerTitle: true,
             elevation: 0,
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.sunny, color: Colors.white,),
+                onPressed: () {
+                  setState(() {
+                    between = backgroundcolor;
+                    backgroundcolor = primarycolor;
+                    primarycolor = between!;
+                  });
 
+                },
+              ),
+            ],
           ),
         ),
 
-        // body: Padding(
-        //   padding: EdgeInsets.all(8.0),
-        //   child: Column(
-        //     children: [
-        //       Container(
-        //         height: 45,
-        //         decoration: BoxDecoration(
-        //           borderRadius: BorderRadius.circular(20.0)
-        //         ),
-        //         child: TabBar(
-        //           indicator: BoxDecoration(
-        //             color: Color.fromRGBO(251, 150, 158, 0.9),
-        //             borderRadius: BorderRadius.circular(25.0),
-        //           ),
-        //           labelColor: Colors.white,
-        //           unselectedLabelColor: Colors.black,
-        //           tabs: [
-        //             Tab(text: 'Преподаватели'),
-        //             Tab(text: 'Группы'),
-        //           ],
-        //         ),
-        //       ),
-        //       SizedBox.shrink(
-        //           child: TabBarView(
-        //             children: [
-        //               Schedule(),
-        //             ],
-        //           ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
+
          bottomNavigationBar: SizedBox(
            height: MediaQuery.of(context).size.height - 100,
-           child: NavBar(),
+           child: NavBar(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
          ),
       ),
     );

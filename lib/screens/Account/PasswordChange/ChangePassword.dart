@@ -90,24 +90,26 @@ class _ChangePasswordState extends State<ChangePassword> {
                 child: Column(
                   children: [
 
-                    const SizedBox(height: 160),
-                    Password(
-                      controller: passwordOld,
-                      hintText: 'Старый пароль',
-                      obsecureText: true,
-                    ),
-                    const SizedBox(height: 10),
-                    Password(
-                      controller: newPassword,
-                      hintText: 'Новый пароль',
-                      obsecureText: true,
-                    ),
-                    const SizedBox(height: 10),
-                    Password(
-                      controller: newPasswordRepeat,
-                      hintText: 'Подтвердите пароль',
-                      obsecureText: true,
-                    ),
+                    // const SizedBox(height: 160),
+                    // Password(
+                    //   controller: passwordOld,
+                    //   hintText: 'Старый пароль',
+                    //   obsecureText: true,
+                    //   backgroundcolor: backgroundcolor,
+                    //   primarycolor: primarycolor,
+                    // ),
+                    // const SizedBox(height: 10),
+                    // Password(
+                    //   controller: newPassword,
+                    //   hintText: 'Новый пароль',
+                    //   obsecureText: true,
+                    // ),
+                    // const SizedBox(height: 10),
+                    // Password(
+                    //   controller: newPasswordRepeat,
+                    //   hintText: 'Подтвердите пароль',
+                    //   obsecureText: true,
+                    // ),
                     const SizedBox(height: 20,),
                     ConfirmButton(
                       onTap: () {
