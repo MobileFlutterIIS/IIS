@@ -8,7 +8,7 @@ import 'package:iis/screens/Account/AccountPage.dart';
 import 'package:iis/screens/Schedule/NavigationBetween.dart';
 import 'package:iis/screens/Students/Students.dart';
 import 'package:iis/screens/ScheduleDepartment.dart';
-import 'package:iis/screens/Departments.dart';
+import 'package:iis/screens/Departments/Departments.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);

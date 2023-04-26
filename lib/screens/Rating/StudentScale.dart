@@ -7,6 +7,8 @@ import 'package:logger/logger.dart';
 
 final logger = Logger();
 
+/// TODO SEARCH
+
 class StudentScale extends StatefulWidget{
   @override
   State<StudentScale> createState() => _StudentScaleState();
