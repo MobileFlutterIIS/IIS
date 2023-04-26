@@ -9,6 +9,7 @@ import 'package:iis/screens/Account/Study.dart';
 import 'package:iis/screens/Account/MarkBookPage.dart';
 import 'package:iis/screens/Account/GradeBookPage.dart';
 import 'package:iis/screens/Account/OmissionsPage.dart';
+import 'package:iis/screens/Account/PasswordChange/ChangePassword.dart';
 
 import 'package:iis/services/CheckValidatingUserAndPassword/LessonDto.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/Omissions.dart';
@@ -19,8 +20,9 @@ import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart'
 
 class AccountPage extends StatefulWidget{
   UserEntity user = UserEntity();
+  String password;
 
-  AccountPage({super.key, required this.user});
+  AccountPage({super.key, required this.user, required this.password});
 
   @override
   State<AccountPage> createState() => _AccountPageState();
@@ -42,6 +44,7 @@ class _AccountPageState extends State<AccountPage> {
   Markbook? markbook;
   List<GradeBook>? gradebook;
   List<Omission>? omissions;
+  String? password;
   static bool sucs = false;
 
   Future<bool> initall() async{
@@ -53,6 +56,7 @@ class _AccountPageState extends State<AccountPage> {
     markbook = (await AccountManager.UserMarkBook());
     gradebook = (await AccountManager.UserGradeBook());
     omissions = (await AccountManager.UserOmissions());
+    password = widget.password;
     logger.d(certificates);
     logger.d(groupinfo);
     logger.d(anouncements);
@@ -95,6 +99,7 @@ class _AccountPageState extends State<AccountPage> {
           MarkBookPage(markBook: markbook!,),
           GradeBookPage(gradebook: gradebook!,),
           OmissionsPage(omissions: omissions!,),
+          ChangePassword(password: password!,),
         ];
 
         void selectedItem(BuildContext context, int index) {
@@ -131,6 +136,11 @@ class _AccountPageState extends State<AccountPage> {
                 builder: (context) => OmissionsPage(omissions: omissions!,),
               ));
               break;
+            case 6:
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ChangePassword(password: password!,),
+              ));
+              break;
           }
         }
 
@@ -154,7 +164,7 @@ class _AccountPageState extends State<AccountPage> {
                   ListTile(
                     leading: Icon(Icons.book, color: Colors.white,),
                     title: Text(
-                      'Учеба',
+                      'Объявления',
                       style: TextStyle(color: Colors.white),
                     ),
                     onTap: () => selectedItem(context, 1),
@@ -163,7 +173,7 @@ class _AccountPageState extends State<AccountPage> {
                   ListTile(
                     leading: Icon(Icons.announcement, color: Colors.white,),
                     title: Text(
-                      'Объявления',
+                      'Учеба',
                       style: TextStyle(color: Colors.white),
                     ),
                     onTap: () => selectedItem(context, 2),
@@ -194,6 +204,15 @@ class _AccountPageState extends State<AccountPage> {
                       style: TextStyle(color: Colors.white),
                     ),
                     onTap: () => selectedItem(context, 5),
+                  ),
+                  const SizedBox(height: 15,),
+                  ListTile(
+                    leading: const Icon(Icons.password, color: Colors.white,),
+                    title: const Text(
+                      'Изменить пароль?',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () => selectedItem(context, 6),
                   ),
                 ],
               ),

@@ -82,5 +82,10 @@ abstract class ApiService {
   @Body() String photo,{
   @Header('accept') String accept = 'text/plain',
   @Header('content-type') String contentType = 'text/plain'});
+  @POST('settings/password/change')
+  Future<String> setNewPassword(
+      @Header('cookie') String cookie,
+      @Body() Map<String, dynamic> data,
+      );
 }
 

@@ -111,6 +111,22 @@ class AccountManager
      }
    }
 
+  static Future<String?> NewPassword(String password, String newPassword) async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      Map<String, dynamic> data = {
+        'password': password,
+        'newPassword': newPassword,
+      };
+      final response = await apiService.setNewPassword(cookie, data);
+      print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
   /// из докума по image_picker
   ///
   /// No configuration required - the plugin should work out of the box.
