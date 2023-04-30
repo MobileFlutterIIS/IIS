@@ -10,6 +10,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:iis/screens/Account/AccountPage.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart';
 import 'package:logger/logger.dart';
+import 'package:iis/screens/Account/ResetPassword/ForgetPassword.dart';
 
 final logger = Logger();
 
@@ -45,7 +46,13 @@ class _UserLoginState extends State<UserLogin> {
       if (response == null) throw 'e';
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => AccountPage(user: response, password: GetPassword(),)),
+        MaterialPageRoute(builder: (context) =>
+            AccountPage(
+              user: response,
+              password: GetPassword(),
+              background: widget.backgroundcolor,
+              primary: widget.primarycolor,
+            )),
       );
     } on DioError catch (e) {
       print(e);
@@ -74,10 +81,30 @@ class _UserLoginState extends State<UserLogin> {
               controller: passwordController,
               hintText: 'Пароль',
               obsecureText: true,
-              backgroundcolor: widget.backgroundcolor,
-              primarycolor: widget.primarycolor,
+              // backgroundcolor: widget.backgroundcolor,
+              // primarycolor: widget.primarycolor,
             ),
 
+            const SizedBox(height: 8,),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ForgetPassword()),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 160.0),
+                child: Text(
+                  'Забыли пароль?',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: widget.primarycolor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
 
             const SizedBox(height: 25),
             SignInButton(

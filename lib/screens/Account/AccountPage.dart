@@ -21,8 +21,15 @@ import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart'
 class AccountPage extends StatefulWidget{
   UserEntity user = UserEntity();
   String password;
+  final Color background;
+  final Color primary;
 
-  AccountPage({super.key, required this.user, required this.password});
+  AccountPage({
+    super.key,
+    required this.user,
+    required this.password,
+    required this.background,
+    required this.primary});
 
   @override
   State<AccountPage> createState() => _AccountPageState();

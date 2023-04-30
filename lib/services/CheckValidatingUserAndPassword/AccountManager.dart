@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/api_service.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
@@ -5,6 +7,7 @@ import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/MarkBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/GradeBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/Omissions.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/ContactsToReset.dart';
 import 'package:logger/logger.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:convert';
@@ -119,6 +122,64 @@ class AccountManager
         'newPassword': newPassword,
       };
       final response = await apiService.setNewPassword(cookie, data);
+      print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
+  static Future<ContactsToReset?> CheckPassword(String login) async{
+    try {
+      final response = await apiService.checkPassword(login);
+      print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
+  static Future<ContactsToReset?> PhoneNumberToResetPassword(String contactValue, String login) async{
+    try {
+      Map<String, dynamic> data = {
+        'contactValue': contactValue,
+        'login': login,
+      };
+      final response = await apiService.setPhoneNumberToResetPassword(data);
+      print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
+  static Future<String?> CodeToResetPassword(String contactValue, String login) async{
+    try {
+      Map<String, dynamic> data = {
+        'contactValue': contactValue,
+        'login': login,
+      };
+      final response = await apiService.getCodeToResetPassword(data);
+      print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
+  static Future<String?> NewResetedPassword(String confirmCode, String contactValue, String login, String password) async{
+    try {
+      Map<String, dynamic> data = {
+        'confirmCode': confirmCode,
+        'contactValue': contactValue,
+        'login': login,
+        'password': password,
+      };
+      final response = await apiService.setNewResetedPassword(data);
       print(response.toString());
       return response;
     } on DioError catch (e) {

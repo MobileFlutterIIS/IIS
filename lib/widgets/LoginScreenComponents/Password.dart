@@ -4,16 +4,16 @@ class Password extends StatelessWidget{
   final controller;
   final String hintText;
   final bool obsecureText;
-  final Color backgroundcolor;
-  final Color primarycolor;
+  // final Color backgroundcolor;
+  // final Color primarycolor;
 
   const Password({
     super.key,
     required this.controller,
     required this.hintText,
     required this.obsecureText,
-    required this.backgroundcolor,
-    required this.primarycolor
+    // required this.backgroundcolor,
+    // required this.primarycolor
   });
 
   @override
@@ -23,19 +23,19 @@ class Password extends StatelessWidget{
       child: TextField(
         controller: controller,
         obscureText: obsecureText,
-        style: TextStyle(height: 0.6, color: primarycolor),
+        style: const TextStyle(height: 0.6, color: Colors.black),
         decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(14)),
-            borderSide: BorderSide(color: primarycolor),
+            borderSide: BorderSide(color: Colors.black),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: primarycolor),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black),
           ),
-          fillColor: backgroundcolor,
+          fillColor: Colors.white,
           filled: true,
           hintText: hintText,
-          hintStyle: TextStyle(fontSize: 17, color: primarycolor),
+          hintStyle: TextStyle(fontSize: 17, color: Colors.black),
         ),
       ),
     );

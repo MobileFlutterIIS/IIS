@@ -5,6 +5,7 @@ import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnou
 import 'package:iis/services/CheckValidatingUserAndPassword/MarkBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/GradeBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/Omissions.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/ContactsToReset.dart';
 import 'package:logger/logger.dart';
 
 part 'api_service.g.dart';
@@ -85,6 +86,22 @@ abstract class ApiService {
   @POST('settings/password/change')
   Future<String> setNewPassword(
       @Header('cookie') String cookie,
+      @Body() Map<String, dynamic> data,
+      );
+  @GET('settings/masked-contacts?')
+  Future<ContactsToReset> checkPassword(
+      @Query('login') String user,
+      );
+  @POST('settings/contact/exist')
+  Future<ContactsToReset> setPhoneNumberToResetPassword(
+      @Body() Map<String, dynamic> data,
+      );
+  @POST('settings/password/reset')
+  Future<String> getCodeToResetPassword(
+      @Body() Map<String, dynamic> data,
+      );
+  @POST('settings/password/new')
+  Future<String> setNewResetedPassword(
       @Body() Map<String, dynamic> data,
       );
 }
