@@ -8,6 +8,7 @@ import 'package:iis/services/CheckValidatingUserAndPassword/MarkBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/GradeBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/Omissions.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/ContactsToReset.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:logger/logger.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:convert';
@@ -22,12 +23,25 @@ class AccountManager
   static final apiService = ApiService(dio);
   static String cookie = "";
 
+  static Future<void> saveCredentials(String username, String userpassword) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('username', username);
+    await prefs.setString('userpassword', userpassword);
+  }
+
+  static Future<Map<String, String>> getCredentials() async {
+    final prefs = await SharedPreferences.getInstance();
+    final username = prefs.getString('username');
+    final userpassword = prefs.getString('userpassword');
+    return {'username': username ?? '', 'userpassword': userpassword ?? ''};
+  }
+
   static Future<UserEntity?> signIn(String username, String userpassword) async
   {
     final loginResponse = await loginToAccount(username, userpassword);
   dio.interceptors.add(
   InterceptorsWrapper(onRequest: (options, handler) {
-  cookie =loginResponse.cookie.toString();
+  cookie = loginResponse.cookie.toString();
   options.headers.addAll({"cookie": cookie});
   return handler.next(options);
   })
