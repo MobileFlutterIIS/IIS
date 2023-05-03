@@ -103,8 +103,10 @@ class _StudentsListState extends State<StudentsList> {
                          height: cardheight,
                          child: Card(
                             color: Colors.black12,
-                            child: Text('${Visibleusers[index].middleName!} ${Visibleusers[index].faculty!}',
-                            style: TextStyle(color: Colors.black12),),),
+                            child: Text('${Visibleusers[index].middleName!} ${Visibleusers[index].faculty!} '
+                                '${Visibleusers[index].searchJob} ${Visibleusers[index].speciality} ${Visibleusers[index].skills}',
+                            style: TextStyle(color: Colors.white),
+                            ),),
                        );
                       }
                     else

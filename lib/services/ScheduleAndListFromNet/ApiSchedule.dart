@@ -96,16 +96,22 @@ class ScheduleDay
 class ScheduleWeek
 {
   @HiveField(0)
+  @JsonKey(name: 'Понедельник')
   List<ScheduleDay?>? Monday;
   @HiveField(1)
+  @JsonKey(name: 'Вторник')
   List<ScheduleDay?>? Tuesday;
   @HiveField(2)
+  @JsonKey(name: 'Среда')
   List<ScheduleDay?>? Wednesday;
   @HiveField(3)
+  @JsonKey(name: 'Четверг')
   List<ScheduleDay?>? Thursday;
   @HiveField(4)
+  @JsonKey(name: 'Пятница')
   List<ScheduleDay?>? Friday;
   @HiveField(5)
+  @JsonKey(name: 'Суббота')
   List<ScheduleDay?>? Saturday;
 
   ScheduleWeek(this.Monday, this.Tuesday, this.Wednesday, this.Thursday,

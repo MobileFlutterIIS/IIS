@@ -9,7 +9,7 @@ part of 'departmentsapi.dart';
 DepartmentContainer _$DepartmentContainerFromJson(Map<String, dynamic> json) =>
     DepartmentContainer(
       (json['children'] as List<dynamic>?)
-          ?.map((e) => Department.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => DepartmentContainer.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['data'] == null
           ? null
@@ -86,6 +86,31 @@ class _DepartmentsClient implements DepartmentsClient {
     var value = _result.data!
         .map((dynamic i) =>
             DepartmentContainer.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<List<Department>> getDepartmentsNonTree() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<Department>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'departments',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => Department.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

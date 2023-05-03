@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:iis/data/HiveDatabase.dart';
 import 'package:iis/services/ScheduleAndListFromNet/Api.dart';
 
-Future<void> main() async {
+ void main() async {
   final dio = Dio(); // Provide a dio instance
   dio.options.headers["Demo-Header"] = "demo header"; // config your dio headers globally
   final client = RestClient(dio);
@@ -55,7 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
           child: AppBar(
-
             title: const Text('И И C    "Б Г У И Р"'),
             centerTitle: true,
             elevation: 0,

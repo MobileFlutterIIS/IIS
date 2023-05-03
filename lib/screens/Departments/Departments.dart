@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iis/services/DepartmentsApi/DepartmentsManager.dart';
 import 'package:iis/services/DepartmentsApi/departmentsapi.dart';
+import 'package:iis/screens/Departments/DepartmenList.dart';
 import 'package:iis/services/ScheduleAndListFromNet/Api.dart';
+import 'package:logger/logger.dart';
 
+final logger = Logger();
 
 class Departments extends StatelessWidget{
 
@@ -38,8 +41,8 @@ class Departments extends StatelessWidget{
                 {
                   if (list[index] != null && list[index]!.data!.code != null)
                   return Card(
-                    color: backgroundcolor,
-                    child: Text('${list[index]!.data!.code!}${list[index]!.data!.name!}', style: TextStyle(color: primarycolor),),
+                      color: backgroundcolor,
+                      child: Expacard (temp: list[index])
                   );
                 }
             );
@@ -48,4 +51,67 @@ class Departments extends StatelessWidget{
       ),
     )
   );
+
+
 }
+
+class Expacard extends StatelessWidget {
+  final DepartmentContainer? temp;
+  Expacard({Key? key, required this.temp }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return temp!.children!= null? ExpansionTile(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            IconButton(
+              icon: Icon(Icons.add_box_rounded),
+              onPressed: () async{
+                List<Post>? templist = await DepartmentsManager.GetTutorsDepartment(temp!.data!.id!);
+                logger.d(templist);
+                if (templist != null)
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => DepartmentList(department: templist!),),);
+                ///
+                ///  TODO
+                ///  ADD ERROR MESSAGE
+                ///
+              },
+            ),
+            Container(width: MediaQuery.of(context).size.width-200, child: Text('${temp!.data!.code!}${temp!.data!.name!}', style: TextStyle(color: Colors.black54), overflow: TextOverflow.clip,)),
+          ]
+      ),
+      children: List.generate(temp!.children!.length, (index2) =>
+             Padding(
+               padding: const EdgeInsets.only(left: 25),
+               child: Expacard(temp :temp!.children![index2]),
+             ),
+      ),
+    ):
+    Padding(
+      padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            IconButton(
+              icon: Icon(Icons.add_box_rounded),
+              onPressed: () async{
+                List<Post>? templist = await DepartmentsManager.GetTutorsDepartment(temp!.data!.id!);
+                logger.d(templist);
+                if (templist != null)
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => DepartmentList(department: templist!),),);
+                ///
+                ///  TODO
+                ///  ADD ERROR MESSAGE
+                ///
+              },
+            ),
+            Container(width: MediaQuery.of(context).size.width-200, child: Text('${temp!.data!.code!}${temp!.data!.name!}', style: TextStyle(color: Colors.black),overflow: TextOverflow.fade,)),
+          ]
+      ),
+    );
+  }
+}
+

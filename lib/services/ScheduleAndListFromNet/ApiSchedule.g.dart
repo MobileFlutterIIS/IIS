@@ -308,32 +308,32 @@ Map<String, dynamic> _$ScheduleDayToJson(ScheduleDay instance) =>
     };
 
 ScheduleWeek _$ScheduleWeekFromJson(Map<String, dynamic> json) => ScheduleWeek(
-      (json['Monday'] as List<dynamic>?)
+      (json['Понедельник'] as List<dynamic>?)
           ?.map((e) => e == null
               ? null
               : ScheduleDay.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['Tuesday'] as List<dynamic>?)
+      (json['Вторник'] as List<dynamic>?)
           ?.map((e) => e == null
               ? null
               : ScheduleDay.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['Wednesday'] as List<dynamic>?)
+      (json['Среда'] as List<dynamic>?)
           ?.map((e) => e == null
               ? null
               : ScheduleDay.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['Thursday'] as List<dynamic>?)
+      (json['Четверг'] as List<dynamic>?)
           ?.map((e) => e == null
               ? null
               : ScheduleDay.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['Friday'] as List<dynamic>?)
+      (json['Пятница'] as List<dynamic>?)
           ?.map((e) => e == null
               ? null
               : ScheduleDay.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['Saturday'] as List<dynamic>?)
+      (json['Суббота'] as List<dynamic>?)
           ?.map((e) => e == null
               ? null
               : ScheduleDay.fromJson(e as Map<String, dynamic>))
@@ -342,12 +342,12 @@ ScheduleWeek _$ScheduleWeekFromJson(Map<String, dynamic> json) => ScheduleWeek(
 
 Map<String, dynamic> _$ScheduleWeekToJson(ScheduleWeek instance) =>
     <String, dynamic>{
-      'Monday': instance.Monday,
-      'Tuesday': instance.Tuesday,
-      'Wednesday': instance.Wednesday,
-      'Thursday': instance.Thursday,
-      'Friday': instance.Friday,
-      'Saturday': instance.Saturday,
+      'Понедельник': instance.Monday,
+      'Вторник': instance.Tuesday,
+      'Среда': instance.Wednesday,
+      'Четверг': instance.Thursday,
+      'Пятница': instance.Friday,
+      'Суббота': instance.Saturday,
     };
 
 ScheduleInfo _$ScheduleInfoFromJson(Map<String, dynamic> json) => ScheduleInfo(

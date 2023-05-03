@@ -134,32 +134,35 @@ class _StudentsState extends State<Students> {
                   // },
                 ),
               ),
-             Column(
-               children: [
-                 Autocomplete<Skill>(
-                     displayStringForOption: (Skill option) => option.name!,
-                     optionsBuilder:(TextEditingValue textEditingValue) async
+             Container(
+               child: Column(
+                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                 children: [
+                   Autocomplete<Skill>(
+                       displayStringForOption: (Skill option) => option.name!,
+                       optionsBuilder:(TextEditingValue textEditingValue) async
+                       {
+                         List<Skill>? list = await StudentManager.GetSkills(textEditingValue.text);
+                         return list!;
+                       },
+                      onSelected: (Skill a)
+                      {
+                           setState(() {
+                             SelectedSkills.add(a);
+                           });
+                      },
+                   ),
+                   MultiSelectChipDisplay(
+                     items: SelectedSkills.map((e) => MultiSelectItem(e, e.name!)).toList(),
+                     onTap: (value)
                      {
-                       List<Skill>? list = await StudentManager.GetSkills(textEditingValue.text);
-                       return list!;
+                       setState(() {
+                         SelectedSkills.remove(value);
+                       });
                      },
-                    onSelected: (Skill a)
-                    {
-                         setState(() {
-                           SelectedSkills.add(a);
-                         });
-                    },
-                 ),
-                 MultiSelectChipDisplay(
-                   items: SelectedSkills.map((e) => MultiSelectItem(e, e.name!)).toList(),
-                   onTap: (value)
-                   {
-                     setState(() {
-                       SelectedSkills.remove(value);
-                     });
-                   },
-                 ),
-               ],
+                   ),
+                 ],
+               ),
              ),
               FloatingActionButton(onPressed:
               () {

@@ -7,8 +7,9 @@ import 'package:iis/screens/Account/UserLogin.dart';
 import 'package:iis/screens/Account/AccountPage.dart';
 import 'package:iis/screens/Schedule/NavigationBetween.dart';
 import 'package:iis/screens/Students/Students.dart';
-import 'package:iis/screens/ScheduleDepartment.dart';
+import 'package:iis/screens/Departments/ScheduleDepartment.dart';
 import 'package:iis/screens/Departments/Departments.dart';
+import 'package:iis/screens/PhoneBook/Phonebook.dart';
 
 class NavBar extends StatefulWidget {
   final Color backgroundcolor;
@@ -34,6 +35,7 @@ class _MyNavBar extends State<NavBar> {
       AdditionalFunctions(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
       ScheduleDepartment(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
       Departments(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
+      Phonebook(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
     ];
     return pages;
   }
@@ -49,6 +51,7 @@ class _MyNavBar extends State<NavBar> {
       const Icon(Icons.settings),
       const Icon(Icons.schema),
       const Icon(Icons.home_filled),
+      const Icon(Icons.phone),
     ];
     return Scaffold(
 

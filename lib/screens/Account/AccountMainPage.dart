@@ -32,6 +32,10 @@ class MainPage extends StatelessWidget {
                           ),
                         ),
                         child: ClipOval(
+                          ///
+                          /// TODO
+                          /// CANT UPLOAD WHEN NO PHOTO
+                          ///
                           child: UserIcon(url :user.photoUrl!),
                           clipBehavior: Clip.antiAlias,
                         ),),

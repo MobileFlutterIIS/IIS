@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
-import 'package:iis/widgets/HomepageMain.dart';
+import 'package:iis/main.dart';
 
 class AnouncementPage extends StatelessWidget {
   final List<Anouncement> anouncement;

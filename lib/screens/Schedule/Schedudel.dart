@@ -13,7 +13,6 @@ class Schedule extends StatefulWidget {
   ScheduleInfo whattobuild;
   Schedule(this.whattobuild, {Key? key}) : super(key: key);
 
-
   @override
   State<Schedule> createState() => _ScheduleState();
 }
@@ -91,7 +90,7 @@ int weekNumber(DateTime date) {
 Widget ScheduleForDay(BuildContext context, DateTime day, ScheduleInfo schedule)
 {
   ///
-  ///  CHECK FOR CORRECTNESS
+  ///  CHECK FOR CORRECTNESS, CAN GET FROM NET
   ///
   int? week = (weekNumber(day)+1)%4+1;
   int weekday = day.weekday-1;
@@ -238,7 +237,7 @@ Widget ScheduleForDay(BuildContext context, DateTime day, ScheduleInfo schedule)
 
 String getfio (ScheduleDay? schedule ) {
   String? temp = schedule!.employees!.first!.fio ?? '';
-  logger.d(schedule!.employees!.first!.fio);
+  logger.d(schedule!.employees!.first!.fio!);
   try {
     return temp ;
   }

@@ -10,6 +10,8 @@ abstract class DepartmentsClient {
   factory DepartmentsClient(Dio dio, {String baseUrl}) = _DepartmentsClient;
   @GET("departments/tree")
   Future<List<DepartmentContainer>> getDepartments();
+  @GET("departments")
+  Future<List<Department>> getDepartmentsNonTree();
   @GET("employees")
   Future<List<Post>> getTutorsDepartment(@Query('departmentId') int departmentId);
 }
@@ -17,7 +19,7 @@ abstract class DepartmentsClient {
 @JsonSerializable()
 class  DepartmentContainer
 {
-  List<Department>? children;
+  List<DepartmentContainer>? children;
   Department? data;
 
 
@@ -41,6 +43,7 @@ class  Department
 
   Department(this.abbrev, this.code, this.id, this.idHead, this.name,
       this.numberOfEmployee, this.oldCode, this.typeId);
+
 
   factory Department.fromJson(Map<String, dynamic> json) => _$DepartmentFromJson(json);
   Map<String, dynamic> toJson() => _$DepartmentToJson(this);
