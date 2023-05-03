@@ -36,6 +36,12 @@ class AccountManager
     return {'username': username ?? '', 'userpassword': userpassword ?? ''};
   }
 
+  static Future<void> removeCredentials() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('username');
+    await prefs.remove('userpassword');
+  }
+
   static Future<UserEntity?> signIn(String username, String userpassword) async
   {
     final loginResponse = await loginToAccount(username, userpassword);

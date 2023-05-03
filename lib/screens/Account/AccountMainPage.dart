@@ -176,44 +176,44 @@ class MainPage extends StatelessWidget {
                             ? user.references!.toString()
                             : "",
                       ),
-                      // const SizedBox(height: 150,),
-                      // Row(
-                      //   children: [
-                      //     SizedBox(width: MediaQuery.of(context).size.width/10),
-                      //     Text(
-                      //       'Почта:  ',
-                      //       style: TextStyle(
-                      //         fontWeight: FontWeight.w500,
-                      //         fontSize: 16,
-                      //       ),
-                      //     ),
-                      //     Text(
-                      //       user.officeEmail!,
-                      //       style: TextStyle(
-                      //         fontSize: 14,
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                      // const SizedBox(height: 10,),
-                      // Row(
-                      //   children: [
-                      //     SizedBox(width: MediaQuery.of(context).size.width/10),
-                      //     Text(
-                      //       'Пароль:  ',
-                      //       style: TextStyle(
-                      //         fontWeight: FontWeight.w500,
-                      //         fontSize: 16,
-                      //       ),
-                      //     ),
-                      //     Text(
-                      //       user.officePassword!,
-                      //       style: TextStyle(
-                      //         fontSize: 14,
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
+                      const SizedBox(height: 150,),
+                      Row(
+                        children: [
+                          SizedBox(width: MediaQuery.of(context).size.width/10),
+                          Text(
+                            'Почта:  ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            user.officeEmail!,
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10,),
+                      Row(
+                        children: [
+                          SizedBox(width: MediaQuery.of(context).size.width/10),
+                          Text(
+                            'Пароль:  ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            user.officePassword!,
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
