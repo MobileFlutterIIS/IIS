@@ -15,9 +15,9 @@ import 'package:iis/screens/Account/ResetPassword/ForgetPassword.dart';
 final logger = Logger();
 
 class UserLogin extends StatefulWidget{
-  final Color backgroundcolor;
-  final Color primarycolor;
-  UserLogin({super.key, required this.backgroundcolor, required this.primarycolor});
+  // final Color backgroundcolor;
+  // final Color primarycolor;
+  UserLogin({super.key});
 
   @override
   State<UserLogin> createState() => _UserLoginState();
@@ -54,8 +54,8 @@ class _UserLoginState extends State<UserLogin> {
           MaterialPageRoute(builder: (context) => AccountPage(
             user: user,
             password: credentials['userpassword']!,
-            background: widget.backgroundcolor,
-            primary: widget.primarycolor,
+            // background: widget.backgroundcolor,
+            // primary: widget.primarycolor,
           )),
         );
       }
@@ -119,8 +119,7 @@ class _UserLoginState extends State<UserLogin> {
         MaterialPageRoute(builder: (context) => AccountPage(
           user: user,
           password: password,
-          background: widget.backgroundcolor,
-          primary: widget.primarycolor,
+
         )),
       );
     } else {
@@ -136,7 +135,7 @@ class _UserLoginState extends State<UserLogin> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: widget.backgroundcolor,
+      //backgroundColor: widget.backgroundcolor,
       body: _isLoading
         ? Center(child: CircularProgressIndicator())
         : SafeArea(
@@ -149,8 +148,8 @@ class _UserLoginState extends State<UserLogin> {
                 nameController: userNameController,
                 nameHintText: 'Пользователь',
                 nameObsecureText: false,
-                backgroundcolor: widget.backgroundcolor,
-                primarycolor: widget.primarycolor,
+                // backgroundcolor: widget.backgroundcolor,
+                // primarycolor: widget.primarycolor,
               ),
 
               const SizedBox(height: 10),
@@ -175,7 +174,7 @@ class _UserLoginState extends State<UserLogin> {
                     'Забыли пароль?',
                     style: TextStyle(
                       fontSize: 15,
-                      color: widget.primarycolor,
+                      //color: widget.primarycolor,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -185,8 +184,8 @@ class _UserLoginState extends State<UserLogin> {
               const SizedBox(height: 25),
               SignInButton(
                 onTap: () => _handleSignIn(userNameController.text, passwordController.text),
-                backgroundcolor: widget.backgroundcolor,
-                primarycolor: widget.primarycolor,
+                // backgroundcolor: widget.backgroundcolor,
+                // primarycolor: widget.primarycolor,
               ),
             ],
           ),

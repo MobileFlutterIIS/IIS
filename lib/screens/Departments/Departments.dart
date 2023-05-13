@@ -6,12 +6,8 @@ import 'package:iis/services/ScheduleAndListFromNet/Api.dart';
 
 class Departments extends StatelessWidget{
 
-  final Color backgroundcolor;
-  final Color primarycolor;
   Departments({
     super.key,
-    required this.backgroundcolor,
-    required this.primarycolor
   });
 
   Future<List<DepartmentContainer>?> initialise() async
@@ -22,9 +18,9 @@ class Departments extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: backgroundcolor,
+    //backgroundColor: backgroundcolor,
     body: Scaffold(
-      backgroundColor: backgroundcolor,
+      //backgroundColor: backgroundcolor,
       body: SafeArea(
         child: FutureBuilder(
           future: initialise(),
@@ -38,8 +34,8 @@ class Departments extends StatelessWidget{
                 {
                   if (list[index] != null && list[index]!.data!.code != null)
                   return Card(
-                    color: backgroundcolor,
-                    child: Text('${list[index]!.data!.code!}${list[index]!.data!.name!}', style: TextStyle(color: primarycolor),),
+                    //color: backgroundcolor,
+                    child: Text('${list[index]!.data!.code!}${list[index]!.data!.name!}', ),
                   );
                 }
             );

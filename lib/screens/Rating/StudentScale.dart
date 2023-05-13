@@ -10,9 +10,9 @@ final logger = Logger();
 /// TODO SEARCH
 
 class StudentScale extends StatefulWidget{
-  final Color backgroundcolor;
-  final Color primarycolor;
-  StudentScale({super.key, required this.backgroundcolor, required this.primarycolor});
+  // final Color backgroundcolor;
+  // final Color primarycolor;
+  StudentScale({super.key});
   @override
   State<StudentScale> createState() => _StudentScaleState();
 }
@@ -62,7 +62,7 @@ class _StudentScaleState extends State<StudentScale> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: widget.backgroundcolor,
+    //backgroundColor: widget.backgroundcolor,
     body: FutureBuilder(
       future: initialize(),
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
@@ -78,9 +78,9 @@ class _StudentScaleState extends State<StudentScale> {
                 (
                 hint: Text(
                     'Year',
-                  style: TextStyle(
-                    color: widget.primarycolor,
-                  ),
+                  // style: TextStyle(
+                  //   color: widget.primarycolor,
+                  // ),
                 ),
                 value: dropdownYear,
                 items: Years.map<DropdownMenuItem<int>>((
@@ -109,9 +109,9 @@ class _StudentScaleState extends State<StudentScale> {
                 (
                 hint: Text(
                     'Faculty',
-                  style: TextStyle(
-                    color: widget.primarycolor,
-                  ),
+                  // style: TextStyle(
+                  //   color: widget.primarycolor,
+                  // ),
                 ),
                 value: dropdownFaculty,
                 items: (Faculties != null ? Faculties!.map<DropdownMenuItem<Speciality>>((
@@ -140,9 +140,9 @@ class _StudentScaleState extends State<StudentScale> {
                 (
                 hint: Text(
                     'Speciality',
-                  style: TextStyle(
-                    color: widget.primarycolor,
-                  ),
+                  // style: TextStyle(
+                  //   color: widget.primarycolor,
+                  // ),
                 ),
                 value: dropdownSpecialities,
                 items: (Specialities != null ? Specialities!.map<DropdownMenuItem<Speciality>>((
@@ -168,7 +168,7 @@ class _StudentScaleState extends State<StudentScale> {
               ),
               Expanded(
                 child: (Studentratings == null?
-                Center(child: Icon(Icons.error_outline_rounded, color: widget.primarycolor,),):
+                Center(child: Icon(Icons.error_outline_rounded, ),):
                 ListView.builder(
                     itemCount: Studentratings!.length,
                     itemBuilder: (context, index)
@@ -183,18 +183,12 @@ class _StudentScaleState extends State<StudentScale> {
                           child: Card(
                             child: Row(children:
                             [
-                              Icon(Icons.person,color: widget.primarycolor,),
-                              Text(Studentratings![index].studentCardNumber!, style: TextStyle(
-                                color: widget.primarycolor,
-                              ),),
+                              Icon(Icons.person,),
+                              Text(Studentratings![index].studentCardNumber!, ),
                               const SizedBox(width: 5,),
-                              Text(Studentratings![index].average!.toString(), style: TextStyle(
-                                color: widget.primarycolor,
-                              ),),
+                              Text(Studentratings![index].average!.toString(), ),
                               const SizedBox(width: 5,),
-                              Text(Studentratings![index].averageShift!.toString(), style: TextStyle(
-                                color: widget.primarycolor,
-                              ),),
+                              Text(Studentratings![index].averageShift!.toString(), ),
                             ],
                             ),
                           ),

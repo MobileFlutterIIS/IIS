@@ -21,15 +21,11 @@ import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart'
 class AccountPage extends StatefulWidget{
   UserEntity user = UserEntity();
   String password;
-  final Color background;
-  final Color primary;
 
   AccountPage({
     super.key,
     required this.user,
-    required this.password,
-    required this.background,
-    required this.primary});
+    required this.password});
 
   @override
   State<AccountPage> createState() => _AccountPageState();
@@ -152,12 +148,12 @@ class _AccountPageState extends State<AccountPage> {
             body: MainPage(user: widget.user),
             drawer: Drawer(
               child: Material(
-                color: Color.fromRGBO(22, 49, 99, 0.9),
+                //color: Color.fromRGBO(22, 49, 99, 0.9),
                 child: ListView(
                   children: <Widget>[
                     const SizedBox(height: 70,),
                     ListTile(
-                      leading: Icon(Icons.group, color: Colors.white,),
+                      leading: Icon(Icons.group, ),
                       title: Text(
                         'Группы',
                         style: TextStyle(color: Colors.white),
@@ -166,56 +162,56 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     const SizedBox(height: 15,),
                     ListTile(
-                      leading: Icon(Icons.book, color: Colors.white,),
+                      leading: Icon(Icons.book, ),
                       title: Text(
                         'Объявления',
-                        style: TextStyle(color: Colors.white),
+                        //style: TextStyle(color: Colors.white),
                       ),
                       onTap: () => selectedItem(context, 1),
                     ),
                     const SizedBox(height: 15,),
                     ListTile(
-                      leading: Icon(Icons.announcement, color: Colors.white,),
+                      leading: Icon(Icons.announcement, ),
                       title: Text(
                         'Учеба',
-                        style: TextStyle(color: Colors.white),
+                        //style: TextStyle(color: Colors.white),
                       ),
                       onTap: () => selectedItem(context, 2),
                     ),
                     const SizedBox(height: 15,),
                     ListTile(
-                      leading: Icon(Icons.bookmark, color: Colors.white,),
+                      leading: Icon(Icons.bookmark, ),
                       title: Text(
                         'Зачётка',
-                        style: TextStyle(color: Colors.white),
+                        //style: TextStyle(color: Colors.white),
                       ),
                       onTap: () => selectedItem(context, 3),
                     ),
                     const SizedBox(height: 15,),
                     ListTile(
-                      leading: Icon(Icons.rate_review, color: Colors.white,),
+                      leading: Icon(Icons.rate_review, ),
                       title: Text(
                         'Рейтинг',
-                        style: TextStyle(color: Colors.white),
+                        //style: TextStyle(color: Colors.white),
                       ),
                       onTap: () => selectedItem(context, 4),
                     ),
                     const SizedBox(height: 15,),
                     ListTile(
                       leading: Icon(
-                        Icons.circle_outlined, color: Colors.white,),
+                        Icons.circle_outlined, ),
                       title: Text(
                         'Пропуски',
-                        style: TextStyle(color: Colors.white),
+                        //style: TextStyle(color: Colors.white),
                       ),
                       onTap: () => selectedItem(context, 5),
                     ),
                     const SizedBox(height: 15,),
                     ListTile(
-                      leading: const Icon(Icons.password, color: Colors.white,),
+                      leading: const Icon(Icons.password, ),
                       title: const Text(
                         'Изменить пароль?',
-                        style: TextStyle(color: Colors.white),
+                        //style: TextStyle(color: Colors.white),
                       ),
                       onTap: () => selectedItem(context, 6),
                     ),
@@ -223,10 +219,10 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
             ),
-            backgroundColor: Colors.white,
+            //backgroundColor: Colors.white,
             appBar: AppBar(
               elevation: 0.0,
-              backgroundColor: const Color.fromRGBO(22, 49, 99, 0.9),
+             // backgroundColor: const Color.fromRGBO(22, 49, 99, 0.9),
               centerTitle: true,
               title: Text(
                 'И И С   "Б Г У И Р"',

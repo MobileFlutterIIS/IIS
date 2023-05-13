@@ -22,20 +22,20 @@ class Password extends StatelessWidget{
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: TextField(
         controller: controller,
-        obscureText: obsecureText,
-        style: const TextStyle(height: 0.6, color: Colors.black),
+        //obscureText: obsecureText,
+        style: const TextStyle(height: 0.6, ),
         decoration: InputDecoration(
           enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(14)),
-            borderSide: BorderSide(color: Colors.black),
+            //borderSide: BorderSide(color: Colors.black),
           ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black),
-          ),
-          fillColor: Colors.white,
+          // focusedBorder: const OutlineInputBorder(
+          //   borderSide: BorderSide(color: Colors.black),
+          // ),
+          //fillColor: Colors.white,
           filled: true,
           hintText: hintText,
-          hintStyle: TextStyle(fontSize: 17, color: Colors.black),
+          hintStyle: TextStyle(fontSize: 17, ),
         ),
       ),
     );

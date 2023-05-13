@@ -4,16 +4,16 @@ class UserName extends StatelessWidget{
   final nameController;
   final String nameHintText;
   final bool nameObsecureText;
-  final Color backgroundcolor;
-  final Color primarycolor;
+  // final Color backgroundcolor;
+  // final Color primarycolor;
 
   const UserName({
     super.key,
     required this.nameController,
     required this.nameHintText,
     required this.nameObsecureText,
-    required this.backgroundcolor,
-    required this.primarycolor,
+    // required this.backgroundcolor,
+    // required this.primarycolor,
   });
 
   @override
@@ -25,19 +25,19 @@ class UserName extends StatelessWidget{
       child: TextField(
         controller: nameController,
         obscureText: nameObsecureText,
-        style: TextStyle(height: 0.6, color: primarycolor),
+        style: TextStyle(height: 0.6, ),
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(14)),
-            borderSide: BorderSide(color: primarycolor),
+            //borderSide: BorderSide(color: primarycolor),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: primarycolor),
-          ),
-          fillColor: backgroundcolor,
+          // focusedBorder: OutlineInputBorder(
+          //   borderSide: BorderSide(color: primarycolor),
+          // ),
+          //fillColor: backgroundcolor,
           filled: true,
           hintText: nameHintText,
-          hintStyle: TextStyle(fontSize: 17, color: primarycolor),
+          hintStyle: TextStyle(fontSize: 17,),
         ),
       ),
     );
