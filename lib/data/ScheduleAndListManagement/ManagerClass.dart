@@ -22,6 +22,37 @@ class ManagerClass with ChangeNotifier
   /// PEREDELAI getGroups
   ///           getPosts
   ///
+  ///  DONE
+  ///
+
+  ///
+  /// DONT HAVE PAIR CLASS
+  /// MAYBE ADD
+  ///
+
+  static Future<int?> getWeek() async
+  {
+    DateTime now = new DateTime.now();
+    int? temp;
+    DateWeek? input;
+    temp = await InternetInfo.GetWeekNet();
+    if (temp != null) { input =DateWeek(now, temp); await schedules.addValue(12349999,input );}
+    else
+    {input = await schedules.getValue(12349999);
+     var diff = now.difference(input!.date!);
+     var weeks = diff.inDays;
+     temp = input.weeknumber!;
+     if (now.weekday > input!.date!.weekday!)
+       temp += weeks.floor();
+     else
+       temp += weeks.ceil();
+       temp %= 4;
+       if (temp ==0) temp = 4;
+    }
+    return temp;
+  }
+
+
   static Future<List<Post>?> getPosts() async
   {
     List<Post>? temp =[];
@@ -94,7 +125,7 @@ class ManagerClass with ChangeNotifier
     if (temp != Null)
     {
       logger.d('U got new schedule ${temp}, ${tutor}, hehe(${temp!.schedules!.Friday})');
-      schedules.addValue(tutor.id, temp);
+      schedules.addValue(tutor.id!, temp);
     }
     else
       logger.d('no shcedule for u bruv :(');
@@ -105,15 +136,20 @@ class ManagerClass with ChangeNotifier
     ///
     /// ADD WIDGET TO LOAD
     ///
+    /// DONE
+    ///
     bool gtg = await InternetInfo.GetConnect();
     if (gtg)
     {
+
       List<Group>? temp1 = [];
       temp1 = await InternetInfo.GetGroupsNet();
-      if (temp1!.isNotEmpty) { groups.clearAll() ;await groups.fillAll(temp1);}
+      if (temp1!.isNotEmpty) { await groups.clearAll();
+         await groups.fillAll(temp1);}
       List<Post>? temp2 =[];
       temp2 = await InternetInfo.GetPostsNet();
-      if (temp2!.isNotEmpty) { tutors.clearAll() ;await tutors.fillAll(temp2);}
+      if (temp2!.isNotEmpty) { await tutors.clearAll();
+         await tutors.fillAll(temp2);}
       List<ScheduleInfo>? temp3;
       temp3 = await schedules.getSchedules();
       if (temp3 != null)
@@ -126,9 +162,9 @@ class ManagerClass with ChangeNotifier
           {
             getGroupsScheduleToBase(element.studentGroupDto!.name!);
           }
-        logger.i("Done Updating");
       });
     }
+    logger.w("FINISHED UPDATE!!!");
     //notifyListeners();
   }
 

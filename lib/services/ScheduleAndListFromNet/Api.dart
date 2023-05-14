@@ -18,6 +18,8 @@ abstract class RestClient {
   Future<ScheduleInfo> getGroupSchedule(@Path("groupNumber") String group);
   @GET("employees/schedule/{urlId}")
   Future<ScheduleInfo> getTutorSchedule(@Path("urlId") String group);
+  @GET("schedule/current-week")
+  Future<int> getCurrentWeek();
 }
 
 @JsonSerializable()
@@ -34,15 +36,15 @@ class Post{
  @HiveField(5)
   String? rank;
  @HiveField(6)
-  String photoLink;
+  String? photoLink;
  @HiveField(7)
   String? calendarId;
  @HiveField(8)
   List<String>? academicDepartment;
  @HiveField(0)
-  int id;
+  int? id;
  @HiveField(9)
-  String urlId;
+  String? urlId;
  @HiveField(10)
   String? fio;
 

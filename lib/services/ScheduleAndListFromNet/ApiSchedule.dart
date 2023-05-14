@@ -25,6 +25,18 @@ class studentGroup
 
 }
 
+
+@HiveType(typeId: 6)
+class DateWeek
+{
+  @HiveField(0)
+  DateTime? date;
+  @HiveField(1)
+  int? weeknumber;
+
+  DateWeek(this.date, this.weeknumber);
+}
+
 @JsonSerializable()
 @HiveType(typeId: 4)
 class ScheduleDay

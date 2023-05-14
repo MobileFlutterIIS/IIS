@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:iis/services/ScheduleAndListFromNet/Api.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
@@ -7,12 +8,13 @@ final logger = new Logger();
 class Groupsdatabase
 {
   static const groupsBox = '_groupBox';
+  late final ValueListenable<Box<dynamic>> box = ValueNotifier(Hive.box(groupsBox));
 
-  late final Box<dynamic> _box;
+  late final Box<dynamic> _box = box.value;
 
   Groupsdatabase()
   {
-    _box = Hive.box(groupsBox);
+    //_box.value = Hive.box(groupsBox);
     logger.d(_box.path);
   }
 

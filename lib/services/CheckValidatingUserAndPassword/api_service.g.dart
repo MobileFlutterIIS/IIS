@@ -21,7 +21,7 @@ class _ApiService implements ApiService {
   String? baseUrl;
 
   @override
-  Future<UserEntity> getUserProfile(cookie) async {
+  Future<UserEntity> getUserProfile(String cookie) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'cookie': cookie};
@@ -45,7 +45,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<Certificate>> getUserCertificates(cookie) async {
+  Future<List<Certificate>> getUserCertificates(String cookie) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'cookie': cookie};
@@ -71,7 +71,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<Groupinfo> getUserGroupInfo(cookie) async {
+  Future<Groupinfo> getUserGroupInfo(String cookie) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'cookie': cookie};
@@ -95,7 +95,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<Anouncement>> getUserNotifications(cookie) async {
+  Future<List<Anouncement>> getUserNotifications(String cookie) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'cookie': cookie};
@@ -121,7 +121,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<MarkSheet>> getUserMarkSheet(cookie) async {
+  Future<List<MarkSheet>> getUserMarkSheet(String cookie) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'cookie': cookie};
@@ -147,7 +147,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<Markbook> getUserMarkBook(cookie) async {
+  Future<Markbook> getUserMarkBook(String cookie) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'cookie': cookie};
@@ -171,7 +171,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<GradeBook>> getUserGradeBook(cookie) async {
+  Future<List<GradeBook>> getUserGradeBook(String cookie) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'cookie': cookie};
@@ -197,7 +197,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<Omission>> getUserOmissions(cookie) async {
+  Future<List<Omission>> getUserOmissions(String cookie) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'cookie': cookie};
@@ -224,10 +224,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<String> setUserImage(
-    cookie,
-    photo, {
-    accept = 'text/plain',
-    contentType = 'text/plain',
+    String cookie,
+    String photo, {
+    String accept = 'text/plain',
+    String contentType = 'text/plain',
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -257,8 +257,8 @@ class _ApiService implements ApiService {
 
   @override
   Future<String> setNewPassword(
-    cookie,
-    data,
+    String cookie,
+    Map<String, dynamic> data,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -283,7 +283,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ContactsToReset> checkPassword(user) async {
+  Future<ContactsToReset> checkPassword(String user) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'login': user};
     final _headers = <String, dynamic>{};
@@ -306,7 +306,8 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ContactsToReset> setPhoneNumberToResetPassword(data) async {
+  Future<ContactsToReset> setPhoneNumberToResetPassword(
+      Map<String, dynamic> data) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -330,7 +331,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<String> getCodeToResetPassword(data) async {
+  Future<String> getCodeToResetPassword(Map<String, dynamic> data) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -353,7 +354,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<String> setNewResetedPassword(data) async {
+  Future<String> setNewResetedPassword(Map<String, dynamic> data) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

@@ -84,7 +84,7 @@ class _StudentsClient implements StudentsClient {
   String? baseUrl;
 
   @override
-  Future<List<Skill>> getSkills(name) async {
+  Future<List<Skill>> getSkills(String name) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'name': name};
     final _headers = <String, dynamic>{};
@@ -109,7 +109,7 @@ class _StudentsClient implements StudentsClient {
   }
 
   @override
-  Future<StudentsPage> getStudentPage(payload) async {
+  Future<StudentsPage> getStudentPage(StudentPayload payload) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

@@ -37,8 +37,8 @@ class _DisciplineClient implements DisciplineClient {
 
   @override
   Future<List<Discipline>> getDisciplines(
-    id,
-    year,
+    int id,
+    int year,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{

@@ -27,6 +27,19 @@ class InternetInfo
     return hasconnect;
   }
 
+  static  Future<int?> GetWeekNet() async
+  {
+    GetConnect();
+    logger.d("${hasconnect} ");
+    int data = await client.getCurrentWeek();
+    if (data != null && hasconnect) {
+      logger.d('got week');
+    }
+    else logger.d('No week');
+    return (data!);
+
+  }
+
   static  Future<List<Post>?> GetPostsNet() async
   {
     GetConnect();
@@ -70,7 +83,7 @@ class InternetInfo
   {
     await GetConnect();
     logger.d("${hasconnect} ");
-    ScheduleInfo? data = await client.getTutorSchedule(tutor.urlId);
+    ScheduleInfo? data = await client.getTutorSchedule(tutor.urlId!);
     logger.d(data);
     if (data != Null && hasconnect) {
       logger.d('New list from net');

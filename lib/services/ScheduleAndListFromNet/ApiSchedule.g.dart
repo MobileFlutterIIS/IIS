@@ -49,6 +49,43 @@ class studentGroupAdapter extends TypeAdapter<studentGroup> {
           typeId == other.typeId;
 }
 
+class DateWeekAdapter extends TypeAdapter<DateWeek> {
+  @override
+  final int typeId = 6;
+
+  @override
+  DateWeek read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return DateWeek(
+      fields[0] as DateTime?,
+      fields[1] as int?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, DateWeek obj) {
+    writer
+      ..writeByte(2)
+      ..writeByte(0)
+      ..write(obj.date)
+      ..writeByte(1)
+      ..write(obj.weeknumber);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DateWeekAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 class ScheduleDayAdapter extends TypeAdapter<ScheduleDay> {
   @override
   final int typeId = 4;

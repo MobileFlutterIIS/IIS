@@ -65,8 +65,8 @@ class _RatingClient implements RatingClient {
 
   @override
   Future<List<Speciality>> getSpecialities(
-    faciltyid,
-    entryYear,
+    int faciltyid,
+    int entryYear,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -96,8 +96,8 @@ class _RatingClient implements RatingClient {
 
   @override
   Future<List<StudentsRating>> getSpecialityRating(
-    year,
-    sdef,
+    int year,
+    int sdef,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -126,7 +126,7 @@ class _RatingClient implements RatingClient {
   }
 
   @override
-  Future<Student> getStudentRating(studentCardNumber) async {
+  Future<Student> getStudentRating(String studentCardNumber) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'studentCardNumber': studentCardNumber

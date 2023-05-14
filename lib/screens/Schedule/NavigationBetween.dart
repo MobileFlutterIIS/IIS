@@ -8,9 +8,27 @@ import 'package:iis/screens/Schedule/Schedudel.dart';
 import 'package:iis/screens/Schedule/Lists.dart';
 import 'package:iis/data/ScheduleAndListManagement/ManagerClass.dart';
 import 'package:logger/logger.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 final logger = Logger();
+
+
+/// TODO
+///
+/// 1) fix week
+/// 2) add delete
+/// 3) add favorite
+/// 4) add sorting types
+/// 5) fix view
+/// 6) add on press info
+/// 7) add themes
+/// 8) change side slider to bottom shit
+/// 9) add save last opened
+/// 10) add exams
+/// 11) add groups view
+/// 12) add whole shedule
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({Key? key}) : super(key: key);
@@ -65,87 +83,107 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return  Scaffold(
-        appBar: AppBar(
-          title: Text('Schedule'),
-          //leading: IconButton(icon: Icon(Icons.menu), onPressed: () {
-          //
-          //},),
-        ),
-        drawer: drawer(context, list),
-        body: Center(child: SafeArea(child: ((whatscedule != null) ? Schedule(whatscedule!) : Center(child: Icon(Icons.downloading),)))),
+    return ValueListenableBuilder(
+      valueListenable: Hive.box('_schedulesBox').listenable(),
+      builder: (context, box,_) => Scaffold(
+          appBar: AppBar(
+            title: Text('Schedule'),
+            //leading: IconButton(icon: Icon(Icons.menu), onPressed: () {
+            //
+            //},),
+          ),
+          drawer: drawer(context, list),
+          body: Center(child: SafeArea(child: ((whatscedule != null) ? Schedule(whatscedule!) : Center(child: Icon(Icons.downloading),)))),
 
+      ),
     );
   }
 
 
   Widget drawer(BuildContext context, List<ScheduleInfo> Schedules) {
-    return Drawer(
-      child: Container(
-        color: Colors.black54,
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          children: [
-            Expanded(
-              child: Container(
-                color: Colors.black38,
-                child: ListView.builder(
-                  itemCount: Schedules.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        setwhattobuild(index);
-                        Navigator.pop(context);
-                      },
-                      child: Card
-                        (
-                        color: Colors.black87,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: const BorderRadius.all(
-                              Radius.circular(12)),),
-                        elevation: 10,
-                        child: Container(
-                          decoration: BoxDecoration(
-                          ),
-                          height: 50,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Text(getname(Schedules![index]),
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.white),),
-                              ),
-                            ],
+    return ValueListenableBuilder(
+      valueListenable: Hive.box('_schedulesBox').listenable(),
+      builder: (context,box,_) => Drawer(
+        child: Container(
+          color: Colors.black54,
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(
+                  color: Colors.black38,
+                  child: ListView.builder(
+                    itemCount: Schedules.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          setwhattobuild(index);
+                          Navigator.pop(context);
+                        },
+                        child: Card
+                          (
+                          color: Colors.black87,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: const BorderRadius.all(
+                                Radius.circular(12)),),
+                          elevation: 10,
+                          child: Container(
+                            decoration: BoxDecoration(
+                            ),
+                            height: 50,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text(getname(Schedules![index]),
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.white),),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
-            Container(
-                child: ElevatedButton(onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Lists(),),).then((_) => getlist());
-                }, child: Icon(Icons.add),)
-            ),
-            Container(
-                child: ElevatedButton(onPressed: () async {
-                  await manager.UpdateAll();
-                  setState(() {
-                    getlist();
-                  });
-                }, child: Icon(Icons.update_outlined),)
-            ),
-          ],
+              Container(
+                  child: ElevatedButton(onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Lists(),),).then((_) => getlist());
+                  }, child: Icon(Icons.add),)
+              ),
+              Container(
+                  child: ElevatedButton(onPressed: () async {
+                    WaitUpdateIndicator(manager.UpdateAll());
+                    //await manager.UpdateAll();
+                    setState(() {
+                      getlist();
+                    });
+                  }, child: Icon(Icons.update_outlined),)
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
+
+  WaitUpdateIndicator(Future<dynamic> a) async {
+        showDialog(
+          barrierDismissible: false,
+            context: context,
+            builder: (_) {return Dialog(
+              child: CircularProgressIndicator(),
+            );
+          }
+        );
+        await a;
+        Navigator.of(context).pop();
+ }
 
   String getname(ScheduleInfo? schedule) {
     logger.d('${schedule} ${schedule!.studentGroupDto} ${schedule!.employeeDto}');

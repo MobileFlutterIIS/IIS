@@ -22,11 +22,11 @@ class PostAdapter extends TypeAdapter<Post> {
       fields[3] as String?,
       fields[4] as String?,
       fields[5] as String?,
-      fields[6] as String,
+      fields[6] as String?,
       fields[7] as String?,
       (fields[8] as List?)?.cast<String>(),
-      fields[0] as int,
-      fields[9] as String,
+      fields[0] as int?,
+      fields[9] as String?,
       fields[10] as String?,
     );
   }
@@ -135,13 +135,13 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       json['middleName'] as String?,
       json['degree'] as String?,
       json['rank'] as String?,
-      json['photoLink'] as String,
+      json['photoLink'] as String?,
       json['calendarId'] as String?,
       (json['academicDepartment'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      json['id'] as int,
-      json['urlId'] as String,
+      json['id'] as int?,
+      json['urlId'] as String?,
       json['fio'] as String?,
     );
 
@@ -251,7 +251,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<ScheduleInfo> getGroupSchedule(group) async {
+  Future<ScheduleInfo> getGroupSchedule(String group) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -274,7 +274,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<ScheduleInfo> getTutorSchedule(group) async {
+  Future<ScheduleInfo> getTutorSchedule(String group) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -293,6 +293,28 @@ class _RestClient implements RestClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ScheduleInfo.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<int> getCurrentWeek() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<int>(_setStreamType<int>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'schedule/current-week',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
     return value;
   }
 

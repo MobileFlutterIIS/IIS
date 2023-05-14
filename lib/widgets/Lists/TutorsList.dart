@@ -49,7 +49,7 @@ ListView buildPosts(BuildContext context, List<Post> posts) {
                         child:
                         CachedNetworkImage(
                           width: 80, height: 80,
-                          imageUrl: posts[index].photoLink,
+                          imageUrl: posts[index].photoLink!,
                           placeholder: (context, url) => Image.asset('images/pepo.png', width: 80, height: 80),
                           errorWidget: (context, url, error) => Image.asset('images/pepo.png', width: 80, height: 80),
                         ),
@@ -107,7 +107,7 @@ AlertDialog createdialog (Post post)
             child:
             CachedNetworkImage(
               width: 120, height: 120,
-              imageUrl: post.photoLink,
+              imageUrl: post.photoLink!,
               fit: BoxFit.fitWidth,
               placeholder: (context, url) => const CircularProgressIndicator(),
               errorWidget: (context, url, error) => Image.asset('images/pepo.png', width: 80, height: 80),
