@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:iis/data/ScheduleAndListManagement/Tutors.dart';
 import 'package:iis/data/ScheduleAndListManagement/Groups.dart';
 import 'package:iis/data/ScheduleAndListManagement/Schedules.dart';
+import 'package:iis/data/ScheduleAndListManagement/DateWeek.dart';
 import 'package:iis/services/ScheduleAndListFromNet/ApiSchedule.dart';
 import 'package:iis/services/ScheduleAndListFromNet/Api.dart';
 import 'package:path_provider/path_provider.dart'as pathProvider;
@@ -20,6 +21,7 @@ class HiveInjector
     await Hive.openBox(Groupsdatabase.groupsBox);
     await Hive.openBox(Tutorsdatabase.tutorsBox);
     await Hive.openBox(Schedulesdatabase.schedulesBox);
+    await Hive.openBox(DataDataBase.dateBox);
 
   }
 
@@ -30,6 +32,7 @@ class HiveInjector
     Hive.registerAdapter(ScheduleInfoAdapter());
     Hive.registerAdapter(ScheduleDayAdapter());
     Hive.registerAdapter(ScheduleWeekAdapter());
+    Hive.registerAdapter(DateWeekAdapter());
     Hive.registerAdapter(studentGroupAdapter());
   }
 

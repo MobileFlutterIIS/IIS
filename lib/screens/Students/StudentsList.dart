@@ -103,10 +103,18 @@ class _StudentsListState extends State<StudentsList> {
                          height: cardheight,
                          child: Card(
                             color: Colors.black12,
-                            child: Text('${Visibleusers[index].middleName!} ${Visibleusers[index].faculty!} '
-                                '${Visibleusers[index].searchJob} ${Visibleusers[index].speciality} ${Visibleusers[index].skills}',
-                            style: TextStyle(color: Colors.white),
-                            ),),
+                            child: Row(
+                              children: [
+                                ClipRRect(child:
+                                Visibleusers[index].photoUrl != null ? Image(image: NetworkImage(Visibleusers[index].photoUrl!)) :
+                                    Image.asset('images/pepo.png'),
+                                ),
+                                Text("${Visibleusers[index].firstName} ${Visibleusers[index].middleName} ${Visibleusers[index].lastName}"),
+                                Text("${Visibleusers[index].speciality} ${Visibleusers[index].rating}"),
+                              ],
+                            )
+
+                           ),
                        );
                       }
                     else

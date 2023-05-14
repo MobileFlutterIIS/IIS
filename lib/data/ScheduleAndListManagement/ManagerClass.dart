@@ -5,6 +5,7 @@ import 'package:iis/services/ScheduleAndListFromNet/ApiSchedule.dart';
 import 'package:iis/data/ScheduleAndListManagement/Schedules.dart';
 import 'package:iis/data/ScheduleAndListManagement/Tutors.dart';
 import 'package:iis/data/ScheduleAndListManagement/Groups.dart';
+import 'package:iis/data/ScheduleAndListManagement/DateWeek.dart';
 import 'package:iis/services/InternetInfoAndFetch.dart';
 import 'package:logger/logger.dart';
 
@@ -15,6 +16,7 @@ class ManagerClass with ChangeNotifier
   static Tutorsdatabase tutors = Tutorsdatabase();
   static Groupsdatabase groups = Groupsdatabase();
   static Schedulesdatabase schedules = Schedulesdatabase();
+  static DataDataBase data = DataDataBase();
 
 
   ///
@@ -36,22 +38,25 @@ class ManagerClass with ChangeNotifier
     int? temp;
     DateWeek? input;
     temp = await InternetInfo.GetWeekNet();
-    if (temp != null) { input =DateWeek(now, temp); await schedules.addValue(12349999,input );}
-    else
-    {input = await schedules.getValue(12349999);
+    logger.d(temp);
+    if (temp != null) { input =DateWeek(now, temp); await data.addValue(12349999,input );}
+    else {
+      input = await data.getValue(12349999);
+    }
      var diff = now.difference(input!.date!);
-     var weeks = diff.inDays;
+     double weeks = diff.inDays.toDouble();
+     weeks = weeks / 7;
      temp = input.weeknumber!;
      if (now.weekday > input!.date!.weekday!)
        temp += weeks.floor();
      else
        temp += weeks.ceil();
        temp %= 4;
-       if (temp ==0) temp = 4;
-    }
+       if (temp == 0) temp = 4;
+       temp = 4 - temp;
+       if (temp == 0) temp = 4;
     return temp;
   }
-
 
   static Future<List<Post>?> getPosts() async
   {

@@ -52,31 +52,31 @@ class _MyHomePageState extends State<MyHomePage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(100),
-          child: AppBar(
-            title: const Text('И И C    "Б Г У И Р"'),
-            centerTitle: true,
-            elevation: 0,
-            // actions: [
-            //   IconButton(
-            //     icon: const Icon(Icons.sunny, color: Colors.white,),
-            //     onPressed: () {
-            //       setState(() {
-            //         between = backgroundcolor;
-            //         backgroundcolor = primarycolor;
-            //         primarycolor = between!;
-            //       });
-            //
-            //     },
-            //   ),
-            // ],
-          ),
-        ),
+        // appBar: PreferredSize(
+        //   preferredSize: const Size.fromHeight(100),
+        //   child: AppBar(
+        //     title: const Text('И И C    "Б Г У И Р"'),
+        //     centerTitle: true,
+        //     elevation: 0,
+        //     // actions: [
+        //     //   IconButton(
+        //     //     icon: const Icon(Icons.sunny, color: Colors.white,),
+        //     //     onPressed: () {
+        //     //       setState(() {
+        //     //         between = backgroundcolor;
+        //     //         backgroundcolor = primarycolor;
+        //     //         primarycolor = between!;
+        //     //       });
+        //     //
+        //     //     },
+        //     //   ),
+        //     // ],
+        //   ),
+        // ),
 
 
          bottomNavigationBar: SizedBox(
-           height: MediaQuery.of(context).size.height - 100,
+           height: MediaQuery.of(context).size.height,
            child: NavBar(),
          ),
       ),

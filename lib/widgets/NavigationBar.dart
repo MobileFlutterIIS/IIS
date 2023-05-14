@@ -32,7 +32,7 @@ class _MyNavBar extends State<NavBar> {
       AdditionalFunctions(),
       ScheduleDepartment(),
       Departments(),
-      //Phonebook(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
+      Phonebook(),
     ];
     return pages;
   }
@@ -52,7 +52,7 @@ class _MyNavBar extends State<NavBar> {
     ];
     return Scaffold(
 
-      backgroundColor: widget.backgroundcolor,
+      //backgroundColor: widget.backgroundcolor,
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
           iconTheme: const IconThemeData(color: Colors.white),

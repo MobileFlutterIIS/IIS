@@ -16,12 +16,8 @@ import 'package:dio/dio.dart';
 final logger =Logger();
 
 class ScheduleDepartment extends StatefulWidget{
-  final Color backgroundcolor;
-  final Color primarycolor;
   ScheduleDepartment({
     super.key,
-    required this.backgroundcolor,
-    required this.primarycolor
   });
 
   @override
@@ -47,7 +43,7 @@ class _ScheduleDepartmentState extends State<ScheduleDepartment> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: widget.backgroundcolor,
+    //backgroundColor: widget.backgroundcolor,
     body: SafeArea(
       child: FutureBuilder(
         future: initialize(),
@@ -61,7 +57,7 @@ class _ScheduleDepartmentState extends State<ScheduleDepartment> {
                    hint: Text(
                      'Department',
                      style: TextStyle(
-                       color: widget.primarycolor,
+                       //color: widget.primarycolor,
                      ),
                    ),
                  value: ChosenDepartment,

@@ -17,13 +17,13 @@ final logger = Logger();
 
 /// TODO
 ///
-/// 1) fix week
-/// 2) add delete
+/// 1) fix week | DONE
+/// 2) add delete | DONE
 /// 3) add favorite
 /// 4) add sorting types
-/// 5) fix view
+/// 5) fix view  | MOSTLY DONE
 /// 6) add on press info
-/// 7) add themes
+/// 7) add themes | WILL BE DONE
 /// 8) change side slider to bottom shit
 /// 9) add save last opened
 /// 10) add exams
@@ -92,7 +92,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
             //
             //},),
           ),
-          drawer: drawer(context, list),
+          drawer: drawer(context),
           body: Center(child: SafeArea(child: ((whatscedule != null) ? Schedule(whatscedule!) : Center(child: Icon(Icons.downloading),)))),
 
       ),
@@ -100,7 +100,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   }
 
 
-  Widget drawer(BuildContext context, List<ScheduleInfo> Schedules) {
+  Widget drawer(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: Hive.box('_schedulesBox').listenable(),
       builder: (context,box,_) => Drawer(
@@ -113,34 +113,45 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 child: Container(
                   color: Colors.black38,
                   child: ListView.builder(
-                    itemCount: Schedules.length,
+                    itemCount: list.length,
                     itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          setwhattobuild(index);
-                          Navigator.pop(context);
+                      return Dismissible(
+                        key: UniqueKey(),
+                        direction: DismissDirection.endToStart,
+                        onDismissed: (DismissDirection direction) async
+                        {
+                          setState(() {
+                             ManagerClass.schedules.deleteValue(getkey(list![index]));
+                            list.removeAt(index);
+                          });
                         },
-                        child: Card
-                          (
-                          color: Colors.black87,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: const BorderRadius.all(
-                                Radius.circular(12)),),
-                          elevation: 10,
-                          child: Container(
-                            decoration: BoxDecoration(
-                            ),
-                            height: 50,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Text(getname(Schedules![index]),
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white),),
-                                ),
-                              ],
+                        child: GestureDetector(
+                          onTap: () {
+                            setwhattobuild(index);
+                            Navigator.pop(context);
+                          },
+                          child: Card
+                            (
+                            color: Colors.black87,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(12)),),
+                            elevation: 10,
+                            child: Container(
+                              decoration: BoxDecoration(
+                              ),
+                              height: 50,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Text(getname(list![index]),
+                                      style: TextStyle(
+                                          fontSize: 20, color: Colors.white),),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -196,5 +207,16 @@ class _NavigationScreenState extends State<NavigationScreen> {
       return schedule!.employeeDto!.lastName!;
     }
   }
+   dynamic getkey(ScheduleInfo? schedule) {
+     logger.d('${schedule} ${schedule!.studentGroupDto} ${schedule!.employeeDto}');
+     if (schedule!.studentGroupDto != null) {
+       logger.d (schedule!.studentGroupDto!.name);
+       return schedule!.studentGroupDto!.name!;
+     }
+     else {
+       logger.d(schedule!.employeeDto!.lastName);
+       return schedule!.employeeDto!.id!;
+     }
+   }
 
 }

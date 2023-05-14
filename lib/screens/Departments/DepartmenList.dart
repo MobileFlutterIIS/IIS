@@ -14,9 +14,19 @@ class DepartmentList extends StatelessWidget {
               itemBuilder: (context,index)
               {
                 return Card(
-                  child: Column(
+                  child: Row(
                     children: [
-                      Text(department[index].firstName!)
+                      ClipRRect(child:
+                          ///
+                      ///  NETWORIMAGE может быть пустой, заменить на другой метод
+                      ///
+                      department[index].photoLink != null ? Image(image: NetworkImage(department[index].photoLink !),height:80 ,width: 80,) :
+                      Image.asset('images/pepo.png'),
+                      ),
+                      Text(department[index].firstName!),
+                      Text(department[index].middleName!),
+                      Text(department[index].lastName!),
+                     // Text(department[index].rank!),
                     ],
                   ),
                 );

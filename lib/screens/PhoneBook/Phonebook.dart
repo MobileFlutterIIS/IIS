@@ -6,12 +6,8 @@ import 'package:logger/logger.dart';
 final logger = Logger();
 
 class Phonebook extends StatefulWidget{
-  final Color backgroundcolor;
-  final Color primarycolor;
   Phonebook({
     super.key,
-    required this.backgroundcolor,
-    required this.primarycolor
   });
 
   @override
@@ -61,7 +57,7 @@ class _PhonebookState extends State<Phonebook> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: widget.backgroundcolor,
+    //backgroundColor: widget.backgroundcolor,
     body: SafeArea(
       child:
       Column(

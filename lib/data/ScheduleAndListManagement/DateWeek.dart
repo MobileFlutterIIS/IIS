@@ -5,15 +5,15 @@ import 'package:hive/hive.dart';
 
 final logger = new Logger();
 
-class Schedulesdatabase
+class DataDataBase
 {
-  static const schedulesBox = '_schedulesBox';
+  static const dateBox = '_dateBox';
 
   late final Box<dynamic> _box;
 
-  Schedulesdatabase()
+  DataDataBase()
   {
-    _box = Hive.box(schedulesBox);
+    _box = Hive.box(dateBox);
     logger.d(_box.path);
   }
 
@@ -21,7 +21,7 @@ class Schedulesdatabase
   Future<void> setValue<T>(Object key, T value) async => await _box.put(key,value);
   Future<void> deleteValue<T> (Object key) async => await _box.delete(key);
   Future<void> addValue<T>(Object key, T value) async {
-    if (_box.containsKey(key)){ _box.delete(key);}
+    if (_box.containsKey(key)){ await _box.delete(key);}
     await _box.put(key,value);
     await _box.compact();
   }
