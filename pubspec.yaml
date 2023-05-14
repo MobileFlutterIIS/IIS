@@ -50,6 +50,8 @@ dependencies:
   multi_select_flutter: ^4.1.3
   excel: ^2.1.0
   flutter_parse: ^1.0.1
+  shared_preferences: any
+  flex_color_scheme: any
 
   flutter_localizations:
     sdk: flutter

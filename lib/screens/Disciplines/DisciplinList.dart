@@ -10,9 +10,7 @@ final logger = Logger();
 /// TODO CHOICE
 
 class DisciplinList extends StatefulWidget{
-  final Color backgroundcolor;
-  final Color primarycolor;
-  DisciplinList({super.key, required this.backgroundcolor, required this.primarycolor});
+  DisciplinList({super.key});
 
   @override
   State<DisciplinList> createState() => _DisciplinListState();
@@ -42,7 +40,7 @@ class _DisciplinListState extends State<DisciplinList> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: widget.backgroundcolor,
+    // backgroundColor: widget.backgroundcolor,
     body: FutureBuilder(
       future: initialize(),
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
@@ -57,9 +55,9 @@ class _DisciplinListState extends State<DisciplinList> {
               (
               hint: Text(
                   'Year',
-                style: TextStyle(
-                  color: widget.primarycolor,
-                ),
+                // style: TextStyle(
+                //   color: widget.primarycolor,
+                // ),
               ),
               value: dropdownYear,
               items: Years.map<DropdownMenuItem<int>>((int value) {
@@ -87,9 +85,9 @@ class _DisciplinListState extends State<DisciplinList> {
               (
               hint: Text(
                   'Faculty',
-                style: TextStyle(
-                  color: widget.primarycolor,
-                ),
+                // style: TextStyle(
+                //   color: widget.primarycolor,
+                // ),
               ),
               value: dropdownFaculty,
               items: (Faculties != null ? Faculties!.map<
@@ -119,9 +117,9 @@ class _DisciplinListState extends State<DisciplinList> {
               isExpanded: true,
               hint: Text(
                   'Speciality',
-                style: TextStyle(
-                  color: widget.primarycolor,
-                ),
+                // style: TextStyle(
+                //   color: widget.primarycolor,
+                // ),
               ),
               value: dropdownSpecialities,
               items: (Specialities != null ? Specialities!.map<
@@ -159,13 +157,13 @@ class _DisciplinListState extends State<DisciplinList> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children:
                         [
-                          Icon(Icons.book,color: widget.primarycolor,),
-                          Container(width: 200,child:Text(Disciplines![index].name!, style: TextStyle(color: widget.primarycolor),), color: widget.backgroundcolor,),
+                          Icon(Icons.book,),
+                          Container(width: 200,child:Text(Disciplines![index].name!, ),),
                           Text(
                               Disciplines![index].hours!.toString(),
-                            style: TextStyle(
-                              color: widget.primarycolor,
-                            ),
+                            // style: TextStyle(
+                            //   color: widget.primarycolor,
+                            // ),
                           ),
                         ],
                         ),

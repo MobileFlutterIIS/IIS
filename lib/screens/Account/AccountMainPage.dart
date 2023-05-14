@@ -216,18 +216,15 @@ class MainPage extends StatelessWidget {
                       //         fontSize: 14,
                       //       ),
                       //     ),
-                      //   ],
-                      // ),
+                        ],
+                      ),
+                ),
                     ],
                   ),
                 ),
               ],
-            ),
-          ),
+            );
 
-
-        ],
-      );
     }
 
   }

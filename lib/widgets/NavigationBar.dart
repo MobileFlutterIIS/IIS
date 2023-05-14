@@ -12,10 +12,7 @@ import 'package:iis/screens/Departments/Departments.dart';
 import 'package:iis/screens/PhoneBook/Phonebook.dart';
 
 class NavBar extends StatefulWidget {
-  final Color backgroundcolor;
-  final Color primarycolor;
-  const NavBar({Key? key, required this.backgroundcolor, required this.primarycolor}) : super(key: key);
-
+  const NavBar({Key? key});
   @override
   State<NavBar> createState() => _MyNavBar();
 }
@@ -25,17 +22,17 @@ class _MyNavBar extends State<NavBar> {
   int pageNum = 0;
 
 
-  List<Widget> Pages(Color backgroundcolor, Color primarycolor) {
+  List<Widget> Pages() {
     List<Widget> pages = [
       NavigationScreen(),
-      DisciplinList(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
-      Students(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
-      UserLogin(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
-      StudentScale(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
-      AdditionalFunctions(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
-      ScheduleDepartment(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
-      Departments(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
-      Phonebook(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
+      DisciplinList(),
+      Students(),
+      UserLogin(),
+      StudentScale(),
+      AdditionalFunctions(),
+      ScheduleDepartment(),
+      Departments(),
+      //Phonebook(backgroundcolor: backgroundcolor, primarycolor: primarycolor,),
     ];
     return pages;
   }
@@ -70,12 +67,12 @@ class _MyNavBar extends State<NavBar> {
             });
           },
           color: const Color.fromRGBO(22, 49, 99, 0.9),
-          backgroundColor: widget.backgroundcolor,
+          backgroundColor: Colors.transparent,
           height: 60,
           items: tabs,
         ),
       ),
-      body: Pages(widget.backgroundcolor, widget.primarycolor)[pageNum],
+      body: Pages()[pageNum],
     );
   }
 }
