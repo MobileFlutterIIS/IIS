@@ -45,6 +45,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+ double addheight = 0;
+
 class _MyHomePageState extends State<MyHomePage> {
 
   @override
@@ -73,9 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
         //     // ],
         //   ),
         // ),
-
-
-         bottomNavigationBar: SizedBox(
+         bottomNavigationBar: Container(
            height: MediaQuery.of(context).size.height,
            child: NavBar(),
          ),

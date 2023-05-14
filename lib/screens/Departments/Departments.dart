@@ -63,7 +63,7 @@ class Expacard extends StatelessWidget {
           children: [
             temp!.data!.numberOfEmployee! != 0 ? Container(
               height: 25,
-              width: 40,
+              width: 50,
               child: ElevatedButton(
                 child: Text(temp!.data!.numberOfEmployee!.toString(),style: TextStyle(color: Colors.white,fontSize: 10),),
                 onPressed: () async{
@@ -90,13 +90,13 @@ class Expacard extends StatelessWidget {
       ),
     ):
     Padding(
-      padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
+      padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            temp!.data!.numberOfEmployee! !=0 ? Container(
+            temp!.data!.numberOfEmployee! != 0 ? Container(
               height: 25,
-              width: 40,
+              width: 50,
               child: ElevatedButton(
                 child: Text(temp!.data!.numberOfEmployee!.toString(),style: TextStyle(color: Colors.white,fontSize: 10),),
                 onPressed: () async{

@@ -82,7 +82,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return ValueListenableBuilder(
       valueListenable: Hive.box('_schedulesBox').listenable(),
       builder: (context, box,_) => Scaffold(

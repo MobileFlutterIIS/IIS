@@ -20,6 +20,9 @@ class NavBar extends StatefulWidget {
 class _MyNavBar extends State<NavBar> {
 
   int pageNum = 0;
+  double height = 60;
+  double boxheight = 30;
+  bool arrowup = true;
 
 
   List<Widget> Pages() {
@@ -40,40 +43,88 @@ class _MyNavBar extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     final tabs = <Widget>[
-      const Icon(Icons.schedule),
-      const Icon(Icons.book),
-      const Icon(Icons.people),
-      const Icon(Icons.person),
-      const Icon(Icons.star_rate),
-      const Icon(Icons.settings),
-      const Icon(Icons.schema),
-      const Icon(Icons.home_filled),
-      const Icon(Icons.phone),
+      IconButton(icon: Icon(Icons.schedule),onPressed: () {setState(() {pageNum = 0;});},),
+      IconButton(icon: Icon(Icons.book),onPressed: () {setState(() {pageNum = 1;});},),
+      IconButton(icon: Icon(Icons.people),onPressed: () {setState(() {pageNum = 2;});},),
+      IconButton(icon: Icon(Icons.person),onPressed: () {setState(() {pageNum = 3;});},),
+      IconButton(icon: Icon(Icons.star_rate),onPressed: () {setState(() {pageNum = 4;});},),
+      IconButton(icon: Icon(Icons.settings),onPressed: () {setState(() {pageNum = 5;});},),
+      IconButton(icon: Icon(Icons.schema),onPressed: () {setState(() {pageNum = 6;});},),
+      IconButton(icon: Icon(Icons.home_filled),onPressed: () {setState(() {pageNum = 7;});},),
+      IconButton(icon: Icon(Icons.phone),onPressed: () {setState(() {pageNum = 8;});},),
     ];
-    return Scaffold(
-
-      //backgroundColor: widget.backgroundcolor,
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          iconTheme: const IconThemeData(color: Colors.white),
+    return GestureDetector(
+      onPanUpdate: (details) {
+        int sensitivity = 1;
+        if (details.delta.dy < -sensitivity) {
+          setState(() {
+            height=120;
+            boxheight = 0;
+            arrowup = false;
+          });
+        }
+        if (details.delta.dy >sensitivity ) {
+          setState(() {
+            height=60;
+            boxheight = 30;
+            arrowup = true;
+          });
+        }
+      },
+      child: Scaffold(
+        bottomNavigationBar: Theme(
+          data: Theme.of(context).copyWith(
+            iconTheme: const IconThemeData(color: Colors.white),
+          ),
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 500),
+            curve: Curves.easeInOutCubic,
+            height: height,
+            child: Stack(
+              alignment: Alignment.topLeft,
+              children: [
+                BottomAppBar(
+                color: Colors.blue,
+                child: SingleChildScrollView(
+                  physics: NeverScrollableScrollPhysics(),
+                  child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Column
+                      (
+                      children: [
+                        Row
+                          (
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: tabs.getRange(0, 4).toList(),
+                        ),
+                        AnimatedContainer(curve: Curves.easeInOutCubic,
+                            duration: Duration(milliseconds: 500),
+                            height: boxheight,child : SizedBox()),
+                        Row
+                          (
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: tabs.getRange(5, 9).toList(),
+                        ),
+                        SizedBox(height: 20,)
+                      ],
+                    ),
+                  )
+                ),
+              ),
+                Positioned(width: MediaQuery.of(context).size.width, child: AnimatedSwitcher
+                  (
+                  duration: Duration(milliseconds: 500),
+                  child: Icon(arrowup ? (Icons.keyboard_arrow_up_outlined) : (Icons.keyboard_arrow_down_outlined)),
+                )),
+              ]
+            ),
+          ),
         ),
-        child: CurvedNavigationBar(
-          index: pageNum,
-          animationCurve: Curves.easeInOut,
-          animationDuration: const Duration(milliseconds: 300),
-          onTap: (selectedIndex){
-            setState(() {
-              pageNum = selectedIndex;
-            });
-          },
-          color: const Color.fromRGBO(22, 49, 99, 0.9),
-          backgroundColor: Colors.transparent,
-          height: 60,
-          items: tabs,
-        ),
+        body: Pages()[pageNum],
       ),
-      body: Pages()[pageNum],
     );
   }
+
 }
+
 
