@@ -54,27 +54,34 @@ class _MyNavBar extends State<NavBar> {
       IconButton(icon: Icon(Icons.phone),onPressed: () {setState(() {pageNum = 8;});},),
     ];
     return GestureDetector(
-      onPanUpdate: (details) {
-        int sensitivity = 1;
-        if (details.delta.dy < -sensitivity) {
-          setState(() {
-            height=120;
-            boxheight = 0;
-            arrowup = false;
-          });
-        }
-        if (details.delta.dy >sensitivity ) {
-          setState(() {
-            height=60;
-            boxheight = 30;
-            arrowup = true;
-          });
-        }
+      // onPanUpdate: (details) {
+      //   int sensitivity = 1;
+      //   if (details.delta.dy < -sensitivity) {
+      //     setState(() {
+      //       height=120;
+      //       boxheight = 0;
+      //       arrowup = false;
+      //     });
+      //   }
+      //   if (details.delta.dy >sensitivity ) {
+      //     setState(() {
+      //       height=60;
+      //       boxheight = 30;
+      //       arrowup = true;
+      //     });
+      //   }
+      // },
+      onTap: () {
+        setState(() {
+          height = arrowup ? 120 : 60;
+          boxheight = arrowup ? 0 : 30;
+          arrowup = !arrowup;
+        });
       },
       child: Scaffold(
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
-            iconTheme: const IconThemeData(color: Colors.white),
+            iconTheme: const IconThemeData(color: Colors.black),
           ),
           child: AnimatedContainer(
             duration: Duration(milliseconds: 500),
@@ -84,7 +91,7 @@ class _MyNavBar extends State<NavBar> {
               alignment: Alignment.topLeft,
               children: [
                 BottomAppBar(
-                color: Colors.blue,
+                //color: Colors.blue,
                 child: SingleChildScrollView(
                   physics: NeverScrollableScrollPhysics(),
                   child: Padding(

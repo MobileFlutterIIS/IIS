@@ -83,15 +83,37 @@ class _StudentsListState extends State<StudentsList> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      appBar: AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+        title: Row(
+          children: [
+            const Text(
+              'Студенты',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'NotoSerif',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.34,
+            ),
+          ],
+        ),
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(
+          color: Colors.black, // Цвет иконки
+        ),
+      ),
       body: SafeArea(
         child: FutureBuilder(
           future: initialise(),
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             if (!snapshot.hasData && snapshot != null)
               return CircularProgressIndicator();
-            if (Visibleusers.length == 0) return Icon(Icons.accessible_sharp);
+            if (Visibleusers.length == 0) return const Icon(Icons.accessible_sharp);
             return Container(
-              color: Colors.black12,
+              //color: Colors.black12,
               child: ListView.builder(
                 controller: controller,
                 itemCount: Visibleusers.length+1,
@@ -102,15 +124,25 @@ class _StudentsListState extends State<StudentsList> {
                        return Container(
                          height: cardheight,
                          child: Card(
-                            color: Colors.black12,
+                            //color: Colors.black12,
                             child: Row(
                               children: [
                                 ClipRRect(child:
                                 Visibleusers[index].photoUrl != null ? Image(image: NetworkImage(Visibleusers[index].photoUrl!)) :
                                     Image.asset('images/pepo.png'),
                                 ),
-                                Text("${Visibleusers[index].firstName} ${Visibleusers[index].middleName} ${Visibleusers[index].lastName}"),
-                                Text("${Visibleusers[index].speciality} ${Visibleusers[index].rating}"),
+                                Text("${Visibleusers[index].firstName} ${Visibleusers[index].middleName} ${Visibleusers[index].lastName}",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'NotoSerif',
+                                  ),
+                                ),
+                                Text("${Visibleusers[index].speciality} ${Visibleusers[index].rating}",
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: 'NotoSerif',
+                                  ),
+                                ),
                               ],
                             )
 
@@ -121,7 +153,7 @@ class _StudentsListState extends State<StudentsList> {
                       {
                         if (Visibleusers.length <= MediaQuery.of(context).size.height/cardheight);
                         adddata();
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }
                   }
               ),

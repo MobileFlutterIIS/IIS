@@ -46,7 +46,41 @@ class _StudentsState extends State<Students> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    //backgroundColor: widget.backgroundcolor,
+      appBar: AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+        leadingWidth: MediaQuery.of(context).size.width * 0.046,
+        title: Row(
+          children: [
+            SizedBox(
+              child: IconButton(
+                icon: const Icon(Icons.person),
+                iconSize: MediaQuery.of(context).size.width * 0.06,
+                onPressed: () {
+                  // Действия при нажатии на кнопку
+                },
+              ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.031,
+            ),
+            const Text(
+              'Студенты',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'NotoSerif',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.34,
+            ),
+          ],
+        ),
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(
+          color: Colors.black, // Цвет иконки
+        ),
+      ),
     body: FutureBuilder(
       future: initialize(),
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
@@ -63,13 +97,16 @@ class _StudentsState extends State<Students> {
                       value: searchjob,
                       onChanged: (bol){setState(() {
                     searchjob = bol!;
-                  });}
+                  });},
+                    checkColor: Colors.white, // Color of the checkmark when the checkbox is selected
+                    activeColor: Colors.black,
                   ),
-                  Text(
-                      "Searchjob",
-                  // style: TextStyle(
-                  //   color: widget.primarycolor,
-                  // ),
+                  const Text(
+                      "В поисках работы",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'NotoSerif',
+                    ),
                   ),
                 ],
               ),
@@ -81,18 +118,22 @@ class _StudentsState extends State<Students> {
                 }
                 ),
               MultiSelectDialogField<int>(
-                buttonText: Text(
-                    'Faculties',
-                  // style: TextStyle(
-                  //   color: widget.primarycolor,
-                  // ),
+                buttonText: const Text(
+                    'Факультеты',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontFamily: 'NotoSerif',
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
                 searchable: true,
-                title: Text(
-                    'Faculties',
-                  // style: TextStyle(
-                  //   color: widget.primarycolor,
-                  // ),
+                title: const Text(
+                    'Факультеты',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontFamily: 'NotoSerif',
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
                 items: Faculties!.map((e) => MultiSelectItem(e.id!, e.text!)).toList(),
                 listType: MultiSelectListType.CHIP,
@@ -107,18 +148,22 @@ class _StudentsState extends State<Students> {
                 ),
               ),
               MultiSelectDialogField<int>(
-                buttonText: Text(
-                    'Courses',
-                  // style: TextStyle(
-                  //   color: widget.primarycolor,
-                  // ),
+                buttonText: const Text(
+                    'Курсы',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontFamily: 'NotoSerif',
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
                 searchable: true,
-                title: Text(
-                    'Courses',
-                  // style: TextStyle(
-                  //   color: widget.primarycolor,
-                  // ),
+                title: const Text(
+                    'Курсы',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontFamily: 'NotoSerif',
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
                 items: Courses.map((e) => MultiSelectItem(e, e.toString())).toList(),
                 listType: MultiSelectListType.CHIP,
@@ -162,14 +207,23 @@ class _StudentsState extends State<Students> {
                  ],
                ),
              ),
+              const SizedBox(
+                height: 10,
+              ),
               FloatingActionButton(onPressed:
               () {
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => StudentsList(searchjob: searchjob,
                       Secondname: Secondname, SelectedFaculties:
-                      SelectedFaculties, SelectedSkills: SelectedSkills.map((e) => e!.id!).toList(),
+                      SelectedFaculties, SelectedSkills: SelectedSkills.map((e) => e.id!).toList(),
                       SelectedCourses: SelectedCourses)),);
-              }
+              },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0), // Adjust the border radius as desired
+                ),
+                backgroundColor: Colors.white, // Change the color to your desired color
+                foregroundColor: Colors.black, // Change the icon color to black
+                child: const Icon(Icons.search),
               ),
             ],
           ),

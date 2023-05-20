@@ -14,7 +14,7 @@ ListView buildPosts(BuildContext context, List<Post> posts) {
     itemBuilder: (context,index){
       return
         Container(
-          height: 100,
+          height: 120,
           child:
           GestureDetector (
             // onTap: () {
@@ -31,13 +31,13 @@ ListView buildPosts(BuildContext context, List<Post> posts) {
               Navigator.pop(context);
             },
             child: Card(
-                color: Colors.black12,
+                //color: Colors.black12,
                 elevation: 4,
                 shape: const RoundedRectangleBorder(
                   side: BorderSide(
                     color: Colors.black12,
                   ),
-                  borderRadius: const BorderRadius.all(Radius.circular(12)),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
 
                 child:
@@ -60,18 +60,24 @@ ListView buildPosts(BuildContext context, List<Post> posts) {
 
                           Container(
                             width: 200 ,
-                            height: 70,
+                            height: 100,
                             child :
                             Center (
                               child: ListTile(
                                 title: Text(
                                   "${posts[index].firstName} ${posts[index].middleName} ${posts[index].lastName}",
-                                  style: const TextStyle( fontSize: 20, color: Colors.white),
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'NotoSerif',
+                                  ),
                                 ),
                                 subtitle: Text(
                                   posts[index].rank ?? '',
                                   textAlign: TextAlign.left,
-                                  style: const TextStyle( fontSize: 15, color: Colors.white54),
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: 'NotoSerif',
+                                  ),
                                 ),
                               ),
                             ),

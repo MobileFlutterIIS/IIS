@@ -14,7 +14,7 @@ ListView buildGroups(BuildContext context, List<Group> groups) {
     itemBuilder: (context,index){
       return
         Container(
-          height: 100,
+          height: 120,
           child:
           GestureDetector (
             // onTap: () {
@@ -30,13 +30,13 @@ ListView buildGroups(BuildContext context, List<Group> groups) {
               Navigator.pop(context);
             },
             child: Card(
-                color: Colors.black12,
+                //color: Colors.black12,
                 elevation: 4,
                 shape: const RoundedRectangleBorder(
                   side: BorderSide(
                     color: Colors.black12,
                   ),
-                  borderRadius: const BorderRadius.all(Radius.circular(12)),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
 
                 child:
@@ -54,18 +54,24 @@ ListView buildGroups(BuildContext context, List<Group> groups) {
 
                           Container(
                             width: 250 ,
-                            height: 70,
+                            height: 100,
                             child :
                             Center (
                               child: ListTile(
                                 title: Text(
                                   "${groups[index].name}",
-                                  style: const TextStyle( fontSize: 20, color: Colors.white),
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'NotoSerif',
+                                    ),
                                 ),
                                 subtitle: Text(
                                   groups[index].specialityName!,
                                   textAlign: TextAlign.left,
-                                  style: const TextStyle( fontSize: 13, color: Colors.white54),
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: 'NotoSerif',
+                                  ),
                                 ),
                               ),
                             ),
@@ -103,7 +109,7 @@ AlertDialog createdialog (Group post)
           const SizedBox(height: 20,),
           Text('${post.name} \n'
               '${post.facultyName} \n'
-              '${post.specialityName}\n', style: const  TextStyle(color: Colors.white),),
+              '${post.specialityName}\n'),
         ],
       ),
     ),

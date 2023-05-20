@@ -62,14 +62,14 @@ class _ScheduleState extends State<Schedule> {
       builder: (BuildContext context, AsyncSnapshot<bool> t) {
         if (!t.hasData || t == null) return CircularProgressIndicator();
         return Scaffold(
-          backgroundColor: Colors.grey[900],
+          backgroundColor: Colors.transparent,
           body: SafeArea(
             child: ListView.builder(
                 itemCount: 20,
                 itemBuilder: (context, index) {
                   return Container(
                     //child: Text('btbt'),
-                      child: ScheduleForDay(context, days20[index], _schedule!)
+                      child: ScheduleForDay(context, days20[index], _schedule)
                   );
                 }
             ),
@@ -85,7 +85,7 @@ class _ScheduleState extends State<Schedule> {
     var weeks = diff.inDays.toDouble();
     weeks = weeks / 7;
     var temp = curweek!;
-    if (now.weekday > input!.weekday!)
+    if (now.weekday > input.weekday)
       temp += weeks.floor();
     else
       temp += weeks.ceil();
@@ -107,27 +107,27 @@ class _ScheduleState extends State<Schedule> {
     String Stringdayofweek;
     switch (weekday) {
       case 0 :
-        dayofweek = schedule!.schedules!.Monday;
+        dayofweek = schedule.schedules!.Monday;
         Stringdayofweek = "Понедельник";
         break;
       case 1 :
-        dayofweek = schedule!.schedules!.Tuesday;
+        dayofweek = schedule.schedules!.Tuesday;
         Stringdayofweek = "Вторник";
         break;
       case 2 :
-        dayofweek = schedule!.schedules!.Wednesday;
+        dayofweek = schedule.schedules!.Wednesday;
         Stringdayofweek = "Среда";
         break;
       case 3 :
-        dayofweek = schedule!.schedules!.Thursday;
+        dayofweek = schedule.schedules!.Thursday;
         Stringdayofweek = "Четверг";
         break;
       case 4 :
-        dayofweek = schedule!.schedules!.Friday;
+        dayofweek = schedule.schedules!.Friday;
         Stringdayofweek = "Пятница";
         break;
       case 5 :
-        dayofweek = schedule!.schedules!.Saturday;
+        dayofweek = schedule.schedules!.Saturday;
         Stringdayofweek = "Суббота";
         break;
       default:
@@ -138,16 +138,16 @@ class _ScheduleState extends State<Schedule> {
 
     List<ScheduleDay> scheduleitself = [];
     if (dayofweek != null)
-      dayofweek!.forEach((element) {
+      dayofweek.forEach((element) {
         //logger.d("${element!.startLessonDate} ${element!.endLessonDate} ${element} ${element!.weekNumber} ${element!.subject}${element!.lessonTypeAbbrev}");
         if (
-            (element!.lessonTypeAbbrev == null || (element!.lessonTypeAbbrev! != "Экзамен" && element!.lessonTypeAbbrev! != "Консультация"))
+            (element!.lessonTypeAbbrev == null || (element.lessonTypeAbbrev! != "Экзамен" && element.lessonTypeAbbrev! != "Консультация"))
                &&
                 (
-                    (element!.startLessonDate == null || element!.endLessonDate == null) ||
+                    (element.startLessonDate == null || element.endLessonDate == null) ||
             (
                     (
-                        DateFormat('dd.MM.yy').parse(element!.startLessonDate!).isBefore(day)
+                        DateFormat('dd.MM.yy').parse(element.startLessonDate!).isBefore(day)
                         ///
                         /// ХЗ как будет лучше выводить, подумай еще
                         ///
@@ -156,8 +156,8 @@ class _ScheduleState extends State<Schedule> {
                   // DateFormat('dd.MM.yy').parse(element!.endLessonDate!).isAfter(day)
                     )
             )
-                && (element!.weekNumber == null ||
-                    element!.weekNumber!.contains(week)))
+                && (element.weekNumber == null ||
+                    element.weekNumber!.contains(week)))
          ) {
           scheduleitself.add(element);
         }
@@ -170,12 +170,12 @@ class _ScheduleState extends State<Schedule> {
               children: <Widget>[
                 Expanded(child: Divider()),
                 Text("${Stringdayofweek}",
-                  style: TextStyle(color: Colors.white, fontSize: 20),),
+                  style: TextStyle( fontSize: 20),),
                 Text(" ${day.day}.${day.month.toInt() < 10 ? '0' : ''}${day
                     .month}",
-                  style: TextStyle(color: Colors.white, fontSize: 20),),
-                Text(" ${week!}",
-                  style: TextStyle(color: Colors.white, fontSize: 20),),
+                  style: TextStyle(fontSize: 20),),
+                Text(" ${week}",
+                  style: TextStyle(fontSize: 20),),
                 Expanded(child: Divider()),
               ]
           ),
@@ -188,7 +188,7 @@ class _ScheduleState extends State<Schedule> {
                 itemBuilder: (context, index) {
                   return Container(
                     child: Card(
-                      color: Colors.black12,
+                      //color: Colors.black12,
                       elevation: 4,
                       shape: const RoundedRectangleBorder(
                         side: BorderSide(
@@ -206,18 +206,18 @@ class _ScheduleState extends State<Schedule> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(scheduleitself![index].startLessonTime!,
+                              Text(scheduleitself[index].startLessonTime!,
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 20),),
-                              Text(scheduleitself![index].endLessonTime!
+                                    fontSize: 20),),
+                              Text(scheduleitself[index].endLessonTime!
                                   .toString(), style: TextStyle(
-                                  color: Colors.white, fontSize: 15),)
+                                  fontSize: 15),)
                             ],
                           ),
                           SizedBox(width: 5,),
                           Container(
                             decoration: BoxDecoration(
-                              color: getcolor(scheduleitself![index]),
+                              color: getcolor(scheduleitself[index]),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             width: 10,
@@ -232,14 +232,14 @@ class _ScheduleState extends State<Schedule> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(scheduleitself![index].subject != null
-                                    ? "${scheduleitself![index].subject!}(${scheduleitself![index].lessonTypeAbbrev!})"
+                                Text(scheduleitself[index].subject != null
+                                    ? "${scheduleitself[index].subject!}(${scheduleitself[index].lessonTypeAbbrev!})"
                                     : "PLACEHOLDER", style: TextStyle(
-                                    color: Colors.white, fontSize: 20),),
+                                    fontSize: 20),),
                                 Text(
-                                  scheduleitself![index].auditories!.toString(),
+                                  scheduleitself[index].auditories!.toString(),
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 15),)
+                                      fontSize: 15),)
                               ],
                             ),
                           ),
@@ -252,17 +252,17 @@ class _ScheduleState extends State<Schedule> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(scheduleitself![index].weekNumber != null
-                                    ? scheduleitself![index].weekNumber!
+                                Text(scheduleitself[index].weekNumber != null
+                                    ? scheduleitself[index].weekNumber!
                                     .toString()
                                     : "ALL WEEKS", style: TextStyle(
-                                    color: Colors.white, fontSize: 15),),
+                                    fontSize: 15),),
 
                                 ///
                                 /// BE CAREFUL HERE        |          |   getfio(scheduleitself[index])
                                 ///
-                                Text(getfio(scheduleitself![index]), style: TextStyle(
-                                    color: Colors.white, fontSize: 10),)
+                                Text(getfio(scheduleitself[index]), style: TextStyle(
+                                    fontSize: 10),)
                               ],
                             ),
                           ),
@@ -291,14 +291,14 @@ class _ScheduleState extends State<Schedule> {
                 Expanded(child: Divider()),
               ]
           ),
-          Container(
-            height: 30,
-            child:
-            Card(color: Colors.black12,
-              elevation: 4,
-              child: Text('Нет Занятий в этот день',
-                style: TextStyle(color: Colors.white, fontSize: 20),),),
-          ),
+          // Container(
+          //   height: 30,
+          //   child:
+          //   Card(
+          //     elevation: 4,
+          //     child: Text('Нет Занятий в этот день',
+          //       style: TextStyle(fontSize: 20),),),
+          // ),
         ],
       );
     }
