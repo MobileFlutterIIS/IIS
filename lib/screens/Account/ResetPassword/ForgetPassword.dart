@@ -34,9 +34,27 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('В О С С Т А Н О В Л Е Н И Е'),
-        centerTitle: true,
-        elevation: 0,
+        //toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+        leadingWidth: MediaQuery.of(context).size.width * 0.046,
+        title: Row(
+          children: const [
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Восстановление пароля',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'NotoSerif',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(
+          color: Colors.black, // Цвет иконки
+        ),
       ),
       body: Container(
         child: Padding(
@@ -45,35 +63,27 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             alignment: Alignment.topCenter,
             child: Column(
               children: [
-                const CircleAvatar(
-                  radius: 36,
-                  backgroundColor: Color.fromRGBO(54, 84, 140, 0.9),
-                  child: Icon(
-                    Icons.person,
-                    size: 30,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 40),
-
                 Column(
                   children: const [
                     Text(
                       'Для восстановления пароля',
                       style: TextStyle(
-                        color: Color.fromRGBO(54, 84, 140, 0.9),
+                        color: Colors.black,
+                        fontFamily: 'NotoSerif',
                       ),
                     ),
                     Text(
                       'введите логин, используемый',
                       style: TextStyle(
-                        color: Color.fromRGBO(54, 84, 140, 0.9),
+                        color: Colors.black,
+                        fontFamily: 'NotoSerif',
                       ),
                     ),
                     Text(
                         'для входа',
                       style: TextStyle(
-                        color: Color.fromRGBO(54, 84, 140, 0.9),
+                        color: Colors.black,
+                        fontFamily: 'NotoSerif',
                       ),
                     ),
                   ],
@@ -85,23 +95,28 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   child: TextField(
                     controller: loginController,
                     obscureText: false,
-                    style: const TextStyle(height: 0.6, color: Colors.black),
-                    decoration: const InputDecoration(
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'NotoSerif',
+                    ),
+                    decoration: InputDecoration(
+                      hintText: 'Введите логин',
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(14)),
-                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(16.0),
+                        borderSide: BorderSide(color: Colors.grey[400]!),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(18.0),
+                        borderSide: const BorderSide(color: Colors.blue),
                       ),
-                      fillColor: Colors.white,
                       filled: true,
-                      hintText: 'Логин',
-                      hintStyle: TextStyle(fontSize: 17, color: Colors.grey),
+                      fillColor: Colors.grey[200],
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 16.0),
                     ),
                   ),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(height: 20,),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromRGBO(54, 84, 140, 0.9),
@@ -111,8 +126,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     'Отправить',
                     style: TextStyle(
                       color: Colors.white,
+                      fontFamily: 'NotoSerif',
                       fontWeight: FontWeight.bold,
-                      fontSize: 15,
                     ),
                   ),
                 ),

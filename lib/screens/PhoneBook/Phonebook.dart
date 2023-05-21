@@ -5,7 +5,7 @@ import 'package:logger/logger.dart';
 
 final logger = Logger();
 
-class Phonebook extends StatefulWidget{
+class Phonebook extends StatefulWidget {
   Phonebook({
     super.key,
   });
@@ -21,12 +21,11 @@ class _PhonebookState extends State<Phonebook> {
   double cardheight = 50;
   int max = 0;
   int page = 1;
-  List<PhoneDto> Visiblephones =[];
+  List<PhoneDto> Visiblephones = [];
 
   void initState() {
     controller.addListener(() {
-      if (controller.position.maxScrollExtent == controller.offset)
-      {
+      if (controller.position.maxScrollExtent == controller.offset) {
         adddata();
       }
     });
@@ -34,20 +33,20 @@ class _PhonebookState extends State<Phonebook> {
     super.initState();
   }
 
-  Future adddata() async{
-    final userspage = await DepartmentsManager.GetPhonePage(page+1,10,CurText);
+  Future adddata() async {
+    final userspage =
+        await DepartmentsManager.GetPhonePage(page + 1, 10, CurText);
     setState(() {
       Visiblephones.addAll(userspage!.auditoryPhoneNumberDtoList!);
       //logger.d(Visibleusers);
-      page+=1;
+      page += 1;
     });
   }
 
-  Future<bool> initialise() async
-  {
+  Future<bool> initialise() async {
     if (Visiblephones.isEmpty) {
-      final userspage = await DepartmentsManager.GetPhonePage(
-          page , 10, CurText);
+      final userspage =
+          await DepartmentsManager.GetPhonePage(page, 10, CurText);
       logger.d(CurText);
       max = userspage!.totalItems!;
       Visiblephones.addAll(userspage!.auditoryPhoneNumberDtoList!);
@@ -57,50 +56,114 @@ class _PhonebookState extends State<Phonebook> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    //backgroundColor: widget.backgroundcolor,
-    body: SafeArea(
-      child:
-      Column(
-        children: [
-          TextField(
-            controller: controller2,
-            onChanged: (value) {
-              setState(() {
-                CurText = value;
-                Visiblephones.clear();
-                page = 1;
-              });
-            },
-          ),
-          FutureBuilder(
-            future: initialise(),
-              builder: (BuildContext context, AsyncSnapshot<bool> snapshot)
-              {
-                if (!snapshot.hasData && snapshot != null)
-                  return CircularProgressIndicator();
-                if (Visiblephones.length == 0) return Icon(Icons.accessible_sharp);
-                return Expanded(
-                  child:
-                  ListView.builder(
-                    controller: controller,
-                     itemCount: Visiblephones.length+1,
-                      itemBuilder: (context,index){
-                        if (index < Visiblephones.length)
-                          return Container( height: cardheight, child: Card(child: Text(Visiblephones[index].auditory!)));
-                        else
-                          {
-                            if (index == max) return Icon(Icons.ice_skating);
-                            if (Visiblephones.length <= MediaQuery.of(context).size.height/cardheight);
-                            adddata();
-                            return CircularProgressIndicator();
-                          }
-                      }
-                  ),
-                );
-              }
-          ),
-        ],
+      appBar: AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+        leadingWidth: MediaQuery.of(context).size.width * 0.046,
+        title: Row(
+          children: const [
+            Text(
+              'Телефонный справочник',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'NotoSerif',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(
+          color: Colors.black, // Цвет иконки
+        ),
       ),
-    )
-  );
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  textTheme: const TextTheme(
+                    // Customize the text style for the input text
+                    titleMedium: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'NotoSerif',
+                    ),
+                  ),
+                ),
+                child: TextField(
+                  controller: controller2,
+                  onChanged: (value) {
+                    setState(() {
+                      CurText = value;
+                      Visiblephones.clear();
+                      page = 1;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Поиск',
+                    prefixIcon: const Icon(Icons.search),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                      borderSide: BorderSide(color: Colors.grey[400]!),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      borderSide: const BorderSide(color: Colors.blue),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[200],
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 16.0),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            FutureBuilder(
+                future: initialise(),
+                builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                  if (!snapshot.hasData && snapshot != null) {
+                    return const CircularProgressIndicator();
+                  }
+                  if (Visiblephones.isEmpty) {
+                    return const Icon(Icons.accessible_sharp);
+                  }
+                  return Expanded(
+                    child: ListView.builder(
+                        controller: controller,
+                        itemCount: Visiblephones.length + 1,
+                        itemBuilder: (context, index) {
+                          if (index < Visiblephones.length) {
+                            return Container(
+                                height: cardheight,
+                                child: Card(
+                                    child: Padding(
+                                  padding: const EdgeInsets.only(left: 16.0),
+                                  child: Text(
+                                    Visiblephones[index].auditory!,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'NotoSerif',
+                                    ),
+                                  ),
+                                )));
+                          } else {
+                            if (index == max){
+                              return const Icon(Icons.ice_skating);}
+                            if (Visiblephones.length <=
+                                MediaQuery.of(context).size.height /
+                                    cardheight) {
+                              adddata();
+                            }
+                            return const CircularProgressIndicator();
+                          }
+                        }),
+                  );
+                }),
+          ],
+        ),
+      ));
 }

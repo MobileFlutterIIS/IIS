@@ -25,19 +25,24 @@ class UserName extends StatelessWidget{
       child: TextField(
         controller: nameController,
         obscureText: nameObsecureText,
-        style: TextStyle(height: 0.6, ),
+        style: const TextStyle(
+          color: Colors.black,
+          fontFamily: 'NotoSerif',
+        ),
         decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(14)),
-            //borderSide: BorderSide(color: primarycolor),
-          ),
-          // focusedBorder: OutlineInputBorder(
-          //   borderSide: BorderSide(color: primarycolor),
-          // ),
-          //fillColor: backgroundcolor,
-          filled: true,
           hintText: nameHintText,
-          hintStyle: TextStyle(fontSize: 17,),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16.0),
+            borderSide: BorderSide(color: Colors.grey[400]!),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(18.0),
+            borderSide: const BorderSide(color: Colors.blue),
+          ),
+          filled: true,
+          fillColor: Colors.grey[200],
+          contentPadding: const EdgeInsets.symmetric(
+              vertical: 10.0, horizontal: 16.0),
         ),
       ),
     );

@@ -92,18 +92,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
           leadingWidth: MediaQuery.of(context).size.width * 0.046,
           title: Row(
             children: [
-              SizedBox(
-                child: IconButton(
-                  icon: const Icon(Icons.person),
-                  iconSize: MediaQuery.of(context).size.width * 0.06,
-                  onPressed: () {
-                    // Действия при нажатии на кнопку
-                  },
-                ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.031,
-              ),
               const Text(
                 'Расписание',
                 style: TextStyle(
@@ -113,7 +101,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.34,
+                width: MediaQuery.of(context).size.width * 0.48,
               ),
               SizedBox(
                 child: IconButton(

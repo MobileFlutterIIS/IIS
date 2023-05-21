@@ -8,6 +8,7 @@ import 'package:iis/services/StudentsApi/studentsapi.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:iis/screens/Students/StudentsList.dart';
+import 'package:iis/screens/Account/UserLogin.dart';
 
 final logger = Logger();
 
@@ -51,18 +52,6 @@ class _StudentsState extends State<Students> {
         leadingWidth: MediaQuery.of(context).size.width * 0.046,
         title: Row(
           children: [
-            SizedBox(
-              child: IconButton(
-                icon: const Icon(Icons.person),
-                iconSize: MediaQuery.of(context).size.width * 0.06,
-                onPressed: () {
-                  // Действия при нажатии на кнопку
-                },
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.031,
-            ),
             const Text(
               'Студенты',
               style: TextStyle(
@@ -84,8 +73,8 @@ class _StudentsState extends State<Students> {
     body: FutureBuilder(
       future: initialize(),
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (!snapshot.hasData && snapshot != null)
-          return CircularProgressIndicator();
+        if (!snapshot.hasData && snapshot != null){
+          return const CircularProgressIndicator();}
         return SafeArea(
           child:
           Column
@@ -110,12 +99,45 @@ class _StudentsState extends State<Students> {
                   ),
                 ],
               ),
-                TextField(
-                onSubmitted: (String value) async {
-                  setState(() {
-                    Secondname = value;
-                  });
-                }
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Theme(
+                    data: Theme.of(context).copyWith(
+                      textTheme: const TextTheme(
+                        // Customize the text style for the input text
+                        titleMedium: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'NotoSerif',
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    child: TextField(
+                    onSubmitted: (String value) async {
+                      setState(() {
+                        Secondname = value;
+                      });
+                    },
+                      decoration: InputDecoration(
+                        hintText: 'Начините вводить фамилию',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                          borderSide: BorderSide(color: Colors.grey[400]!),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          borderSide: const BorderSide(color: Colors.blue),
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 16.0),
+                      ),
+                    ),
+                  ),
                 ),
               MultiSelectDialogField<int>(
                 buttonText: const Text(
@@ -124,6 +146,7 @@ class _StudentsState extends State<Students> {
                     color: Colors.grey,
                     fontFamily: 'NotoSerif',
                     fontStyle: FontStyle.italic,
+                    fontSize: 14,
                   ),
                 ),
                 searchable: true,
@@ -133,6 +156,7 @@ class _StudentsState extends State<Students> {
                     color: Colors.grey,
                     fontFamily: 'NotoSerif',
                     fontStyle: FontStyle.italic,
+                    fontSize: 14,
                   ),
                 ),
                 items: Faculties!.map((e) => MultiSelectItem(e.id!, e.text!)).toList(),
@@ -181,19 +205,24 @@ class _StudentsState extends State<Students> {
                child: Column(
                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                  children: [
-                   Autocomplete<Skill>(
-                       displayStringForOption: (Skill option) => option.name!,
-                       optionsBuilder:(TextEditingValue textEditingValue) async
-                       {
-                         List<Skill>? list = await StudentManager.GetSkills(textEditingValue.text);
-                         return list!;
-                       },
-                      onSelected: (Skill a)
-                      {
-                           setState(() {
-                             SelectedSkills.add(a);
-                           });
-                      },
+                   InputDecorator(
+                     decoration: const InputDecoration(
+                       hintText: 'Выберите навык',
+                     ),
+                     child: Autocomplete<Skill>(
+                         displayStringForOption: (Skill option) => option.name!,
+                         optionsBuilder:(TextEditingValue textEditingValue) async
+                         {
+                           List<Skill>? list = await StudentManager.GetSkills(textEditingValue.text);
+                           return list!;
+                         },
+                        onSelected: (Skill a)
+                        {
+                             setState(() {
+                               SelectedSkills.add(a);
+                             });
+                        },
+                     ),
                    ),
                    MultiSelectChipDisplay(
                      items: SelectedSkills.map((e) => MultiSelectItem(e, e.name!)).toList(),

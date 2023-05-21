@@ -25,9 +25,27 @@ class _ChoosingEmailOrPhonenumberState extends State<ChoosingEmailOrPhonenumber>
     final login = widget.login;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('С П О С О Б'),
-        centerTitle: true,
-        elevation: 0,
+        //toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+        leadingWidth: MediaQuery.of(context).size.width * 0.046,
+        title: Row(
+          children: const [
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Способ восстановления',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'NotoSerif',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(
+          color: Colors.black, // Цвет иконки
+        ),
       ),
       body: Container(
         child: Padding(
@@ -36,29 +54,20 @@ class _ChoosingEmailOrPhonenumberState extends State<ChoosingEmailOrPhonenumber>
             alignment: Alignment.topCenter,
             child: Column(
               children: [
-                const CircleAvatar(
-                  radius: 36,
-                  backgroundColor: Color.fromRGBO(54, 84, 140, 0.9),
-                  child: Icon(
-                    Icons.key,
-                    size: 30,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 40),
-
                 Column(
                   children: const [
                     Text(
                       'Выберите способ',
                       style: TextStyle(
-                        color: Color.fromRGBO(54, 84, 140, 0.9),
+                        color: Colors.black,
+                        fontFamily: 'NotoSerif',
                       ),
                     ),
                     Text(
                       'восстановления',
                       style: TextStyle(
-                        color: Color.fromRGBO(54, 84, 140, 0.9),
+                        color: Colors.black,
+                        fontFamily: 'NotoSerif',
                       ),
                     ),
                   ],
@@ -67,7 +76,66 @@ class _ChoosingEmailOrPhonenumberState extends State<ChoosingEmailOrPhonenumber>
                 contacts.contacts!.length==2?
                 Column(
                   children: [
-                    ElevatedButton(
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                        ),
+                        onPressed: () {
+                          setVariantOfReset(contacts.contacts![0].contactValue!, login);
+                        },
+                        child: Row(
+                          children: [
+                            Column(
+                              children: [
+                                const SizedBox(height: 5,),
+                                Text(
+                                  contacts.contacts![0].contactValue!,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'NotoSerif',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                          ),
+                          onPressed: () {
+                            setVariantOfReset(contacts.contacts![1].contactValue!, login);
+                          },
+                          child: Row(
+                            children: [
+                              Column(
+                                children: [
+                                  const SizedBox(height: 5,),
+                                  Text(
+                                    contacts.contacts![1].contactValue!,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'NotoSerif',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )
+                      ),
+                    ),
+                  ],
+                )
+                    :
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                       ),
@@ -76,86 +144,21 @@ class _ChoosingEmailOrPhonenumberState extends State<ChoosingEmailOrPhonenumber>
                       },
                       child: Row(
                         children: [
-                          const Icon(
-                            Icons.border_right,
-                            size: 20,
-                            color: Color.fromRGBO(54, 84, 140, 0.9),
-                          ),
-                          const SizedBox(width: 10,),
                           Column(
                             children: [
                               const SizedBox(height: 5,),
                               Text(
                                 contacts.contacts![0].contactValue!,
                                 style: const TextStyle(
-                                  color: Color.fromRGBO(20, 31, 51, 0.9),
+                                  color: Colors.black,
+                                  fontFamily: 'NotoSerif',
                                 ),
                               ),
                             ],
                           ),
                         ],
                       )
-                    ),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                        ),
-                        onPressed: () {
-                          setVariantOfReset(contacts.contacts![1].contactValue!, login);
-                        },
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.border_right,
-                              size: 20,
-                              color: Color.fromRGBO(54, 84, 140, 0.9),
-                            ),
-                            const SizedBox(width: 10,),
-                            Column(
-                              children: [
-                                const SizedBox(height: 5,),
-                                Text(
-                                  contacts.contacts![1].contactValue!,
-                                  style: const TextStyle(
-                                    color: Color.fromRGBO(20, 31, 51, 0.9),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        )
-                    ),
-                  ],
-                )
-                    :
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                    ),
-                    onPressed: () {
-                      setVariantOfReset(contacts.contacts![0].contactValue!, login);
-                    },
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.border_right,
-                          size: 20,
-                          color: Color.fromRGBO(54, 84, 140, 0.9),
-                        ),
-                        const SizedBox(width: 10,),
-                        Column(
-                          children: [
-                            const SizedBox(height: 5,),
-                            Text(
-                              contacts.contacts![0].contactValue!,
-                              style: const TextStyle(
-                                color: Color.fromRGBO(20, 31, 51, 0.9),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
+                  ),
                 )
 
               ],

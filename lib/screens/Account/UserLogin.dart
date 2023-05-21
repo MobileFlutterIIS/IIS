@@ -135,9 +135,28 @@ class _UserLoginState extends State<UserLogin> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      //backgroundColor: widget.backgroundcolor,
+      appBar: AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+        leadingWidth: MediaQuery.of(context).size.width * 0.046,
+        title: Row(
+          children: const [
+            Text(
+              'Личный кабинет',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'NotoSerif',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(
+          color: Colors.black, // Цвет иконки
+        ),
+      ),
       body: _isLoading
-        ? Center(child: CircularProgressIndicator())
+        ? const Center(child: CircularProgressIndicator())
         : SafeArea(
         child: Center(
           child: Column(
@@ -159,7 +178,7 @@ class _UserLoginState extends State<UserLogin> {
                 obsecureText: true,
               ),
 
-              const SizedBox(height: 8,),
+              const SizedBox(height: 6,),
               TextButton(
                 onPressed: () {
                   Navigator.push(
@@ -168,14 +187,14 @@ class _UserLoginState extends State<UserLogin> {
                         builder: (context) => const ForgetPassword()),
                   );
                 },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 160.0),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 50),
                   child: Text(
                     'Забыли пароль?',
                     style: TextStyle(
-                      fontSize: 15,
-                      //color: widget.primarycolor,
-                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      fontFamily: 'NotoSerif',
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

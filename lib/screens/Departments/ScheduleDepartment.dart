@@ -13,9 +13,9 @@ import 'package:excel/excel.dart';
 import 'package:flutter_parse/flutter_parse.dart';
 import 'package:dio/dio.dart';
 
-final logger =Logger();
+final logger = Logger();
 
-class ScheduleDepartment extends StatefulWidget{
+class ScheduleDepartment extends StatefulWidget {
   ScheduleDepartment({
     super.key,
   });
@@ -25,12 +25,11 @@ class ScheduleDepartment extends StatefulWidget{
 }
 
 class _ScheduleDepartmentState extends State<ScheduleDepartment> {
-  static List<Department>? Departments  = null;
+  static List<Department>? Departments = null;
   static Department? ChosenDepartment;
   static Excel? excel;
 
-  Future<bool> initialize() async
-  {
+  Future<bool> initialize() async {
     if (Departments == null || Departments!.isEmpty)
       Departments = await DepartmentsManager.GetDepartmentsNonTree();
     return true;
@@ -43,83 +42,136 @@ class _ScheduleDepartmentState extends State<ScheduleDepartment> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    //backgroundColor: widget.backgroundcolor,
-    body: SafeArea(
-      child: FutureBuilder(
-        future: initialize(),
-        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-          if (!snapshot.hasData && snapshot != null)
-            return CircularProgressIndicator();
-          return Column(
-          children: [
-               DropdownButton<Department>(
-                   isExpanded: true,
-                   hint: Text(
-                     'Department',
-                     style: TextStyle(
-                       //color: widget.primarycolor,
-                     ),
-                   ),
-                 value: ChosenDepartment,
-                   items: Departments!.map<DropdownMenuItem<Department>>((
-                       Department value) {
-                     return DropdownMenuItem<Department>(
-                       value: value,
-                       child: Text(value.name!, overflow: TextOverflow.visible),
-                     );
-                   }).toList(),
-                   onChanged: (Department? dep)
-                   {
-                     setState(() {
-                       ChosenDepartment = dep;
-                     });
-                   }
-               ),
-            ElevatedButton(onPressed: () async {
-              logger.d(ChosenDepartment!.id!);
-                 Dio _dio = Dio();
-                  Response response = await _dio.get(
-                    "https://iis.bsuir.by/api/v1/departments/report?department-id=${ChosenDepartment!.id!}",
-                    options: Options(
-                        responseType: ResponseType.bytes,
-                        followRedirects: false,
-                        validateStatus: (status) { return status! < 500; }
-                    ),
-                  );
-              var ex = Excel.decodeBytes(response.data!);
-              logger.d(ex.tables.length);
-              setState(() {
-                excel = ex;
-              });
-            }, child: Icon(Icons.image_aspect_ratio_outlined)),
-            Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: excel != null? Table(
-                      border: TableBorder.all(color: Colors.green, width: 1.5),
-                      defaultColumnWidth: FixedColumnWidth(100),
-                      children:
-                        List.generate(excel!.tables![excel!.tables!.keys.first]!.rows!.length!, (index) => TableRow(
-                            children:
-                            List.generate(excel!.tables![excel!.tables!.keys.first]!.rows![index]!.length, (twindex) =>
-                            Text(excel!.tables![excel!.tables!.keys.first]!.rows![index]![twindex] == null?
-                            '':
-                            excel!.tables![excel!.tables!.keys.first]!.rows![index]![twindex]!.value.toString()
-                            )
-                            )
-                         ),
-                        ),
-                    ):
-                    Center(child: Icon(Icons.icecream_outlined),)
-                  ),
+        appBar: AppBar(
+          toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+          leadingWidth: MediaQuery.of(context).size.width * 0.046,
+          title: Row(
+            children: const [
+              Text(
+                'Расписание кафедры',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'NotoSerif',
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-          ],
-        );
-        }
-      ),
-    ),
-  );
+            ],
+          ),
+          backgroundColor: Colors.transparent,
+          iconTheme: const IconThemeData(
+            color: Colors.black, // Цвет иконки
+          ),
+        ),
+        body: SafeArea(
+          child: FutureBuilder(
+              future: initialize(),
+              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                if (!snapshot.hasData && snapshot != null){
+                  return const CircularProgressIndicator();}
+                return Column(
+                  children: [
+                    DropdownButton<Department>(
+                        isExpanded: true,
+                        hint: const Text(
+                          'Подразделение',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontFamily: 'NotoSerif',
+                          ),
+                        ),
+                        value: ChosenDepartment,
+                        items: Departments!.map<DropdownMenuItem<Department>>(
+                            (Department value) {
+                          return DropdownMenuItem<Department>(
+                            value: value,
+                            child: Center(
+                              child: Text(value.name!,
+                                  overflow: TextOverflow.visible,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (Department? dep) {
+                          setState(() {
+                            ChosenDepartment = dep;
+                          });
+                        }),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      "Скачать расписание подразделения",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'NotoSerif',
+                      ),
+                    ),
+                    ElevatedButton(
+                        onPressed: () async {
+                          logger.d(ChosenDepartment!.id!);
+                          Dio _dio = Dio();
+                          Response response = await _dio.get(
+                            "https://iis.bsuir.by/api/v1/departments/report?department-id=${ChosenDepartment!.id!}",
+                            options: Options(
+                                responseType: ResponseType.bytes,
+                                followRedirects: false,
+                                validateStatus: (status) {
+                                  return status! < 500;
+                                }),
+                          );
+                          var ex = Excel.decodeBytes(response.data!);
+                          logger.d(ex.tables.length);
+                          setState(() {
+                            excel = ex;
+                          });
+                        },
+                        child: const Icon(Icons.image_aspect_ratio_outlined)),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: excel != null
+                                ? Table(
+                                    border: TableBorder.all(
+                                        color: Colors.green, width: 1.5),
+                                    defaultColumnWidth: const FixedColumnWidth(100),
+                                    children: List.generate(
+                                      excel!.tables[excel!.tables.keys.first]!
+                                          .rows.length,
+                                      (index) => TableRow(
+                                          children: List.generate(
+                                              excel!
+                                                  .tables[
+                                                      excel!.tables.keys.first]!
+                                                  .rows[index]
+                                                  .length,
+                                              (twindex) => Text(
+                                                  excel!
+                                                                  .tables[excel!
+                                                                      .tables
+                                                                      .keys
+                                                                      .first]!
+                                                                  .rows[index]
+                                                              [twindex] ==
+                                                          null
+                                                      ? ''
+                                                      : excel!
+                                                          .tables[excel!.tables
+                                                              .keys.first]!
+                                                          .rows[index][twindex]!
+                                                          .value
+                                                          .toString()))),
+                                    ),
+                                  )
+                                : const Center(
+                                    child: Icon(Icons.icecream_outlined),
+                                  )),
+                      ),
+                    ),
+                  ],
+                );
+              }),
+        ),
+      );
 }

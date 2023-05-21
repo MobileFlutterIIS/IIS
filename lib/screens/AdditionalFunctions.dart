@@ -7,12 +7,25 @@ class AdditionalFunctions extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    //backgroundColor: backgroundcolor,
-    body: Text(
-        'Доп',
-      // style: TextStyle(
-      //   color: primarycolor,
-      // ),
+    appBar: AppBar(
+      toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+      leadingWidth: MediaQuery.of(context).size.width * 0.046,
+      title: Row(
+        children: const [
+          Text(
+            'Настройки',
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'NotoSerif',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: Colors.transparent,
+      iconTheme: const IconThemeData(
+        color: Colors.black, // Цвет иконки
+      ),
     ),
   );
 }

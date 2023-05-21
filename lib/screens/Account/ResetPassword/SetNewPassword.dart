@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart';
-
+import 'package:iis/screens/Account/UserLogin.dart';
 
 class SetNewPassword extends StatefulWidget{
   final String? contactValue;
@@ -41,6 +41,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
             login,
             passwordController.text
         );
+        Navigator.pop(context);
       }
       else{
         print("Пароли не верны");
@@ -55,9 +56,27 @@ class _SetNewPasswordState extends State<SetNewPassword> {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Н О В Ы Й   П А Р О Л Ь'),
-        centerTitle: true,
-        elevation: 0,
+        //toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+        leadingWidth: MediaQuery.of(context).size.width * 0.046,
+        title: Row(
+          children: const [
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Новый пароль',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'NotoSerif',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(
+          color: Colors.black, // Цвет иконки
+        ),
       ),
       body: Container(
         child: Padding(
@@ -66,35 +85,31 @@ class _SetNewPasswordState extends State<SetNewPassword> {
             alignment: Alignment.topCenter,
             child: Column(
               children: [
-                const CircleAvatar(
-                  radius: 36,
-                  backgroundColor: Color.fromRGBO(54, 84, 140, 0.9),
-                  child: Icon(
-                    Icons.lock,
-                    size: 30,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 40),
                 Container(
                   width: 280,
                   height: 40,
                   child: TextField(
                     controller: passwordController,
                     obscureText: false,
-                    style: const TextStyle(height: 0.6, color: Colors.black),
-                    decoration: const InputDecoration(
+                    style: const TextStyle(
+                      //color: Colors.black,
+                      fontFamily: 'NotoSerif',
+                    ),
+                    decoration: InputDecoration(
+                      hintText: 'Пароль',
+                      //enabled: passwordController.text.isNotEmpty && repeatPasswordController.text.isNotEmpty,
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(14)),
-                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(12.0),
+                        borderSide: BorderSide(color: Colors.grey[400]!),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(14.0),
+                        borderSide: const BorderSide(color: Colors.blue),
                       ),
-                      fillColor: Colors.white,
                       filled: true,
-                      hintText: 'Пароль',
-                      hintStyle: TextStyle(fontSize: 17, color: Colors.grey),
+                      fillColor: Colors.grey[200],
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 16.0),
                     ),
                   ),
                 ),
@@ -105,19 +120,25 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                   child: TextField(
                     controller: repeatPasswordController,
                     obscureText: false,
-                    style: const TextStyle(height: 0.6, color: Colors.black),
-                    decoration: const InputDecoration(
+                    style: const TextStyle(
+                      //color: Colors.black,
+                      fontFamily: 'NotoSerif',
+                    ),
+                    decoration: InputDecoration(
+                      hintText: 'Подтвердите пароль',
+                      //enabled: passwordController.text.isNotEmpty && repeatPasswordController.text.isNotEmpty,
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(14)),
-                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(12.0),
+                        borderSide: BorderSide(color: Colors.grey[400]!),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(14.0),
+                        borderSide: const BorderSide(color: Colors.blue),
                       ),
-                      fillColor: Colors.white,
                       filled: true,
-                      hintText: 'Подтвердите пароль',
-                      hintStyle: TextStyle(fontSize: 17, color: Colors.grey),
+                      fillColor: Colors.grey[200],
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 16.0),
                     ),
                   ),
                 ),
@@ -126,60 +147,64 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: 140,
+                      width: 120,
                       height: 40,
                       child: TextField(
                         controller: codeController,
                         obscureText: false,
-                        style: const TextStyle(height: 0.6, color: Colors.black),
-                        decoration: const InputDecoration(
+                        style: const TextStyle(
+                          //color: Colors.black,
+                          fontFamily: 'NotoSerif',
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Код',
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(14)),
-                            borderSide: BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.circular(12.0),
+                            borderSide: BorderSide(color: Colors.grey[400]!),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.circular(14.0),
+                            borderSide: const BorderSide(color: Colors.blue),
                           ),
-                          fillColor: Colors.white,
                           filled: true,
-                          hintText: 'Код',
-                          hintStyle: TextStyle(fontSize: 17, color: Colors.grey),
+                          fillColor: Colors.grey[200],
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 16.0),
                         ),
                       ),
                     ),
                     const SizedBox(width: 10,),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                      ),
-                      onPressed: () {
+                      // style: ElevatedButton.styleFrom(
+                      //   backgroundColor: Colors.white,
+                      // ),
+                      onPressed: passwordController.text.isNotEmpty && repeatPasswordController.text.isNotEmpty ? () {
                         getCode(widget.contactValue!, widget.login!);
-                      },
+                      } : null,
                       child: const Text(
                         'Получить код',
                         style: TextStyle(
-                          color: Color.fromRGBO(54, 84, 140, 0.9),
                           fontWeight: FontWeight.bold,
-                          fontSize: 15,
+                          fontFamily: 'NotoSerif',
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(height: 20,),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(54, 84, 140, 0.9),
-                  ),
-                  onPressed: () {
+                  // style: ElevatedButton.styleFrom(
+                  //   backgroundColor: const Color.fromRGBO(54, 84, 140, 0.9),
+                  // ),
+                  onPressed: codeController.text.isNotEmpty ? () {
                     sendPassword(widget.contactValue!, widget.login!);
-                  },
+                  } : null,
                   child: const Text(
                     'Создать',
                     style: TextStyle(
-                      color: Colors.white,
+                      // color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 15,
+                      fontFamily: 'NotoSerif',
                     ),
                   ),
                 ),
