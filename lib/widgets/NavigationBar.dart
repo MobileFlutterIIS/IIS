@@ -84,7 +84,7 @@ class _MyNavBar extends State<NavBar> {
             iconTheme: const IconThemeData(color: Colors.black),
           ),
           child: AnimatedContainer(
-            duration: Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 500),
             curve: Curves.easeInOutCubic,
             height: height,
             child: Stack(
@@ -93,9 +93,9 @@ class _MyNavBar extends State<NavBar> {
                 BottomAppBar(
                 //color: Colors.blue,
                 child: SingleChildScrollView(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   child: Padding(
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     child: Column
                       (
                       children: [
@@ -105,14 +105,14 @@ class _MyNavBar extends State<NavBar> {
                           children: tabs.getRange(0, 4).toList(),
                         ),
                         AnimatedContainer(curve: Curves.easeInOutCubic,
-                            duration: Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             height: boxheight,child : SizedBox()),
                         Row
                           (
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: tabs.getRange(5, 9).toList(),
                         ),
-                        SizedBox(height: 20,)
+                        const SizedBox(height: 20,)
                       ],
                     ),
                   )
@@ -120,7 +120,7 @@ class _MyNavBar extends State<NavBar> {
               ),
                 Positioned(width: MediaQuery.of(context).size.width, child: AnimatedSwitcher
                   (
-                  duration: Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 500),
                   child: Icon(arrowup ? (Icons.keyboard_arrow_up_outlined) : (Icons.keyboard_arrow_down_outlined)),
                 )),
               ]

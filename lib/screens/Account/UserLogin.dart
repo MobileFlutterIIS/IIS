@@ -11,6 +11,7 @@ import 'package:iis/screens/Account/AccountPage.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart';
 import 'package:logger/logger.dart';
 import 'package:iis/screens/Account/ResetPassword/ForgetPassword.dart';
+import 'package:iis/widgets/NavBarAccount.dart';
 
 final logger = Logger();
 
