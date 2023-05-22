@@ -14,7 +14,7 @@ class Diploma extends StatelessWidget {
         children: [
           Text('Дипломный проект'),
           Text('Оставить заявку Вы сможете только на выпускном курсе.'),
-          ElevatedButton(onPressed: (){}, child: Text("Подать Заявку")),
+          ElevatedButton(onPressed: (){DiplomaReq();}, child: Text("Подать Заявку")),
           SizedBox(height: 10,),
           // Text('Производственная практика'),
           // ElevatedButton(onPressed: (){}, child: Text("Подать Заявку")),
@@ -32,8 +32,27 @@ class DiplomaReq extends StatefulWidget {
 }
 
 class _DiplomaReqState extends State<DiplomaReq> {
+
+  List<String> hints = [];
+  List<String> topics = [];
+
+  Future<bool> initplaces ( ) async
+  {
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return FutureBuilder(
+        future: initplaces(),
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          return Column(
+            children: [
+              Text('Оформить заявку на дипломный проект'),
+
+            ],
+          );
+        }
+    );
   }
 }

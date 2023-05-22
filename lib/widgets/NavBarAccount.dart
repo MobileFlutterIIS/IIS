@@ -22,6 +22,8 @@ import 'package:iis/screens/Departments/ScheduleDepartment.dart';
 import 'package:iis/screens/Departments/Departments.dart';
 import 'package:iis/screens/PhoneBook/Phonebook.dart';
 import 'package:iis/screens/Account/Dormitory.dart';
+import 'package:iis/screens/Account/Diploma.dart';
+import 'package:iis/screens/Account/Penalties.dart';
 
 import 'package:iis/services/CheckValidatingUserAndPassword/LessonDto.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/Omissions.dart';
@@ -125,6 +127,8 @@ class _NavBarAccountState extends State<NavBarAccount> {
       OmissionsPage(omissions: omissions!,),
       ChangePassword(password: password!,),
       Dormitory(),
+      Diploma(),
+      Penalties(),
     ];
     if (widget.user != null) {
       return pages;
@@ -145,6 +149,8 @@ class _NavBarAccountState extends State<NavBarAccount> {
       Column(children: [IconButton(icon: const Icon(Icons.access_time_rounded),onPressed: () {collapse();setState(() {pageNum = 6;});},),AnimatedOpacity(child: Text('Пропуски',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
       Column(children: [IconButton(icon: const Icon(Icons.password),onPressed: () {collapse();setState(() {pageNum = 7;});},),AnimatedOpacity(child: Text('Смена пароля',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
       Column(children: [IconButton(icon: const Icon(Icons.house_siding_outlined),onPressed: () {collapse();setState(() {pageNum = 8;});},),AnimatedOpacity(child: Text('Общежитие',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.my_library_books_rounded),onPressed: () {collapse();setState(() {pageNum = 9;});},),AnimatedOpacity(child: Text('Диплом',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.error_sharp),onPressed: () {collapse();setState(() {pageNum = 10;});},),AnimatedOpacity(child: Text('Взыскания',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
     ];
     return FutureBuilder(
       future: initall(),
@@ -215,7 +221,7 @@ class _NavBarAccountState extends State<NavBarAccount> {
                                       (
                                       mainAxisAlignment: MainAxisAlignment
                                           .spaceEvenly,
-                                      children: tabs.getRange(8, 9).toList(),
+                                      children: tabs.getRange(8, 11).toList(),
                                     ),
                                     const SizedBox(height: 20,)
                                   ],
