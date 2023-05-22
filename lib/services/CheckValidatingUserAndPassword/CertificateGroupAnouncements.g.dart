@@ -25,6 +25,57 @@ Map<String, dynamic> _$CertificateToJson(Certificate instance) =>
       'status': instance.status,
     };
 
+PlaceType _$PlaceTypeFromJson(Map<String, dynamic> json) => PlaceType(
+      (json['places'] as List<dynamic>?)
+          ?.map((e) => Place.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['type'] as String?,
+    );
+
+Map<String, dynamic> _$PlaceTypeToJson(PlaceType instance) => <String, dynamic>{
+      'places': instance.places,
+      'type': instance.type,
+    };
+
+Place _$PlaceFromJson(Map<String, dynamic> json) => Place(
+      json['id'] as int?,
+      json['name'] as String?,
+      json['type'] as int?,
+    );
+
+Map<String, dynamic> _$PlaceToJson(Place instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'type': instance.type,
+    };
+
+CertificateBody _$CertificateBodyFromJson(Map<String, dynamic> json) =>
+    CertificateBody(
+      json['certificateCount'] as int?,
+      json['certificateRequestDto'] == null
+          ? null
+          : CertificateDTO.fromJson(
+              json['certificateRequestDto'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CertificateBodyToJson(CertificateBody instance) =>
+    <String, dynamic>{
+      'certificateCount': instance.certificateCount,
+      'certificateRequestDto': instance.certificateRequestDto,
+    };
+
+CertificateDTO _$CertificateDTOFromJson(Map<String, dynamic> json) =>
+    CertificateDTO(
+      json['certificateType'] as String?,
+      json['provisionPlace'] as String?,
+    );
+
+Map<String, dynamic> _$CertificateDTOToJson(CertificateDTO instance) =>
+    <String, dynamic>{
+      'certificateType': instance.certificateType,
+      'provisionPlace': instance.provisionPlace,
+    };
+
 Groupinfo _$GroupinfoFromJson(Map<String, dynamic> json) => Groupinfo(
       json['numberOfGroup'] as String?,
       (json['groupInfoStudentDto'] as List<dynamic>?)

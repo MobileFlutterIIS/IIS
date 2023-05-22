@@ -7,6 +7,7 @@ import 'package:iis/services/CheckValidatingUserAndPassword/GradeBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/Omissions.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/ContactsToReset.dart';
 import 'package:logger/logger.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/DormDipPenalty.dart';
 
 part 'api_service.g.dart';
 
@@ -104,5 +105,21 @@ abstract class ApiService {
   Future<String> setNewResetedPassword(
       @Body() Map<String, dynamic> data,
       );
+  @GET('certificate/places')
+  Future<List<PlaceType>> getPlaces(@Header('cookie') String cookie);
+  @POST('certificate/register')
+  Future<Certificate> sentCertificateRequest(
+      @Header('cookie') String cookie,
+      @Body() CertificateBody body,);
+  @GET('library/debts')
+  Future<List<String>> getDebts(@Header('cookie') String cookie);
+  @GET('lms/application-history')
+  Future<List<String>> getApplicationHistory(@Header('cookie') String cookie);
+  @GET('dormitory-queue-application/premium-penalty')
+  Future<List<String>> getPenalties(@Header('cookie') String cookie);
+  @GET('dormitory-queue-application')
+  Future<List<DormReq>> getDormReqs(@Header('cookie') String cookie);
+  @GET('dormitory-queue-application/privileges')
+  Future<List<String>> getPriviliges(@Header('cookie') String cookie);
 }
 

@@ -53,6 +53,8 @@ dependencies:
   shared_preferences: any
   flex_color_scheme: any
   flutter_sliding_up_panel: any
+  flutter_spinbox: any
+  url_launcher: any
 
   flutter_localizations:
     sdk: flutter

@@ -41,38 +41,6 @@ class AccountPage extends StatefulWidget{
 
 class _AccountPageState extends State<AccountPage> {
 
-  List<Certificate>? certificates;
-  List<Anouncement>? anouncements;
-  Groupinfo? groupinfo;
-  List<MarkSheet>? marksheets;
-  Markbook? markbook;
-  List<GradeBook>? gradebook;
-  List<Omission>? omissions;
-  String? password;
-  static bool sucs = false;
-
-  Future<bool> initall() async {
-    if (sucs) return true;
-    certificates = (await AccountManager.UserCetificate());
-    groupinfo = (await AccountManager.UserGroupInfo());
-    anouncements = (await AccountManager.UserNotifications());
-    marksheets = (await AccountManager.UserMarkSheets());
-    markbook = (await AccountManager.UserMarkBook());
-    gradebook = (await AccountManager.UserGradeBook());
-    omissions = (await AccountManager.UserOmissions());
-    password = widget.password;
-    logger.d(certificates);
-    logger.d(groupinfo);
-    logger.d(anouncements);
-    logger.d(marksheets);
-    logger.d(markbook);
-    logger.d(gradebook);
-    logger.d(omissions);
-    sucs = true;
-    return true;
-  }
-
-
   @override
   void initState() {
     super.initState();
@@ -80,7 +48,7 @@ class _AccountPageState extends State<AccountPage> {
 
   @override
   void dispose() {
-    sucs = false;
+    //sucs = false;
     super.dispose();
   }
 

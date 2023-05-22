@@ -7,7 +7,12 @@ import 'package:logger/logger.dart';
 
 final logger = Logger();
 
-/// TODO SEARCH
+/// TODO
+/// SEARCH
+///
+/// TODO
+/// БЕСКОНЕЧНО ГРУЗИТСЯ
+///
 
 class StudentScale extends StatefulWidget{
   // final Color backgroundcolor;
@@ -74,7 +79,8 @@ class _StudentScaleState extends State<StudentScale> {
             (
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              DropdownButton<int>
+             Row (
+              children: [DropdownButton<int>
                 (
                 hint: Text(
                     'Year',
@@ -135,7 +141,8 @@ class _StudentScaleState extends State<StudentScale> {
                     });
                   }
                 },
-              ),
+              ),]
+             ),
               DropdownButton<Speciality>
                 (
                 hint: Text(

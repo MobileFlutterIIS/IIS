@@ -6,6 +6,10 @@ import 'package:iis/services/ScheduleAndListFromNet/ApiSchedule.dart';
 
 part 'CertificateGroupAnouncements.g.dart';
 
+
+
+///STUDY
+
 @JsonSerializable()
 class Certificate{
 
@@ -23,6 +27,58 @@ class Certificate{
   factory Certificate.fromJson(Map<String, dynamic> json) => _$CertificateFromJson(json);
   Map<String, dynamic> toJson() => _$CertificateToJson(this);
 }
+@JsonSerializable()
+class PlaceType{
+
+  List<Place>? places;
+  String? type;
+
+  PlaceType(this.places, this.type);
+
+  factory PlaceType.fromJson(Map<String, dynamic> json) => _$PlaceTypeFromJson(json);
+  Map<String, dynamic> toJson() => _$PlaceTypeToJson(this);
+}
+@JsonSerializable()
+class Place{
+
+   int? id;
+   String? name;
+   int? type;
+
+
+   Place(this.id, this.name, this.type);
+
+  factory Place.fromJson(Map<String, dynamic> json) => _$PlaceFromJson(json);
+  Map<String, dynamic> toJson() => _$PlaceToJson(this);
+}
+
+@JsonSerializable()
+class CertificateBody{
+
+  int? certificateCount;
+  CertificateDTO? certificateRequestDto;
+
+
+  CertificateBody(this.certificateCount, this.certificateRequestDto);
+
+  factory CertificateBody.fromJson(Map<String, dynamic> json) => _$CertificateBodyFromJson(json);
+  Map<String, dynamic> toJson() => _$CertificateBodyToJson(this);
+}
+
+@JsonSerializable()
+class CertificateDTO{
+
+  String? certificateType;
+  String? provisionPlace;
+
+
+  CertificateDTO(this.certificateType, this.provisionPlace);
+
+  factory CertificateDTO.fromJson(Map<String, dynamic> json) => _$CertificateDTOFromJson(json);
+  Map<String, dynamic> toJson() => _$CertificateDTOToJson(this);
+}
+
+/// GROUP
 
 @JsonSerializable()
 class Groupinfo{
@@ -36,6 +92,7 @@ class Groupinfo{
   factory Groupinfo.fromJson(Map<String, dynamic> json) => _$GroupinfoFromJson(json);
   Map<String, dynamic> toJson() => _$GroupinfoToJson(this);
 }
+
 
 @JsonSerializable()
 class GroupStudentInfo{
@@ -53,6 +110,7 @@ class GroupStudentInfo{
   Map<String, dynamic> toJson() => _$GroupStudentInfoToJson(this);
 }
 
+/// ANOUNCEMENTS
 
 @JsonSerializable()
 class Anouncement{

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/DormDipPenalty.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/api_service.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
@@ -228,6 +229,76 @@ class AccountManager
     logger.d(image.length);
     try {
       final response = await apiService.setUserImage(cookie,image);
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
+  static Future<List<PlaceType>?> GetPlaces() async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      final response = await apiService.getPlaces(cookie);
+      // print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
+  static Future<List<String>?> GetDebts() async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      final response = await apiService.getDebts(cookie);
+     // print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
+  static Future<List<DormReq>?> GetDormReqs() async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      final response = await apiService.getDormReqs(cookie);
+      // print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
+  static Future<List<String>?> GetPriviliges() async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      final response = await apiService.getPriviliges(cookie);
+      // print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
+  static Future<List<String>?> GetApplicationHistory() async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      final response = await apiService.getApplicationHistory(cookie);
+      // print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
+  static Future<Certificate?> SentCertificateRequest(int count, String type, String place, String comment ) async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      String placecom = comment.isEmpty? place: place+' ('+comment+')';
+      var tdo = CertificateDTO(type, placecom);
+      var body = CertificateBody(count,tdo);
+      logger.d('${tdo.provisionPlace}, ${tdo.certificateType}, ${count}');
+      final response = await apiService.sentCertificateRequest(cookie,body);
+      // print(response.toString());
       return response;
     } on DioError catch (e) {
       return null;

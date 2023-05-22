@@ -21,6 +21,7 @@ import 'package:iis/screens/Students/Students.dart';
 import 'package:iis/screens/Departments/ScheduleDepartment.dart';
 import 'package:iis/screens/Departments/Departments.dart';
 import 'package:iis/screens/PhoneBook/Phonebook.dart';
+import 'package:iis/screens/Account/Dormitory.dart';
 
 import 'package:iis/services/CheckValidatingUserAndPassword/LessonDto.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/Omissions.dart';
@@ -28,6 +29,7 @@ import 'package:iis/services/CheckValidatingUserAndPassword/MarkBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/GradeBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/DormDipPenalty.dart';
 
 class NavBarAccount extends StatefulWidget{
   UserEntity user = UserEntity();
@@ -45,9 +47,30 @@ class NavBarAccount extends StatefulWidget{
 class _NavBarAccountState extends State<NavBarAccount> {
 
   int pageNum = 0;
-  double height = 120;
+  double height = 60;
   double boxheight = 30;
   bool arrowup = true;
+  bool textvisible = false;
+
+  void collapse()
+  {
+    setState(() {
+      height=60;
+      boxheight = 30;
+      arrowup = true;
+      textvisible = false;
+    });
+  }
+  void open()
+  {
+    setState(() {
+      height=220;
+      boxheight = 0;
+      arrowup = false;
+      textvisible = true;
+    });
+  }
+
 
   List<Certificate>? certificates;
   List<Anouncement>? anouncements;
@@ -96,19 +119,12 @@ class _NavBarAccountState extends State<NavBarAccount> {
       MainPage(user: widget.user),
       GroupInfoPage(group: groupinfo!,),
       AnouncementPage(anouncement: anouncements!,),
-      StudyPage(certificate: certificates!,),
+      StudyPage(certificate: certificates!, marksheet: marksheets!,),
       MarkBookPage(markBook: markbook!,),
       GradeBookPage(gradebook: gradebook!,),
       OmissionsPage(omissions: omissions!,),
       ChangePassword(password: password!,),
-      NavigationScreen(),
-      DisciplinList(),
-      Students(),
-      StudentScale(),
-      AdditionalFunctions(),
-      ScheduleDepartment(),
-      Departments(),
-      Phonebook(),
+      Dormitory(),
     ];
     if (widget.user != null) {
       return pages;
@@ -120,125 +136,115 @@ class _NavBarAccountState extends State<NavBarAccount> {
   @override
   Widget build(BuildContext context){
     final tabs = <Widget>[
-      IconButton(icon: const Icon(Icons.person),onPressed: () {setState(() {pageNum = 0;});},),
-      IconButton(icon: const Icon(Icons.people_alt_outlined),onPressed: () {setState(() {pageNum = 1;});},),
-      IconButton(icon: const Icon(Icons.mark_as_unread),onPressed: () {setState(() {pageNum = 2;});},),
-      IconButton(icon: const Icon(Icons.collections_bookmark_outlined),onPressed: () {setState(() {pageNum = 3;});},),
-      IconButton(icon: const Icon(Icons.grade),onPressed: () {setState(() {pageNum = 4;});},),
-      IconButton(icon: const Icon(Icons.circle_outlined),onPressed: () {setState(() {pageNum = 5;});},),
-      IconButton(icon: const Icon(Icons.password),onPressed: () {setState(() {pageNum = 6;});},),
-      IconButton(icon: const Icon(Icons.schedule),onPressed: () {setState(() {pageNum = 7;});},),
-      IconButton(icon: const Icon(Icons.book),onPressed: () {setState(() {pageNum = 8;});},),
-      IconButton(icon: const Icon(Icons.people),onPressed: () {setState(() {pageNum = 9;});},),
-      IconButton(icon: const Icon(Icons.star_rate),onPressed: () {setState(() {pageNum = 10;});},),
-      IconButton(icon: const Icon(Icons.settings),onPressed: () {setState(() {pageNum = 11;});},),
-      IconButton(icon: const Icon(Icons.schema),onPressed: () {setState(() {pageNum = 12;});},),
-      IconButton(icon: const Icon(Icons.home_filled),onPressed: () {setState(() {pageNum = 13;});},),
-      IconButton(icon: const Icon(Icons.phone),onPressed: () {setState(() {pageNum = 14;});},),
-      IconButton(icon: const Icon(Icons.announcement),onPressed: () {setState(() {pageNum = 15;});},),
+      Column(children: [IconButton(icon: const Icon(Icons.person),onPressed: () {collapse(); setState(() {pageNum = 0;});},),AnimatedOpacity(child: Text('Профиль',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.people_alt_outlined),onPressed: () {collapse();setState(() {pageNum = 1;});},),AnimatedOpacity(child: Text('Группа',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.mark_as_unread),onPressed: () {collapse();setState(() {pageNum = 2;});},),AnimatedOpacity(child: Text('Объявления',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.collections_bookmark_outlined),onPressed: () {collapse();setState(() {pageNum = 3;});},),AnimatedOpacity(child: Text('Учеба',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.grade),onPressed: () {collapse();setState(() {pageNum = 4;});},),AnimatedOpacity(child: Text('Зачетка',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.circle_outlined),onPressed: () {collapse();setState(() {pageNum = 5;});},),AnimatedOpacity(child: Text('Рейтинг',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.access_time_rounded),onPressed: () {collapse();setState(() {pageNum = 6;});},),AnimatedOpacity(child: Text('Пропуски',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.password),onPressed: () {collapse();setState(() {pageNum = 7;});},),AnimatedOpacity(child: Text('Смена пароля',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.house_siding_outlined),onPressed: () {collapse();setState(() {pageNum = 8;});},),AnimatedOpacity(child: Text('Общежитие',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
     ];
     return FutureBuilder(
       future: initall(),
       builder: (BuildContext context, AsyncSnapshot<bool> f) {
         if (!f.hasData) return const CircularProgressIndicator();
         return Scaffold(
-          bottomNavigationBar: Container(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height,
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  height = arrowup ? 240 : 60;
-                  boxheight = arrowup ? 0 : 30;
-                  arrowup = !arrowup;
-                });
-              },
-              child: Scaffold(
-                bottomNavigationBar: Theme(
-                  data: Theme.of(context).copyWith(
-                    iconTheme: const IconThemeData(color: Colors.black),
-                  ),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOutCubic,
-                    height: height,
-                    child: Stack(
-                        alignment: Alignment.topLeft,
-                        children: [
-                          BottomAppBar(
-                            //color: Colors.blue,
-                            child: SingleChildScrollView(
-                                physics: const NeverScrollableScrollPhysics(),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Column
-                                    (
-                                    children: [
-                                      Row
-                                        (
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .spaceEvenly,
-                                        children: tabs.getRange(0, 4).toList(),
-                                      ),
-                                      AnimatedContainer(
-                                          curve: Curves.easeInOutCubic,
-                                          duration: const Duration(
-                                              milliseconds: 500),
-                                          height: boxheight, child: SizedBox()),
-                                      Row
-                                        (
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .spaceEvenly,
-                                        children: tabs.getRange(4, 8).toList(),
-                                      ),
-                                      AnimatedContainer(
-                                          curve: Curves.easeInOutCubic,
-                                          duration: const Duration(
-                                              milliseconds: 500),
-                                          height: boxheight, child: SizedBox()),
-                                      Row
-                                        (
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .spaceEvenly,
-                                        children: tabs.getRange(8, 12)
-                                            .toList(),
-                                      ),
-                                      AnimatedContainer(
-                                          curve: Curves.easeInOutCubic,
-                                          duration: const Duration(
-                                              milliseconds: 500),
-                                          height: boxheight, child: SizedBox()),
-                                      Row
-                                        (
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .spaceEvenly,
-                                        children: tabs.getRange(12, 15)
-                                            .toList(),
-                                      ),
-                                      const SizedBox(height: 20,)
-                                    ],
-                                  ),
-                                )
-                            ),
+          resizeToAvoidBottomInset: false,
+          bottomNavigationBar: GestureDetector(
+            onPanUpdate: (details) {
+              int sensitivity = 1;
+              if (details.delta.dy < -sensitivity)
+                open();
+              if (details.delta.dy >sensitivity )
+                collapse();
+            },
+            // onTap: () {
+            //   setState(() {
+            //     height = arrowup ? 240 : 60;
+            //     boxheight = arrowup ? 0 : 30;
+            //     arrowup = !arrowup;
+            //   });
+            // },
+            child: Scaffold(
+              bottomNavigationBar: Theme(
+                data: Theme.of(context).copyWith(
+                  iconTheme: const IconThemeData(color: Colors.black),
+                ),
+                child: AnimatedContainer(
+                  clipBehavior: Clip.none,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOutCubic,
+                  height: height,
+                  child: Stack(
+                      alignment: Alignment.topLeft,
+                      children: [
+                        BottomAppBar(
+                          //color: Colors.blue,
+                          child: SingleChildScrollView(
+                              physics: const NeverScrollableScrollPhysics(),
+                              child: Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Column
+                                  (
+                                  children: [
+                                    Row
+                                      (
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceEvenly,
+                                      children: tabs.getRange(0, 4).toList(),
+                                    ),
+                                    AnimatedContainer(
+                                        curve: Curves.easeInOutCubic,
+                                        duration: const Duration(
+                                            milliseconds: 500),
+                                        height: boxheight, child: SizedBox()),
+                                    Row
+                                      (
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceEvenly,
+                                      children: tabs.getRange(4, 8).toList(),
+                                    ),
+                                    AnimatedContainer(
+                                        curve: Curves.easeInOutCubic,
+                                        duration: const Duration(
+                                            milliseconds: 500),
+                                        height: boxheight, child: SizedBox()),
+                                    Row
+                                      (
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceEvenly,
+                                      children: tabs.getRange(8, 9).toList(),
+                                    ),
+                                    const SizedBox(height: 20,)
+                                  ],
+                                ),
+                              )
                           ),
-                          Positioned(width: MediaQuery
-                              .of(context)
-                              .size
-                              .width, child: AnimatedSwitcher
-                            (
-                            duration: const Duration(milliseconds: 500),
-                            child: Icon(arrowup
+                        ),
+                        Positioned(width: MediaQuery
+                            .of(context)
+                            .size
+                            .width, child: AnimatedSwitcher
+                          (
+                          duration: const Duration(milliseconds: 500),
+                          child: IconButton(
+                            icon: Icon(arrowup
                                 ? (Icons.keyboard_arrow_up_outlined)
                                 : (Icons.keyboard_arrow_down_outlined)),
-                          )),
-                        ]
-                    ),
+                            onPressed: (){
+                              setState(() {
+                                arrowup? open(): collapse();
+                              });
+                            },
+                          ),
+                        )),
+                      ]
                   ),
                 ),
-                body: Pages()[pageNum],
               ),
+              body: SafeArea(child: Column(children: [Expanded(child: Pages()[pageNum])])),
             ),
           ),
 
