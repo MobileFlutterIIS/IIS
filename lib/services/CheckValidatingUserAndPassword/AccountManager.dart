@@ -9,6 +9,7 @@ import 'package:iis/services/CheckValidatingUserAndPassword/MarkBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/GradeBook.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/Omissions.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/ContactsToReset.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/DormDipPenalty.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:logger/logger.dart';
 import 'package:image_picker/image_picker.dart';
@@ -239,6 +240,43 @@ class AccountManager
     if (cookie == '' || cookie == null) return null;
     try {
       final response = await apiService.getPlaces(cookie);
+      // print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
+
+
+  static Future<List<Mentor>?> GetMentors(String name) async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      //final str = Uri.encodeFull(name);
+      final response = await apiService.requestMentors(name,cookie);
+      //logger.d(str);
+      // print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
+  static Future<List<Subj>?> GetSubjects() async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      final response = await apiService.getSubjects(cookie);
+      // print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
+  static Future<List<LessonType>?> GetTypes() async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      final response = await apiService.getTypes(cookie);
       // print(response.toString());
       return response;
     } on DioError catch (e) {

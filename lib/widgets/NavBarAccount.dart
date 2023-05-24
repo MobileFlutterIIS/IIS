@@ -157,7 +157,7 @@ class _NavBarAccountState extends State<NavBarAccount> {
     return FutureBuilder(
       future: initall(),
       builder: (BuildContext context, AsyncSnapshot<bool> f) {
-        if (!f.hasData) return const CircularProgressIndicator();
+        if (!f.hasData) return Center(child: const CircularProgressIndicator());
         return Scaffold(
          // resizeToAvoidBottomInset: false,
           bottomNavigationBar: GestureDetector(

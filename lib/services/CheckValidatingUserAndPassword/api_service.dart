@@ -126,5 +126,19 @@ abstract class ApiService {
       @Query('id') int id,
       @Header('cookie') String cookie
       );
+  @GET('employees/fio/requests')
+  Future<List<Mentor>> requestMentors(
+      @Query('employee-fio') String employeefio,
+      @Header('cookie') String cookie,
+      );
+  @GET('mark-sheet/subjects')
+  Future<List<Subj>> getSubjects(
+      @Header('cookie') String cookie,
+      );
+  @GET('mark-sheet/types')
+  Future<List<LessonType>> getTypes(
+      @Header('cookie') String cookie,
+      );
+
 }
 

@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
+import 'package:iis/services/CheckValidatingUserAndPassword/DormDipPenalty.dart';
 import 'package:flutter_spinbox/material.dart';
+import 'package:intl/intl.dart';
 
 class StudyPage extends StatefulWidget {
   final List<Certificate> certificate;
@@ -90,7 +92,14 @@ class _StudyPageState extends State<StudyPage> {
                 ),
                 const SizedBox(height: 5,),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return OrderMarksheet();
+                          }
+                      ).then((_) => updateCertificates());
+                    },
                     child: Text('Заказать ведомостичку'),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -496,3 +505,158 @@ class _OrderCertificateState extends State<OrderCertificate> {
     }
 
 }
+
+class OrderMarksheet extends StatefulWidget {
+  const OrderMarksheet({Key? key}) : super(key: key);
+
+  @override
+  State<OrderMarksheet> createState() => _OrderMarksheetState();
+}
+
+class _OrderMarksheetState extends State<OrderMarksheet> {
+
+  TextEditingController datec = TextEditingController();
+
+  List<Mentor>? mentors ;
+  List<Subj>? subjs ;
+  List<LessonType> types =[];
+  List<LessonType>? examples;
+
+
+  Subj? Chosensubj;
+  Mentor? Chosenmentro;
+  LessonType? Chosentype;
+  DateTime? Chosendate;
+
+  Future<bool> initplaces ( ) async
+  {
+    examples = await AccountManager.GetTypes();
+    if ( subjs == null || subjs!.isEmpty )
+      subjs = await AccountManager.GetSubjects();
+    return true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: initplaces(),
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot){
+        if (!snapshot.hasData && snapshot != null)
+          return CircularProgressIndicator();
+        return AlertDialog(
+        //backgroundColor: Colors.grey[900],
+        scrollable: true,
+        content:
+        Column
+          (
+          children: <Widget>[
+            Text('Дисциплина'),
+            DropdownButton<Subj>(
+                isExpanded: true,
+                hint: Text(
+                  'Вебырите предмет',
+                  // style: TextStyle(
+                  //   color: widget.primarycolor,
+                  // ),
+                ),
+                items: subjs!.map<DropdownMenuItem<Subj>>((
+                    Subj? value) {
+                  return DropdownMenuItem<Subj>(
+                    value: value,
+                    child: Text(value!.abbrev!+ '(' + value!.term!.toString() + ' семестр)'),
+                  );
+                }).toList(),
+                value: Chosensubj,
+                onChanged: (value) {
+                  setState(() {
+                    Chosensubj = value;
+                    types.clear();
+                    types!.addAll(Chosensubj!.lessonTypes!);
+                  });
+                }),
+            Text('Тип'),
+            DropdownButton<LessonType>(
+                isExpanded: true,
+                hint: Text(
+                  'Вебырите Тип',
+                  // style: TextStyle(
+                  //   color: widget.primarycolor,
+                  // ),
+                ),
+                items: types!.map<DropdownMenuItem<LessonType>>((
+                    LessonType? value) {
+                  return DropdownMenuItem<LessonType>(
+                    value: value,
+                    child: Text(value!.abbrev!),
+                  );
+                }).toList(),
+                value: Chosentype,
+                onChanged: types.isEmpty? null :(value) {
+                  setState(() {
+                    Chosentype = value;
+                  });
+                }),
+            Autocomplete<Mentor>(
+              displayStringForOption: (Mentor option) => option.fio!,
+              optionsBuilder:(TextEditingValue textEditingValue) async
+              {
+                List<Mentor>? list = await AccountManager.GetMentors(textEditingValue.text);
+                logger.d(list);
+                return list!;
+              },
+              onSelected: (Mentor a)
+              {
+                FocusManager.instance.primaryFocus?.unfocus();
+                setState(() {
+                  Chosenmentro = a;
+                });
+              },
+            ),
+            Container(
+              child: Row(
+                children: [
+                  IconButton(icon: Icon(Icons.calendar_month),onPressed: () async{
+                    DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(), //get today's date
+                        firstDate:DateTime(2000), //DateTime.now() - not to allow to choose before today.
+                        lastDate: DateTime(2101)
+                    );
+                    if ( pickedDate!= null) {
+                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                      setState(() {
+                        datec.text = formattedDate;
+                        Chosendate = pickedDate;
+                      });
+                    }
+                  }
+                  ),
+                  Text(Chosendate == null? 'Выберети дату' : datec.text),
+                  ElevatedButton(onPressed: (Chosendate == null || Chosenmentro == null || Chosensubj == null || Chosentype == null) ? null :(){}, child: Text('Заказать')),
+                  (Chosendate == null || Chosenmentro == null || Chosensubj == null || Chosentype == null) ? SizedBox():showInfo(),
+                ],
+              ),
+            )
+          ],
+        ),
+      );
+      }
+    );
+  }
+
+  ///
+  /// TODO
+  /// Dodelat
+  ///
+
+  Text showInfo()
+  {
+    String inp ='';
+    LessonType? temp;
+    examples!.forEach((element) {if (element.shortName!.contains(Chosentype!.abbrev!)) {inp = element.fullName!; temp = element; }});
+    String inp2 = temp!.coefficient!.toStringAsFixed(2) + ' ч * ' + Chosentype!.price!.toStringAsFixed(2) +
+        ' руб./ч = ' + (Chosentype!.price!*temp!.coefficient!).toStringAsFixed(2) + ' руб.';
+    return Text('asd');
+  }
+}
+
