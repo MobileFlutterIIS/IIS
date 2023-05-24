@@ -40,7 +40,7 @@ class _MyNavBar extends State<NavBar> {
   void open()
   {
     setState(() {
-      height=220;
+      height=160;
       boxheight = 0;
       arrowup = false;
       textvisible = true;
@@ -71,7 +71,7 @@ class _MyNavBar extends State<NavBar> {
       Column(children: [IconButton(icon: Icon(Icons.people),onPressed: () {collapse();setState(() {pageNum = 2;});},), AnimatedOpacity(child: Text('Студенты',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
       Column(children: [IconButton(icon: Icon(Icons.person),onPressed: () {collapse();setState(() {pageNum = 3;});},), AnimatedOpacity(child: Text('Аккаунт',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
       Column(children: [IconButton(icon: Icon(Icons.star_rate),onPressed: () {collapse(); setState(() {pageNum = 4;} );},), AnimatedOpacity(child: Text('Рейтинг',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: Icon(Icons.settings),onPressed: () {collapse();setState(() {pageNum = 5;});},), AnimatedOpacity(child: Text('Найстройки',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      //Column(children: [IconButton(icon: Icon(Icons.settings),onPressed: () {collapse();setState(() {pageNum = 5;});},), AnimatedOpacity(child: Text('Найстройки',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
       Column(children: [IconButton(icon: Icon(Icons.schema),onPressed: () {collapse();setState(() {pageNum = 6;});},), AnimatedOpacity(child: Text('Расписание Кафедр',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
       Column(children: [IconButton(icon: Icon(Icons.home_filled),onPressed: () {collapse();setState(() {pageNum = 7;});},), AnimatedOpacity(child: Text('Подразделения',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
       Column(children: [IconButton(icon: Icon(Icons.phone),onPressed: () {collapse();setState(() {pageNum = 8;});},), AnimatedOpacity(child: Text('Справочник',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
@@ -127,13 +127,13 @@ class _MyNavBar extends State<NavBar> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: tabs.getRange(4, 9).toList(),
                           ),
-                        SizedBox(height: 20,),
-                        Row
-                          (
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: tabs.getRange(9, 10).toList(),
-                         ),
-                        SizedBox(height: 20,),
+                        // SizedBox(height: 20,),
+                        // Row
+                        //   (
+                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //   children: tabs.getRange(9, 10).toList(),
+                        //  ),
+                        // SizedBox(height: 20,),
                       ],
                     ),
                   )

@@ -24,8 +24,10 @@ class StudentScale extends StatefulWidget{
 
 class _StudentScaleState extends State<StudentScale> {
 
+  TextEditingController controller = TextEditingController();
   static Student? student;
   static List<StudentsRating>? Studentratings;
+  static List<StudentsRating>? Studentratingsvisible;
   static List<Speciality>? Specialities;
   static List<Speciality>? Faculties;
   static List<int> Years = [2022,2021,2020,2019];
@@ -67,6 +69,29 @@ class _StudentScaleState extends State<StudentScale> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+        leadingWidth: MediaQuery.of(context).size.width * 0.046,
+        title: Row(
+          children: [
+            const Text(
+              'Рейтинг',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'NotoSerif',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.34,
+            ),
+          ],
+        ),
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(
+          color: Colors.black, // Цвет иконки
+        ),
+      ),
     //backgroundColor: widget.backgroundcolor,
     body: FutureBuilder(
       future: initialize(),
@@ -80,95 +105,151 @@ class _StudentScaleState extends State<StudentScale> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
              Row (
-              children: [DropdownButton<int>
-                (
-                hint: Text(
-                    'Year',
-                  // style: TextStyle(
-                  //   color: widget.primarycolor,
-                  // ),
-                ),
-                value: dropdownYear,
-                items: Years.map<DropdownMenuItem<int>>((
-                    int value) {
-                  return DropdownMenuItem<int>(
-                    value: value,
-                    child: Text(value.toString()),
-                  );
-                }).toList(),
-                onChanged: (int? input) async {
-                  setState(()  {
-                    dropdownYear = input;
-                  });
-                  if (dropdownFaculty != null) {
-                    Studentratings = null;
-                    dropdownSpecialities = null;
-                    final temp = await RatingManager.GetSpecialities(
-                        dropdownFaculty!.id!, input!);
-                    setState(() {
-                      Specialities = temp;
+               mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 30,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: DropdownButton<int>
+                  (
+                  hint: Text(
+                      'Год',
+                    // style: TextStyle(
+                    //   color: widget.primarycolor,
+                    // ),
+                  ),
+                  value: dropdownYear,
+                  items: Years.map<DropdownMenuItem<int>>((
+                      int value) {
+                    return DropdownMenuItem<int>(
+                      value: value,
+                      child: Text(value.toString()),
+                    );
+                  }).toList(),
+                  onChanged: (int? input) async {
+                    setState(()  {
+                      dropdownYear = input;
                     });
-                  }
-                },
+                    if (dropdownFaculty != null) {
+                      Studentratings = null;
+                      dropdownSpecialities = null;
+                      final temp = await RatingManager.GetSpecialities(
+                          dropdownFaculty!.id!, input!);
+                      setState(() {
+                        Specialities = temp;
+                      });
+                    }
+                  },
               ),
-              DropdownButton<Speciality>
-                (
-                hint: Text(
-                    'Faculty',
-                  // style: TextStyle(
-                  //   color: widget.primarycolor,
-                  // ),
                 ),
-                value: dropdownFaculty,
-                items: (Faculties != null ? Faculties!.map<DropdownMenuItem<Speciality>>((
-                    Speciality value) {
-                  return DropdownMenuItem<Speciality>(
-                    value: value,
-                    child: Text(value.text!),
-                  );
-                }).toList(): null),
-                onChanged: (Speciality? input) async {
-                  setState(() {
-                    dropdownFaculty = input;
-                  });
-                  if (dropdownYear != null) {
-                    Studentratings = null;
-                    dropdownSpecialities = null;
-                    final temp = await RatingManager.GetSpecialitiesDayOnly(
-                        input!.id!, dropdownYear!);
+              Container(
+                height: 30,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 1.0,
+                  ),
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: DropdownButton<Speciality>
+                  (
+                  hint: Text(
+                      'Факультет',
+                    // style: TextStyle(
+                    //   color: widget.primarycolor,
+                    // ),
+                  ),
+                  value: dropdownFaculty,
+                  items: (Faculties != null ? Faculties!.map<DropdownMenuItem<Speciality>>((
+                      Speciality value) {
+                    return DropdownMenuItem<Speciality>(
+                      value: value,
+                      child: Text(value.text!),
+                    );
+                  }).toList(): null),
+                  onChanged: (Speciality? input) async {
                     setState(() {
-                      Specialities = temp;
+                      dropdownFaculty = input;
                     });
-                  }
-                },
+                    if (dropdownYear != null) {
+                      Studentratings = null;
+                      dropdownSpecialities = null;
+                      final temp = await RatingManager.GetSpecialitiesDayOnly(
+                          input!.id!, dropdownYear!);
+                      setState(() {
+                        Specialities = temp;
+                      });
+                    }
+                  },
+                ),
               ),]
              ),
-              DropdownButton<Speciality>
-                (
-                hint: Text(
-                    'Speciality',
-                  // style: TextStyle(
-                  //   color: widget.primarycolor,
-                  // ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 30,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 1.0,
+                  ),
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
-                value: dropdownSpecialities,
-                items: (Specialities != null ? Specialities!.map<DropdownMenuItem<Speciality>>((
-                    Speciality value) {
-                  return DropdownMenuItem<Speciality>(
-                    value: value,
-                    child: Text(value.text!),
-                  );
-                }).toList(): null),
-                onChanged: (Speciality? input) async{
-                  setState(()  {
-                    dropdownSpecialities = input;
-                  });
-                  if (dropdownYear != null)
+                child: DropdownButton<Speciality>
+                  (
+                  hint: Text(
+                      'Специальность',
+                    // style: TextStyle(
+                    //   color: widget.primarycolor,
+                    // ),
+                  ),
+                  value: dropdownSpecialities,
+                  items: (Specialities != null ? Specialities!.map<DropdownMenuItem<Speciality>>((
+                      Speciality value) {
+                    return DropdownMenuItem<Speciality>(
+                      value: value,
+                      child: Text(value.text!),
+                    );
+                  }).toList(): null),
+                  onChanged: (Speciality? input) async{
+                    setState(()  {
+                      dropdownSpecialities = input;
+                    });
+                    if (dropdownYear != null)
+                      {
+                        final temp = await RatingManager.GetSpecialityRating(dropdownYear!,dropdownSpecialities!.id!);
+                        temp!.sort((a,b) => b.average!.compareTo(a.average!));
+                        for (int i =0; i < temp!.length;i++)
+                          {
+                            temp[i]!.index = i+1;
+                          }
+                        setState(() {
+                          Studentratings = temp;
+
+                          Studentratingsvisible =Studentratings;
+                        });
+                      }
+                  },
+                ),
+              ),
+              TextField(
+                controller: controller,
+                onChanged: (value)
+                {
+                  if (value == null || value == '') {setState(() {
+                    Studentratingsvisible = Studentratings;
+                  });}
+                  else
                     {
-                      final temp = await RatingManager.GetSpecialityRating(dropdownYear!,dropdownSpecialities!.id!);
+                      List<StudentsRating> temp = [];
+                      Studentratings!.forEach((element) { if (element.studentCardNumber!.toString().contains(value)) temp.add(element); });
                       setState(() {
-                        Studentratings = temp;
-                        Studentratings!.sort((a,b) => b.average!.compareTo(a.average!));
+                        Studentratingsvisible = temp;
                       });
                     }
                 },
@@ -176,31 +257,65 @@ class _StudentScaleState extends State<StudentScale> {
               Expanded(
                 child: (Studentratings == null?
                 Center(child: Icon(Icons.error_outline_rounded, ),):
-                ListView.builder(
-                    itemCount: Studentratings!.length,
-                    itemBuilder: (context, index)
-                    {
-                        return GestureDetector(
-                          onTap: () async{
-                            final temp = await RatingManager.GetStudentRating(Studentratings![index].studentCardNumber!);
-                            List<GradeBook> tempgradebook = [GradeBook(temp)];
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => GradeBookPage(gradebook: tempgradebook),),);
-                          },
-                          child: Card(
-                            child: Row(children:
-                            [
-                              Icon(Icons.person,),
-                              Text(Studentratings![index].studentCardNumber!, ),
-                              const SizedBox(width: 5,),
-                              Text(Studentratings![index].average!.toString(), ),
-                              const SizedBox(width: 5,),
-                              Text(Studentratings![index].averageShift!.toString(), ),
-                            ],
-                            ),
-                          ),
-                        );
-                    }
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('              № Студента                Средний балл         Часы',textAlign: TextAlign.left,),
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: Studentratingsvisible!.length,
+                          itemBuilder: (context, index)
+                          {
+                            bool neg = Studentratingsvisible![index].averageShift! < 0;
+                              return GestureDetector(
+                                onTap: () async{
+                                  final temp = await RatingManager.GetStudentRating(Studentratingsvisible![index].studentCardNumber!);
+                                  List<GradeBook> tempgradebook = [GradeBook(temp)];
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context) => GradeBookPage(gradebook: tempgradebook),),);
+                                },
+                                child: Card(
+                                  child: Row(children:
+                                  [
+                                    Icon(Icons.person,),
+                                    Text('${(Studentratingsvisible![index].index)}: ', style: TextStyle(fontSize: 20),),
+                                    Text(Studentratingsvisible![index].studentCardNumber!, style: TextStyle(fontSize: 20), ),
+                                    const SizedBox(width: 5,),
+                                    Expanded(
+                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                      Row(
+                                        children: [
+                                          (neg? Icon(Icons.arrow_downward_outlined,color: Colors.red,) :Icon(Icons.arrow_upward_outlined,color: Colors.green,)),
+                                          RichText(
+                                            text: TextSpan(children: [
+                                              TextSpan(text: '${Studentratingsvisible![index].average!}',style: TextStyle(color: Colors.black,fontSize: 20),),
+                                              WidgetSpan(
+                                                child: Transform.translate(
+                                                  offset: const Offset(1, -6),
+                                                  child: Text(
+                                                      (neg? '': '+' )+Studentratingsvisible![index].averageShift!.toStringAsFixed(2),
+                                                    style: TextStyle(color: neg? Colors.red: Colors.green,fontSize: 20),
+                                                    //superscript is usually smaller in size
+                                                    textScaleFactor: 0.7,
+                                                  ),
+                                                ),
+                                              )
+                                            ]),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(Studentratingsvisible![index].hours!.toString(), style: TextStyle(fontSize: 20), ),
+                                      ],),
+                                    ),
+                                  ],
+                                  ),
+                                ),
+                              );
+                          }
+                      ),
+                    ),
+                  ],
                 )),
               ),
             ],

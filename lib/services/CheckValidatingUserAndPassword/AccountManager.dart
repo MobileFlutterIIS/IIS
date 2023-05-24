@@ -257,6 +257,17 @@ class AccountManager
     }
   }
 
+  static Future<List<String>?> GetPenalties() async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      final response = await apiService.getPenalties(cookie);
+      // print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
   static Future<List<DormReq>?> GetDormReqs() async{
     if (cookie == '' || cookie == null) return null;
     try {

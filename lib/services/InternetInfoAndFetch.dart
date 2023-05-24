@@ -31,12 +31,14 @@ class InternetInfo
   {
     GetConnect();
     logger.d("${hasconnect} ");
-    int data = await client.getCurrentWeek();
+    int? data;
+    if (hasconnect)
+      data = await client.getCurrentWeek();
     if (data != null && hasconnect) {
       logger.d('got week');
     }
     else logger.d('No week');
-    return (data!);
+    return (data);
 
   }
 

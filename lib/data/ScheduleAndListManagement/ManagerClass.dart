@@ -39,10 +39,13 @@ class ManagerClass with ChangeNotifier
     DateWeek? input;
     temp = await InternetInfo.GetWeekNet();
     logger.d(temp);
-    if (temp != null) { input =DateWeek(now, temp); await data.addValue(12349999,input );}
+    if (temp != null) { input =DateWeek(now, temp); await data.addValue('12',input );}
     else {
-      input = await data.getValue(12349999);
+      logger.d('getting from base');
+      input = await data.getValue('12');
     }
+    logger.d('${input == null}  AAAAAAAAAAA');
+    logger.d(input);
      var diff = now.difference(input!.date!);
      double weeks = diff.inDays.toDouble();
      weeks = weeks / 7;

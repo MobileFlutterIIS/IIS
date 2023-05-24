@@ -12,6 +12,7 @@ import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart'
 import 'package:logger/logger.dart';
 import 'package:iis/screens/Account/ResetPassword/ForgetPassword.dart';
 import 'package:iis/widgets/NavBarAccount.dart';
+import 'package:another_flushbar/flushbar.dart';
 
 final logger = Logger();
 
@@ -124,7 +125,18 @@ class _UserLoginState extends State<UserLogin> {
         )),
       );
     } else {
-      // Handle sign-in error.
+      Flushbar(
+        backgroundColor: Theme.of(context).cardColor,
+        messageColor: Theme.of(context).hintColor,
+        message: "Ошибка! Не удалось найти аккаунт",
+        icon: Icon(
+          Icons.warning,
+          size: 28.0,
+          color:Theme.of(context).hintColor,
+        ),
+        duration: Duration(seconds: 3),
+        isDismissible: true,
+      )..show(context);
     }
 
     setState(() {
@@ -158,59 +170,61 @@ class _UserLoginState extends State<UserLogin> {
       ),
       body: _isLoading
         ? const Center(child: CircularProgressIndicator())
-        : SafeArea(
-        child: Center(
-          child: Column(
-            children: [
+        : SingleChildScrollView(
+          child: SafeArea(
+          child: Center(
+            child: Column(
+              children: [
 
-              const SizedBox(height: 200),
-              UserName(
-                nameController: userNameController,
-                nameHintText: 'Пользователь',
-                nameObsecureText: false,
-                // backgroundcolor: widget.backgroundcolor,
-                // primarycolor: widget.primarycolor,
-              ),
+                const SizedBox(height: 200),
+                UserName(
+                  nameController: userNameController,
+                  nameHintText: 'Пользователь',
+                  nameObsecureText: false,
+                  // backgroundcolor: widget.backgroundcolor,
+                  // primarycolor: widget.primarycolor,
+                ),
 
-              const SizedBox(height: 10),
-              Password(
-                controller: passwordController,
-                hintText: 'Пароль',
-                obsecureText: true,
-              ),
+                const SizedBox(height: 10),
+                Password(
+                  controller: passwordController,
+                  hintText: 'Пароль',
+                  obsecureText: true,
+                ),
 
-              const SizedBox(height: 6,),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ForgetPassword()),
-                  );
-                },
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50),
-                  child: Text(
-                    'Забыли пароль?',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'NotoSerif',
-                      fontWeight: FontWeight.bold,
+                const SizedBox(height: 6,),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ForgetPassword()),
+                    );
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    child: Text(
+                      'Забыли пароль?',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'NotoSerif',
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 25),
-              SignInButton(
-                onTap: () => _handleSignIn(userNameController.text, passwordController.text),
-                // backgroundcolor: widget.backgroundcolor,
-                // primarycolor: widget.primarycolor,
-              ),
-            ],
+                const SizedBox(height: 25),
+                SignInButton(
+                  onTap: () => _handleSignIn(userNameController.text, passwordController.text),
+                  // backgroundcolor: widget.backgroundcolor,
+                  // primarycolor: widget.primarycolor,
+                ),
+              ],
+            ),
           ),
-        ),
       ),
+        ),
     );
   }
 }

@@ -34,6 +34,7 @@ class  Speciality
 @JsonSerializable()
 class  StudentsRating
 {
+  int? index;
   double? average;
   double? averageShift;
   double? firstAverage;

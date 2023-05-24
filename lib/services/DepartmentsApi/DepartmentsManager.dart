@@ -49,7 +49,7 @@ class DepartmentsManager
     }
   }
 
-  static Future<List<Post>?> GetTutorsDepartment(int departmentId) async
+  static Future<List<Employee>?> GetTutorsDepartment(int departmentId) async
   {
     try {
       final response = await apiService.getTutorsDepartment(departmentId);

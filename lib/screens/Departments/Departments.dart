@@ -79,7 +79,7 @@ class Expacard extends StatelessWidget {
                               color: Colors.white, fontSize: 10),
                         ),
                         onPressed: () async {
-                          List<Post>? templist =
+                          List<Employee>? templist =
                               await DepartmentsManager.GetTutorsDepartment(
                                   temp!.data!.id!);
                           logger.d(templist);
@@ -87,7 +87,7 @@ class Expacard extends StatelessWidget {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    DepartmentList(department: templist),
+                                    DepartmentList(department: templist,place: temp!.data!.name!),
                               ),
                             );
 
@@ -148,7 +148,7 @@ class Expacard extends StatelessWidget {
                             const TextStyle(color: Colors.white, fontSize: 10),
                       ),
                       onPressed: () async {
-                        List<Post>? templist =
+                        List<Employee>? templist =
                             await DepartmentsManager.GetTutorsDepartment(
                                 temp!.data!.id!);
                         logger.d(templist);
@@ -156,7 +156,7 @@ class Expacard extends StatelessWidget {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
-                                  DepartmentList(department: templist),
+                                  DepartmentList(department: templist,place: temp!.data!.name!,),
                             ),
                           );
 

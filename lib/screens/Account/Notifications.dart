@@ -14,7 +14,7 @@ class AnouncementPage extends StatelessWidget {
        // height: MediaQuery.of(context).size.height,
        // width: MediaQuery.of(context).size.width,
         children: [
-          Text('ИГИЛ'),
+          Text('Объявления'),
           Expanded(
             child: anouncement.length!= 0 ?ListView.builder(
               itemCount: anouncement.length,

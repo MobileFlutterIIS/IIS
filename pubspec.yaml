@@ -55,6 +55,7 @@ dependencies:
   flutter_sliding_up_panel: any
   flutter_spinbox: any
   url_launcher: any
+  another_flushbar: any
 
   flutter_localizations:
     sdk: flutter

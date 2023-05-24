@@ -81,6 +81,7 @@ class _NavBarAccountState extends State<NavBarAccount> {
   Markbook? markbook;
   List<GradeBook>? gradebook;
   List<Omission>? omissions;
+  List<String>? penalties;
   String? password;
   static bool sucs = false;
 
@@ -93,6 +94,7 @@ class _NavBarAccountState extends State<NavBarAccount> {
     markbook = (await AccountManager.UserMarkBook());
     gradebook = (await AccountManager.UserGradeBook());
     omissions = (await AccountManager.UserOmissions());
+    penalties = (await AccountManager.GetPenalties());
     password = widget.password;
     // logger.d(certificates);
     // logger.d(groupinfo);
@@ -128,7 +130,7 @@ class _NavBarAccountState extends State<NavBarAccount> {
       ChangePassword(password: password!,),
       Dormitory(),
       Diploma(),
-      Penalties(),
+      Penalties(penalties: penalties!,),
     ];
     if (widget.user != null) {
       return pages;
@@ -157,7 +159,7 @@ class _NavBarAccountState extends State<NavBarAccount> {
       builder: (BuildContext context, AsyncSnapshot<bool> f) {
         if (!f.hasData) return const CircularProgressIndicator();
         return Scaffold(
-          resizeToAvoidBottomInset: false,
+         // resizeToAvoidBottomInset: false,
           bottomNavigationBar: GestureDetector(
             onPanUpdate: (details) {
               int sensitivity = 1;
@@ -250,7 +252,7 @@ class _NavBarAccountState extends State<NavBarAccount> {
                   ),
                 ),
               ),
-              body: SafeArea(child: Column(children: [Expanded(child: Pages()[pageNum])])),
+              body: SafeArea(child: Pages()[pageNum]),
             ),
           ),
 

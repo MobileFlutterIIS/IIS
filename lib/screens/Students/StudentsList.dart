@@ -9,8 +9,15 @@ import 'package:iis/services/StudentsApi/studentsapi.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:logger/logger.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 final logger = Logger();
+
+///
+/// TODO
+/// ADD more info
+///
+///
 
 class StudentsList extends StatefulWidget {
   final bool searchjob;
@@ -33,8 +40,9 @@ class StudentsList extends StatefulWidget {
 
 class _StudentsListState extends State<StudentsList> {
   final controller = ScrollController();
-  double cardheight = 50;
+  double cardheight = 100;
   int page = 1;
+  int maxpages = 1;
   List<UserEntity> Visibleusers =[];
 
   @override
@@ -50,15 +58,17 @@ class _StudentsListState extends State<StudentsList> {
   }
 
   Future adddata() async{
-    final userspage = await StudentManager.GetStudentPage(
-        widget.SelectedCourses, page+1,
-        widget.SelectedFaculties, widget.Secondname,
-        widget.searchjob, widget.SelectedSkills);
-    setState(() {
-      Visibleusers.addAll(userspage!.cvs!);
-      //logger.d(Visibleusers);
-      page+=1;
-    });
+    if (page < maxpages) {
+      final userspage = await StudentManager.GetStudentPage(
+          widget.SelectedCourses, page + 1,
+          widget.SelectedFaculties, widget.Secondname,
+          widget.searchjob, widget.SelectedSkills);
+      setState(() {
+        Visibleusers.addAll(userspage!.cvs!);
+        //logger.d(Visibleusers);
+        page += 1;
+      });
+    }
   }
 
   Future<bool> initialise() async
@@ -71,6 +81,7 @@ class _StudentsListState extends State<StudentsList> {
       Visibleusers.addAll(userspage!.cvs!);
       //logger.d(userspage.cvs! as List<UserEntity>);
       logger.d(MediaQuery.of(context).size.height / cardheight);
+      maxpages = userspage.totalPages!;
     }
     return true;
   }
@@ -127,22 +138,105 @@ class _StudentsListState extends State<StudentsList> {
                             //color: Colors.black12,
                             child: Row(
                               children: [
-                                ClipRRect(child:
-                                Visibleusers[index].photoUrl != null ? Image(image: NetworkImage(Visibleusers[index].photoUrl!)) :
-                                    Image.asset('images/pepo.png'),
-                                ),
-                                Text("${Visibleusers[index].firstName} ${Visibleusers[index].middleName} ${Visibleusers[index].lastName}",
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'NotoSerif',
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  child:
+                                  CachedNetworkImage(
+                                    fit: BoxFit.fitWidth,
+                                    width: 100, height: 100,
+                                    imageUrl: (Visibleusers[index].photoUrl != null? Visibleusers[index].photoUrl!: 'asd') ,
+                                    placeholder: (context, url) => Image.asset('images/pepo.png', width: 100, height: 100,fit: BoxFit.fitWidth,),
+                                    errorWidget: (context, url, error) => Image.asset('images/pepo.png', width: 100, height: 100,fit: BoxFit.fitWidth,),
                                   ),
                                 ),
-                                Text("${Visibleusers[index].speciality} ${Visibleusers[index].rating}",
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontFamily: 'NotoSerif',
-                                  ),
-                                ),
+                               SizedBox(width: 5,),
+                               Expanded(
+                                 child: Column(
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                   children: [
+                                     Text("${Visibleusers[index].firstName} ${Visibleusers[index].middleName} ${Visibleusers[index].lastName}",
+                                       style: const TextStyle(
+                                         color: Colors.black,
+                                         fontFamily: 'NotoSerif',
+                                         fontSize: 20,
+                                         fontWeight: FontWeight.bold,
+                                       ),
+                                     ),
+                                     Text("${Visibleusers[index].faculty}, ${Visibleusers[index].speciality}",
+                                       style: const TextStyle(
+                                         color: Colors.grey,
+                                         fontFamily: 'NotoSerif',
+                                       ),
+                                     ),
+                                     Row(
+                                       crossAxisAlignment: CrossAxisAlignment.start,
+                                       mainAxisAlignment: MainAxisAlignment.start,
+                                       children: [
+                                         Visibleusers[index].rating! >= 1
+                                             ?Icon(
+                                           Icons.filter_vintage,
+                                           size: 10,
+                                           color: Color.fromRGBO(255, 180, 0, 0.9),
+                                         )
+                                             :Icon(
+                                           Icons.filter_vintage,
+                                           size: 10,
+                                           color: Colors.grey[350],
+                                         ),
+                                         const SizedBox(width: 5),
+                                         Visibleusers[index].rating! >= 2
+                                             ?Icon(
+                                           Icons.filter_vintage,
+                                           size: 10,
+                                           color: Color.fromRGBO(255, 180, 0, 0.9),
+                                         )
+                                             :Icon(
+                                           Icons.filter_vintage,
+                                           size: 10,
+                                           color: Colors.grey[350],
+                                         ),
+                                         const SizedBox(width: 5),
+                                         Visibleusers[index].rating! >= 3
+                                             ?Icon(
+                                           Icons.filter_vintage,
+                                           size: 10,
+                                           color: Color.fromRGBO(255, 180, 0, 0.9),
+                                         )
+                                             :Icon(
+                                           Icons.filter_vintage,
+                                           size: 10,
+                                           color: Colors.grey[350],
+                                         ),
+                                         const SizedBox(width: 5),
+                                         Visibleusers[index].rating! >= 4
+                                             ?Icon(
+                                           Icons.filter_vintage,
+                                           size: 10,
+                                           color: Color.fromRGBO(255, 180, 0, 0.9),
+                                         )
+                                             :Icon(
+                                           Icons.filter_vintage,
+                                           size: 10,
+                                           color: Colors.grey[350],
+                                         ),
+                                         const SizedBox(width: 5),
+                                         Visibleusers[index].rating! >= 5
+                                             ?Icon(
+                                           Icons.filter_vintage,
+                                           size: 10,
+                                           color: Color.fromRGBO(255, 180, 0, 0.9),
+                                         )
+                                             :Icon(
+                                           Icons.filter_vintage,
+                                           size: 10,
+                                           color: Colors.grey[350],
+                                         ),
+                                       ],
+                                     ),
+                                   ],
+                                 ),
+                               ),
+
                               ],
                             )
 
@@ -151,6 +245,7 @@ class _StudentsListState extends State<StudentsList> {
                       }
                     else
                       {
+                        if (page == maxpages) return SizedBox();
                         if (Visibleusers.length <= MediaQuery.of(context).size.height/cardheight);
                         adddata();
                         return const CircularProgressIndicator();

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:iis/services/ScheduleAndListFromNet/Api.dart';
+import 'package:iis/services/DepartmentsApi/departmentsapi.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class DepartmentList extends StatelessWidget {
-  final List<Post> department;
-  const DepartmentList({Key? key, required List<Post> this.department }) : super(key: key);
+  final List<Employee> department;
+  final String place;
+  const DepartmentList({Key? key, required List<Employee> this.department,required this.place }) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,39 +38,33 @@ class DepartmentList extends StatelessWidget {
             itemCount:department.length ,
               itemBuilder: (context,index)
               {
-                return Card(
-                  child: Row(
-                    children: [
-                      ClipRRect(child:
-                          ///
-                      ///  NETWORIMAGE может быть пустой, заменить на другой метод
-                      ///
-                      department[index].photoLink != null ? Image(image: NetworkImage(department[index].photoLink !),height:80 ,width: 80,) :
-                      Image.asset('images/pepo.png'),
-                      ),
-                      Text(
-                        department[index].firstName! + ' ',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'NotoSerif',
+                return GestureDetector(
+                  onTap: (){
+                    showDialog(context: context, builder: (BuildContext context) => createdialog (department[index]));
+                  },
+                  child: Card(
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child:
+                        CachedNetworkImage(
+                          width: 80, height: 80,
+                          imageUrl: department[index].photoLink !,
+                          placeholder: (context, url) => Image.asset('images/pepo.png', width: 80, height: 80),
+                          errorWidget: (context, url, error) => Image.asset('images/pepo.png', width: 80, height: 80),
                         ),
-                      ),
-                      Text(
-                        department[index].middleName! + ' ',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'NotoSerif',
                         ),
-                      ),
-                      Text(
-                        department[index].lastName!,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'NotoSerif',
-                        ),
-                      ),
-                     // Text(department[index].rank!),
-                    ],
+                        Container(
+                          width: 250,
+                          child: Column(children: [
+                            Text('${department[index].firstName!} ${department[index].middleName!} ${department[index].lastName!}', style: TextStyle(fontSize: 20),),
+                            Text(getPlace(department[index]),style: TextStyle(fontSize: 10),),
+                          ],),
+                        )
+                       // Text(department[index].rank!),
+                      ],
+                    ),
                   ),
                 );
               }
@@ -73,4 +72,65 @@ class DepartmentList extends StatelessWidget {
       ),
     );
   }
+
+  String getPlace(Employee emp)
+  {
+    List<Job>? jobs = emp.jobPositions;
+    if(jobs == null || jobs.isEmpty) return '';
+    else
+      {
+        String res = jobs[0].jobPosition!;
+        jobs!.forEach((element) {
+          if (element.department! == place) {res = element.jobPosition!; return;}
+        });
+        return res;
+      }
+  }
+
+}
+
+///
+/// TODO
+/// THIS SHIT IS SUCKS
+///
+
+AlertDialog createdialog (Employee post)
+{
+  return AlertDialog(
+    //backgroundColor: Colors.grey[900],
+    scrollable: true,
+    title: Text('${post.firstName!} ${post.middleName!} ${post.lastName!}'),
+    content:
+           Padding(
+            padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Ученая степень'),
+                Text((post.degree != null ? '${post.degree!}' : '') + (post.rank!= null ? '${post.rank!}': '')),
+                Text('Должность, место работы'),
+                SizedBox(
+                  height:  post.jobPositions!.length*50,
+                  width: double.maxFinite,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: post.jobPositions!.length,
+                      itemBuilder: (context,index){
+                        return SizedBox(
+                          child: Row(children: [
+                            Icon(Icons.circle),
+                            Container(width: 200,child: Text('${post.jobPositions![index].jobPosition!},${post.jobPositions![index].department!}')),
+                          ],),
+                        );
+                      } ),
+                ),
+                Divider(),
+                Text('Контакты'),
+                Text('Почта ${post.email!}'),
+                Text('Рабочий телефон:'),
+                
+              ],
+      ),
+    ),
+  );
 }

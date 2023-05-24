@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/user_entity.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/CertificateGroupAnouncements.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/services.dart';
+import 'package:logger/logger.dart';
+import 'package:another_flushbar/flushbar.dart';
 
-class GroupInfoPage extends StatelessWidget {
+final logger = Logger();
+
+class GroupInfoPage extends StatefulWidget {
   final Groupinfo group;
   const GroupInfoPage({Key? key, required this.group}) : super(key: key);
+
+  @override
+  State<GroupInfoPage> createState() => _GroupInfoPageState();
+}
+
+class _GroupInfoPageState extends State<GroupInfoPage> {
 
   ///
   /// МБ кнопку скачивания эксельки добавить
@@ -16,64 +28,86 @@ class GroupInfoPage extends StatelessWidget {
       initialScrollOffset: 1, // or whatever offset you wish
       keepScrollOffset: true,
     );
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.brown[200],
-        centerTitle: true,
-        title: Text('Г Р У П П А'),
-      ),
-      body: Column(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.brown[200],
+          centerTitle: true,
+          title: Text('Г Р У П П А'),
+        ),
+        body: Builder(
+          builder: (context) {
+            return Column(
 
-        children: [
-            // Text('Группа: ${group.numberOfGroup} \n '
-            //     '${group.groupInfoStudentDto![0].fio} \n'
-            //     'Контакты: ${group.groupInfoStudentDto![0].phone},${group.groupInfoStudentDto![0].email}',
-            //   style: TextStyle(fontSize: 20) ,),
-          Expanded(
-            child: Container(
-              child: ListView.builder(
-                  itemCount: (group.groupInfoStudentDto!.length-1),
-                  itemBuilder: (context,index)
-                      {
-                          return Container(
-                            height: 120,
-                            child: Card(
-                              color: getcorlor(group.groupInfoStudentDto![index].position!),
-                              elevation: 4,
-                              shape: const RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color: Colors.black12,
+              children: [
+                  // Text('Группа: ${group.numberOfGroup} \n '
+                  //     '${group.groupInfoStudentDto![0].fio} \n'
+                  //     'Контакты: ${group.groupInfoStudentDto![0].phone},${group.groupInfoStudentDto![0].email}',
+                  //   style: TextStyle(fontSize: 20) ,),
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: (widget.group.groupInfoStudentDto!.length-1),
+                      itemBuilder: (cont,index)
+                          {
+                              return Container(
+                                //height: 120,
+                                child: Card(
+                                  color: getcorlor(widget.group.groupInfoStudentDto![index].position!),
+                                  elevation: 4,
+                                  shape: const RoundedRectangleBorder(
+                                    side: BorderSide(
+                                      color: Colors.black12,
+                                    ),
+                                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 20),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(height: 10,),
+                                        Text('${widget.group.groupInfoStudentDto![index].position != null && widget.group.groupInfoStudentDto![index].position != "" ? '${widget.group.groupInfoStudentDto![index].position!}: ' : ''}${widget.group.groupInfoStudentDto![index].fio!}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 20,
+                                        ),),
+                                        const SizedBox(height: 8,),
+                                        Row(children: [IconButton(onPressed: () async {
+                                          await launch("tel://${widget.group.groupInfoStudentDto![index].phone!}");
+                                        }, icon: Icon(Icons.phone)),Text('${widget.group.groupInfoStudentDto![index].phone!}')]),
+                                        const SizedBox(height: 4,),
+                                        Row(children: [IconButton(onPressed: () async  {
+                                          await Clipboard.setData(ClipboardData(text: widget.group.groupInfoStudentDto![index].email!)).then((_){
+                                            //logger.d(ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Email address copied to clipboard"))));
+                                            Flushbar(
+                                              backgroundColor: Theme.of(context).cardColor,
+                                              messageColor: Theme.of(context).hintColor,
+                                              message: "Адресс скопирован в буфер обмена",
+                                              icon: Icon(
+                                                Icons.notifications,
+                                                size: 28.0,
+                                                color:Theme.of(context).hintColor,
+                                              ),
+                                              duration: Duration(seconds: 1),
+                                              isDismissible: true,
+                                            )..show(context);
+                                          });
+                                        }, icon: Icon(Icons.mail)),Text('${widget.group.groupInfoStudentDto![index].email!}')]),
+                                        const SizedBox(height: 20,),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                borderRadius: const BorderRadius.all(Radius.circular(12)),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(height: 10,),
-                                    Text('${group.groupInfoStudentDto![index].position != null && group.groupInfoStudentDto![index].position != "" ? '${group.groupInfoStudentDto![index].position!}: ' : ''}${group.groupInfoStudentDto![index].fio!}',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15,
-                                    ),),
-                                    const SizedBox(height: 8,),
-                                    Text('${group.groupInfoStudentDto![index].phone!}'),
-                                    const SizedBox(height: 4,),
-                                    Text('${group.groupInfoStudentDto![index].email!}'),
-                                    const SizedBox(height: 20,),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                      }
-              ),
-            ),
-          )
-        ],
+                              );
+                          }
+                  ),
+                )
+              ],
+            );
+          }
+        ),
       ),
     );
   }

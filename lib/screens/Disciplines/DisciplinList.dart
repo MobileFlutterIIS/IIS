@@ -4,6 +4,7 @@ import 'package:iis/services/RatingApi/ratingapi.dart';
 import 'package:iis/services/DIsciplinesApi/disciplineapi.dart';
 import 'package:iis/services/DIsciplinesApi/DisciplineManager.dart';
 import 'package:logger/logger.dart';
+import 'package:iis/services/InternetInfoAndFetch.dart';
 
 final logger = Logger();
 
@@ -65,6 +66,7 @@ class _DisciplinListState extends State<DisciplinList> {
             builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
               if (!snapshot.hasData && snapshot != null)
                 return CircularProgressIndicator();
+              if(InternetInfo.hasconnect == false) return Center(child: Icon(Icons.warning),);
               logger.d(dropdownFaculty);
               logger.d(Faculties);
               return Column(

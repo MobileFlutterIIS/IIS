@@ -23,6 +23,70 @@ Map<String, dynamic> _$DepartmentContainerToJson(
       'data': instance.data,
     };
 
+Employee _$EmployeeFromJson(Map<String, dynamic> json) => Employee(
+      json['firstName'] as String?,
+      json['lastName'] as String?,
+      json['middleName'] as String?,
+      json['degree'] as String?,
+      json['degreeAbbrev'] as String?,
+      json['department'] as String?,
+      json['email'] as String?,
+      json['rank'] as String?,
+      json['photoLink'] as String?,
+      json['calendarId'] as String?,
+      (json['academicDepartment'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      (json['jobPositions'] as List<dynamic>?)
+          ?.map((e) => Job.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['id'] as int?,
+      json['urlId'] as String?,
+      json['fio'] as String?,
+    );
+
+Map<String, dynamic> _$EmployeeToJson(Employee instance) => <String, dynamic>{
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'middleName': instance.middleName,
+      'degree': instance.degree,
+      'degreeAbbrev': instance.degreeAbbrev,
+      'department': instance.department,
+      'email': instance.email,
+      'rank': instance.rank,
+      'photoLink': instance.photoLink,
+      'calendarId': instance.calendarId,
+      'academicDepartment': instance.academicDepartment,
+      'jobPositions': instance.jobPositions,
+      'id': instance.id,
+      'urlId': instance.urlId,
+      'fio': instance.fio,
+    };
+
+Job _$JobFromJson(Map<String, dynamic> json) => Job(
+      (json['contacts'] as List<dynamic>)
+          .map((e) => Phone.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['department'] as String?,
+      json['jobPosition'] as String?,
+    );
+
+Map<String, dynamic> _$JobToJson(Job instance) => <String, dynamic>{
+      'contacts': instance.contacts,
+      'department': instance.department,
+      'jobPosition': instance.jobPosition,
+    };
+
+Phone _$PhoneFromJson(Map<String, dynamic> json) => Phone(
+      json['address'] as String?,
+      json['phoneNumber'] as String?,
+    );
+
+Map<String, dynamic> _$PhoneToJson(Phone instance) => <String, dynamic>{
+      'address': instance.address,
+      'phoneNumber': instance.phoneNumber,
+    };
+
 Department _$DepartmentFromJson(Map<String, dynamic> json) => Department(
       json['abbrev'] as String?,
       json['code'] as String?,
@@ -209,13 +273,13 @@ class _DepartmentsClient implements DepartmentsClient {
   }
 
   @override
-  Future<List<Post>> getTutorsDepartment(int departmentId) async {
+  Future<List<Employee>> getTutorsDepartment(int departmentId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'departmentId': departmentId};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Post>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Employee>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -228,7 +292,7 @@ class _DepartmentsClient implements DepartmentsClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) => Post.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Employee.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

@@ -143,6 +143,10 @@ class _PhonebookState extends State<Phonebook> {
                                     child: Padding(
                                   padding: const EdgeInsets.only(left: 16.0),
                                   child: Text(
+                                    ///
+                                    /// TODO
+                                    /// not all info, finish + infinite load
+                                    ///
                                     Visiblephones[index].auditory!,
                                     style: const TextStyle(
                                       color: Colors.black,

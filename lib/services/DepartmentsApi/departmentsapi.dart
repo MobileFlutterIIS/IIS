@@ -17,7 +17,7 @@ abstract class DepartmentsClient {
   @GET("departments")
   Future<List<Department>> getDepartmentsNonTree();
   @GET("employees")
-  Future<List<Post>> getTutorsDepartment(@Query('departmentId') int departmentId);
+  Future<List<Employee>> getTutorsDepartment(@Query('departmentId') int departmentId);
   @GET("announcements/departments")
   Future<List<DepartmentAnnouncement>> getDepartmentAnouncements(@Query('id') int id);
   @GET("departments/report")
@@ -38,6 +38,67 @@ class  DepartmentContainer
   factory DepartmentContainer.fromJson(Map<String, dynamic> json) => _$DepartmentContainerFromJson(json);
   Map<String, dynamic> toJson() => _$DepartmentContainerToJson(this);
 }
+
+@JsonSerializable()
+class  Employee
+{
+
+  String? firstName;
+  String? lastName;
+  String? middleName;
+  String? degree;
+  String? degreeAbbrev;
+  String? department;
+  String? email;
+  String? rank;
+  String? photoLink;
+  String? calendarId;
+  List<String>? academicDepartment;
+  List<Job>? jobPositions;
+  int? id;
+  String? urlId;
+  String? fio;
+
+
+  Employee(this.firstName, this.lastName, this.middleName, this.degree,
+      this.degreeAbbrev, this.department, this.email, this.rank, this.photoLink,
+      this.calendarId, this.academicDepartment, this.jobPositions, this.id,
+      this.urlId, this.fio);
+
+  factory Employee.fromJson(Map<String, dynamic> json) => _$EmployeeFromJson(json);
+  Map<String, dynamic> toJson() => _$EmployeeToJson(this);
+}
+
+@JsonSerializable()
+class Job {
+     List<Phone> contacts;
+     String? department;
+     String? jobPosition;
+
+
+     Job(this.contacts, this.department, this.jobPosition);
+
+     factory Job.fromJson(Map<String, dynamic> json) =>
+      _$JobFromJson(json);
+
+  Map<String, dynamic> toJson() => _$JobToJson(this);
+}
+
+@JsonSerializable()
+class Phone {
+  String? address;
+  String? phoneNumber;
+
+
+  Phone(this.address, this.phoneNumber);
+
+  factory Phone.fromJson(Map<String, dynamic> json) =>
+      _$PhoneFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PhoneToJson(this);
+
+}
+
 @JsonSerializable()
 class  Department
 {
