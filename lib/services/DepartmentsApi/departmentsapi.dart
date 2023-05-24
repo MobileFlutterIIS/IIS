@@ -55,6 +55,7 @@ class  Employee
   String? calendarId;
   List<String>? academicDepartment;
   List<Job>? jobPositions;
+  String? jobPosition;
   int? id;
   String? urlId;
   String? fio;
@@ -177,7 +178,7 @@ class PhoneDto {
   String? auditory;
   String? buildingAddress;
   List<Department>? departments;
-  List<Post>? employees;
+  List<Employee>? employees;
   String? note;
   List<String>? phones;
 

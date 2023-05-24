@@ -40,6 +40,7 @@ class DepartmentList extends StatelessWidget {
               {
                 return GestureDetector(
                   onTap: (){
+                    if (place != "NOOPEN")
                     showDialog(context: context, builder: (BuildContext context) => createdialog (department[index]));
                   },
                   child: Card(
@@ -58,8 +59,9 @@ class DepartmentList extends StatelessWidget {
                         Container(
                           width: 250,
                           child: Column(children: [
-                            Text('${department[index].firstName!} ${department[index].middleName!} ${department[index].lastName!}', style: TextStyle(fontSize: 20),),
-                            Text(getPlace(department[index]),style: TextStyle(fontSize: 10),),
+                            Text(department[index].fio != null? '${department[index].fio!}' : '${department[index].firstName!} ${department[index].middleName!} ${department[index].lastName!}' ,
+                              style: TextStyle(fontSize: 20),),
+                            Text((department[index].jobPositions != null? getPlace(department[index]) : department[index].jobPosition!),style: TextStyle(fontSize: 10),),
                           ],),
                         )
                        // Text(department[index].rank!),
@@ -99,7 +101,7 @@ AlertDialog createdialog (Employee post)
   return AlertDialog(
     //backgroundColor: Colors.grey[900],
     scrollable: true,
-    title: Text('${post.firstName!} ${post.middleName!} ${post.lastName!}'),
+    title: post.firstName!= null ? Text('${post.firstName!} ${post.middleName!} ${post.lastName!}') : Text('${post.fio!}'),
     content:
            Padding(
             padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),

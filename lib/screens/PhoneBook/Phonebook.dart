@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iis/services/DepartmentsApi/departmentsapi.dart';
 import 'package:iis/services/DepartmentsApi/DepartmentsManager.dart';
 import 'package:logger/logger.dart';
+import 'package:iis/screens/Departments/DepartmenList.dart';
 
 final logger = Logger();
 
@@ -18,7 +19,7 @@ class _PhonebookState extends State<Phonebook> {
   final controller = ScrollController();
   final controller2 = TextEditingController();
   String CurText = "э";
-  double cardheight = 50;
+  double cardheight = 200;
   int max = 0;
   int page = 1;
   List<PhoneDto> Visiblephones = [];
@@ -142,17 +143,25 @@ class _PhonebookState extends State<Phonebook> {
                                 child: Card(
                                     child: Padding(
                                   padding: const EdgeInsets.only(left: 16.0),
-                                  child: Text(
-                                    ///
-                                    /// TODO
-                                    /// not all info, finish + infinite load
-                                    ///
-                                    Visiblephones[index].auditory!,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'NotoSerif',
-                                    ),
-                                  ),
+                                  child: Column
+                                    (
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      buildphones(Visiblephones[index].phones!),
+                                      Divider(),
+                                      Text('${Visiblephones[index].auditory!}, ${Visiblephones[index].buildingAddress!}'),
+                                      buildDepartments(Visiblephones[index].departments!),
+                                      Text(Visiblephones[index].departments!.last.name!,textAlign: TextAlign.center,),
+                                      TextButton(onPressed: (){
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DepartmentList(department: Visiblephones[index].employees!,place: "NOOPEN"),
+                                            ));
+                                      }, child: Text("Посмотреть Состав")),
+                                      Text(Visiblephones[index].note!= null ? Visiblephones[index].note! : ''),
+                                    ],
+                                  )
                                 )));
                           } else {
                             if (index == max){
@@ -170,4 +179,20 @@ class _PhonebookState extends State<Phonebook> {
           ],
         ),
       ));
+}
+
+Text buildphones(List<String> phones)
+{
+  String res = phones[0];
+  for (int i = 1; i < phones.length;i++)
+    res+= '\n' + phones[i];
+  return Text(res,style: TextStyle(fontSize: 20),);
+}
+
+Text buildDepartments(List<Department> dep)
+{
+  String res = dep[0].abbrev!;
+  for (int i = 1; i < dep.length;i++)
+    res+= ' / ' + dep[i].abbrev!;
+  return Text(res,);
 }

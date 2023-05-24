@@ -43,7 +43,7 @@ Employee _$EmployeeFromJson(Map<String, dynamic> json) => Employee(
       json['id'] as int?,
       json['urlId'] as String?,
       json['fio'] as String?,
-    );
+    )..jobPosition = json['jobPosition'] as String?;
 
 Map<String, dynamic> _$EmployeeToJson(Employee instance) => <String, dynamic>{
       'firstName': instance.firstName,
@@ -58,6 +58,7 @@ Map<String, dynamic> _$EmployeeToJson(Employee instance) => <String, dynamic>{
       'calendarId': instance.calendarId,
       'academicDepartment': instance.academicDepartment,
       'jobPositions': instance.jobPositions,
+      'jobPosition': instance.jobPosition,
       'id': instance.id,
       'urlId': instance.urlId,
       'fio': instance.fio,
@@ -175,7 +176,7 @@ PhoneDto _$PhoneDtoFromJson(Map<String, dynamic> json) => PhoneDto(
           ?.map((e) => Department.fromJson(e as Map<String, dynamic>))
           .toList(),
       (json['employees'] as List<dynamic>?)
-          ?.map((e) => Post.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Employee.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['note'] as String?,
       (json['phones'] as List<dynamic>?)?.map((e) => e as String).toList(),
