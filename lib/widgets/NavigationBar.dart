@@ -66,16 +66,16 @@ class _MyNavBar extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     final tabs = <Widget>[
-      Column(children: [IconButton(icon: Icon(Icons.schedule),onPressed: () {collapse();setState(() {pageNum = 0;});},), AnimatedOpacity(child: Text('Расписание',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: Icon(Icons.book),onPressed: () {collapse();setState(() {pageNum = 1;});},), AnimatedOpacity(child: Text('Дисциплины',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: Icon(Icons.people),onPressed: () {collapse();setState(() {pageNum = 2;});},), AnimatedOpacity(child: Text('Студенты',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: Icon(Icons.person),onPressed: () {collapse();setState(() {pageNum = 3;});},), AnimatedOpacity(child: Text('Аккаунт',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: Icon(Icons.star_rate),onPressed: () {collapse(); setState(() {pageNum = 4;} );},), AnimatedOpacity(child: Text('Рейтинг',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      //Column(children: [IconButton(icon: Icon(Icons.settings),onPressed: () {collapse();setState(() {pageNum = 5;});},), AnimatedOpacity(child: Text('Найстройки',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: Icon(Icons.schema),onPressed: () {collapse();setState(() {pageNum = 6;});},), AnimatedOpacity(child: Text('Расписание Кафедр',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: Icon(Icons.home_filled),onPressed: () {collapse();setState(() {pageNum = 7;});},), AnimatedOpacity(child: Text('Подразделения',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: Icon(Icons.phone),onPressed: () {collapse();setState(() {pageNum = 8;});},), AnimatedOpacity(child: Text('Справочник',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: Icon(Icons.help_outline),onPressed: () {collapse();setState(() {pageNum = 9;});},), AnimatedOpacity(child: Text('Поддержка',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: Icon(Icons.schedule),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 0;});},), AnimatedOpacity(child: Text('Расписание',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: Icon(Icons.book),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 1;});},), AnimatedOpacity(child: Text('Дисциплины',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: Icon(Icons.people),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 2;});},), AnimatedOpacity(child: Text('Студенты',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: Icon(Icons.person),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 3;});},), AnimatedOpacity(child: Text('Аккаунт',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: Icon(Icons.star_rate),color: Theme.of(context).primaryColor,onPressed: () {collapse(); setState(() {pageNum = 4;} );},), AnimatedOpacity(child: Text('Рейтинг',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      //Column(children: [IconButton(icon: Icon(Icons.settings),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 5;});},), AnimatedOpacity(child: Text('Найстройки',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: Icon(Icons.schema),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 6;});},), AnimatedOpacity(child: Text('Расписание Кафедр',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: Icon(Icons.home_filled),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 7;});},), AnimatedOpacity(child: Text('Подразделения',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: Icon(Icons.phone),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 8;});},), AnimatedOpacity(child: Text('Справочник',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: Icon(Icons.help_outline),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 9;});},), AnimatedOpacity(child: Text('Поддержка',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
     ];
     return GestureDetector(
       onPanUpdate: (details) {
@@ -143,6 +143,7 @@ class _MyNavBar extends State<NavBar> {
                   (
                   duration: const Duration(milliseconds: 500),
                   child: IconButton(icon: Icon(arrowup ? (Icons.keyboard_arrow_up_outlined) : (Icons.keyboard_arrow_down_outlined)),
+                      color: Theme.of(context).primaryColor,
                       onPressed: (){
                         setState(() {
                          arrowup? open(): collapse();

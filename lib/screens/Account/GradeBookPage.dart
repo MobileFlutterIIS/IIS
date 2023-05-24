@@ -301,10 +301,24 @@ class _GradeBookPageState extends State<GradeBookPage> {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: const Color.fromRGBO(22, 49, 99, 0.9),
-          centerTitle: true,
-          title: const Text('Р Е Й Т И Н Г'),
+          toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+          leadingWidth: MediaQuery.of(context).size.width * 0.046,
+          title: Row(
+            children: const [
+              Text(
+                'Рейтинг',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'NotoSerif',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: Colors.transparent,
+          iconTheme: const IconThemeData(
+            color: Colors.black, // Цвет иконки
+          ),
         ),
         body: Column(
           children: [

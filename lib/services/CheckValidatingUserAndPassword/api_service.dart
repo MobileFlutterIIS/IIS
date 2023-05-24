@@ -121,5 +121,10 @@ abstract class ApiService {
   Future<List<DormReq>> getDormReqs(@Header('cookie') String cookie);
   @GET('dormitory-queue-application/privileges')
   Future<List<String>> getPriviliges(@Header('cookie') String cookie);
+  @GET('certificate/close')
+  Future<Certificate> removeCertificate(
+      @Query('id') int id,
+      @Header('cookie') String cookie
+      );
 }
 

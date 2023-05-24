@@ -29,10 +29,11 @@ StudentsRating _$StudentsRatingFromJson(Map<String, dynamic> json) =>
       (json['thirdAverage'] as num?)?.toDouble(),
       (json['thirdHours'] as num?)?.toDouble(),
       json['studentCardNumber'] as String?,
-    );
+    )..index = json['index'] as int?;
 
 Map<String, dynamic> _$StudentsRatingToJson(StudentsRating instance) =>
     <String, dynamic>{
+      'index': instance.index,
       'average': instance.average,
       'averageShift': instance.averageShift,
       'firstAverage': instance.firstAverage,

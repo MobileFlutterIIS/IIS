@@ -10,11 +10,30 @@ class AnouncementPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+        leadingWidth: MediaQuery.of(context).size.width * 0.046,
+        title: Row(
+          children: const [
+            Text(
+              'Объявления',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'NotoSerif',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(
+          color: Colors.black, // Цвет иконки
+        ),
+      ),
       body: Column(
        // height: MediaQuery.of(context).size.height,
        // width: MediaQuery.of(context).size.width,
         children: [
-          Text('Объявления'),
           Expanded(
             child: anouncement.length!= 0 ?ListView.builder(
               itemCount: anouncement.length,

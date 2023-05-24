@@ -142,17 +142,17 @@ class _NavBarAccountState extends State<NavBarAccount> {
   @override
   Widget build(BuildContext context){
     final tabs = <Widget>[
-      Column(children: [IconButton(icon: const Icon(Icons.person),onPressed: () {collapse(); setState(() {pageNum = 0;});},),AnimatedOpacity(child: Text('Профиль',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: const Icon(Icons.people_alt_outlined),onPressed: () {collapse();setState(() {pageNum = 1;});},),AnimatedOpacity(child: Text('Группа',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: const Icon(Icons.mark_as_unread),onPressed: () {collapse();setState(() {pageNum = 2;});},),AnimatedOpacity(child: Text('Объявления',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: const Icon(Icons.collections_bookmark_outlined),onPressed: () {collapse();setState(() {pageNum = 3;});},),AnimatedOpacity(child: Text('Учеба',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: const Icon(Icons.grade),onPressed: () {collapse();setState(() {pageNum = 4;});},),AnimatedOpacity(child: Text('Зачетка',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: const Icon(Icons.circle_outlined),onPressed: () {collapse();setState(() {pageNum = 5;});},),AnimatedOpacity(child: Text('Рейтинг',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: const Icon(Icons.access_time_rounded),onPressed: () {collapse();setState(() {pageNum = 6;});},),AnimatedOpacity(child: Text('Пропуски',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: const Icon(Icons.password),onPressed: () {collapse();setState(() {pageNum = 7;});},),AnimatedOpacity(child: Text('Смена пароля',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: const Icon(Icons.house_siding_outlined),onPressed: () {collapse();setState(() {pageNum = 8;});},),AnimatedOpacity(child: Text('Общежитие',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: const Icon(Icons.my_library_books_rounded),onPressed: () {collapse();setState(() {pageNum = 9;});},),AnimatedOpacity(child: Text('Диплом',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
-      Column(children: [IconButton(icon: const Icon(Icons.error_sharp),onPressed: () {collapse();setState(() {pageNum = 10;});},),AnimatedOpacity(child: Text('Взыскания',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.person),color: Theme.of(context).primaryColor,onPressed: () {collapse(); setState(() {pageNum = 0;});},),AnimatedOpacity(child: Text('Профиль',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.people_alt_outlined),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 1;});},),AnimatedOpacity(child: Text('Группа',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.mark_as_unread),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 2;});},),AnimatedOpacity(child: Text('Объявления',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.collections_bookmark_outlined),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 3;});},),AnimatedOpacity(child: Text('Учеба',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.grade),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 4;});},),AnimatedOpacity(child: Text('Зачетка',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.circle_outlined),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 5;});},),AnimatedOpacity(child: Text('Рейтинг',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.access_time_rounded),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 6;});},),AnimatedOpacity(child: Text('Пропуски',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.password),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 7;});},),AnimatedOpacity(child: Text('Смена пароля',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.house_siding_outlined),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 8;});},),AnimatedOpacity(child: Text('Общежитие',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.my_library_books_rounded),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 9;});},),AnimatedOpacity(child: Text('Диплом',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
+      Column(children: [IconButton(icon: const Icon(Icons.error_sharp),color: Theme.of(context).primaryColor,onPressed: () {collapse();setState(() {pageNum = 10;});},),AnimatedOpacity(child: Text('Взыскания',style: TextStyle(fontSize: 10),) ,opacity: textvisible? 1.0: 0.0, duration: Duration(milliseconds: 500))]),
     ];
     return FutureBuilder(
       future: initall(),
@@ -238,6 +238,7 @@ class _NavBarAccountState extends State<NavBarAccount> {
                           (
                           duration: const Duration(milliseconds: 500),
                           child: IconButton(
+                          color: Theme.of(context).primaryColor,
                             icon: Icon(arrowup
                                 ? (Icons.keyboard_arrow_up_outlined)
                                 : (Icons.keyboard_arrow_down_outlined)),

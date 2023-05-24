@@ -18,10 +18,24 @@ class _MarkBookPageState extends State<MarkBookPage> {
       length: markBook.markPages!.length,
       child: Scaffold(
         appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: const Color.fromRGBO(22, 49, 99, 0.9),
-          centerTitle: true,
-          title: const Text('З А Ч Е Т К А'),
+          toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+          leadingWidth: MediaQuery.of(context).size.width * 0.046,
+          title: Row(
+            children: const [
+              Text(
+                'Зачетка',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'NotoSerif',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: Colors.transparent,
+          iconTheme: const IconThemeData(
+            color: Colors.black, // Цвет иконки
+          ),
         ),
         body: Column(
           children: [

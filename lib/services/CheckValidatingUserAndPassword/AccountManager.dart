@@ -246,6 +246,17 @@ class AccountManager
     }
   }
 
+  static Future<Certificate?> RemoveCertificate(int id) async{
+    if (cookie == '' || cookie == null) return null;
+    try {
+      final response = await apiService.removeCertificate(id,cookie);
+      // print(response.toString());
+      return response;
+    } on DioError catch (e) {
+      return null;
+    }
+  }
+
   static Future<List<String>?> GetDebts() async{
     if (cookie == '' || cookie == null) return null;
     try {

@@ -31,10 +31,24 @@ class _GroupInfoPageState extends State<GroupInfoPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: Colors.brown[200],
-          centerTitle: true,
-          title: Text('Г Р У П П А'),
+          toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+          leadingWidth: MediaQuery.of(context).size.width * 0.046,
+          title: Row(
+            children: const [
+              Text(
+                'Группа',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'NotoSerif',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: Colors.transparent,
+          iconTheme: const IconThemeData(
+            color: Colors.black, // Цвет иконки
+          ),
         ),
         body: Builder(
           builder: (context) {

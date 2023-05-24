@@ -10,10 +10,30 @@ class Penalties extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(body: Container(child: Column(
+    return SafeArea(child: Scaffold(
+      appBar: AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+        leadingWidth: MediaQuery.of(context).size.width * 0.046,
+        title: Row(
+          children: const [
+            Text(
+              'Взыскания',
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'NotoSerif',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(
+          color: Colors.black, // Цвет иконки
+        ),
+      ),
+      body: Container(child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text('Взыскания'),
         Expanded(child: penalties.length !=0 ?ListView.builder(
           itemCount: penalties.length,
              itemBuilder: (context,index) {

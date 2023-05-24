@@ -25,17 +25,52 @@ class _StudyPageState extends State<StudyPage> {
   /// 3) добавить отмену справки
   /// 4) долги и доты
   ///
+  /// +
+  ///
+  /// тут немного RoflanEbalo по коду (да вот прям под этим комментом)
+  ///
+  static List<Certificate>? certificates ;
+  static List<MarkSheet>? marksheets;
 
+  Future<void> updateCertificates () async
+  {
+    final newcerts = (await AccountManager.UserCetificate());
+   //marksheets = (await AccountManager.UserMarkSheets());
+    setState(() {
+      certificates = newcerts;
+    });
+  }
+
+  @override
+  void initState() {
+   certificates = widget.certificate;
+   marksheets = widget.marksheet ;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.brown[200],
-        centerTitle: true,
-        title: Text('У Ч Е Б А'),
-      ),
+        appBar: AppBar(
+          toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+          leadingWidth: MediaQuery.of(context).size.width * 0.046,
+          title: Row(
+            children: const [
+              Text(
+                'Учеба',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'NotoSerif',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: Colors.transparent,
+          iconTheme: const IconThemeData(
+            color: Colors.black, // Цвет иконки
+          ),
+        ),
       body: SingleChildScrollView(
       child: Container(
         child: Column
@@ -86,13 +121,13 @@ class _StudyPageState extends State<StudyPage> {
                       ),
                       child: ListView.builder(
                         //physics: NeverScrollableScrollPhysics(),
-                          itemCount: widget.marksheet.length,
+                          itemCount: marksheets!.length,
                           padding: const EdgeInsets.all(8),
                           itemBuilder: (context,index)
                           {
                             return Container(
                               child: Card(
-                                color: (widget.marksheet![index].status! == 'напечатана'? Color.fromRGBO(148, 166, 119, 0.9) : Color.fromRGBO(255, 255, 255, 0.9)),
+                                color: (marksheets![index].status! == 'напечатана'? Color.fromRGBO(148, 166, 119, 0.9) : Color.fromRGBO(255, 255, 255, 0.9)),
                                 elevation: 0.0,
                                 shape: const RoundedRectangleBorder(
                                   side: BorderSide(
@@ -107,32 +142,32 @@ class _StudyPageState extends State<StudyPage> {
                                     //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
                                       const SizedBox(height: 10,),
-                                      Text('Дата Создания ${widget.marksheet![index].createDate!}'),
+                                      Text('Дата Создания ${marksheets![index].createDate!}'),
                                       const SizedBox(height: 5,),
-                                      Text('Предмет ${widget.marksheet![index].subject!.abbrev!}'
-                                          '(${widget.marksheet![index].subject!.lessonTypeAbbrev!})'
-                                          '${widget.marksheet![index].subject!.term} семестр'),
+                                      Text('Предмет ${marksheets![index].subject!.abbrev!}'
+                                          '(${marksheets![index].subject!.lessonTypeAbbrev!})'
+                                          '${marksheets![index].subject!.term} семестр'),
                                       const SizedBox(height: 5,),
-                                      Text('Преподаватель ${widget.marksheet![index].employee!.fio!}'),
+                                      Text('Преподаватель ${marksheets![index].employee!.fio!}'),
                                       const SizedBox(height: 5,),
                                       ///
                                       /// TODO
                                       ///
-                                      widget.marksheet![index].absentDate != null?
+                                      marksheets![index].absentDate != null?
                                       Text(
-                                      'Дата пропуска ${widget.marksheet![index].employee!.fio!}'
+                                      'Дата пропуска ${marksheets![index].employee!.fio!}'
                                           ): SizedBox(),
                                       const SizedBox(height: 5,),
-                                      Text('Статус ${widget.marksheet![index].status!}'),
+                                      Text('Статус ${marksheets![index].status!}'),
                                       const SizedBox(height: 5,),
-                                      widget.marksheet![index].rejectionReason != null?
+                                      marksheets![index].rejectionReason != null?
                                       Text(
-                                          'Причина отказа ${widget.marksheet![index].rejectionReason!}'
+                                          'Причина отказа ${marksheets![index].rejectionReason!}'
                                       ): SizedBox(),
                                       const SizedBox(height: 5,),
-                                      widget.marksheet![index].price != null?
+                                      marksheets![index].price != null?
                                       Text(
-                                          'Цена ${widget.marksheet![index].price}'
+                                          'Цена ${marksheets![index].price}'
                                       ): SizedBox(),
                                     ],
                                   ),
@@ -163,7 +198,7 @@ class _StudyPageState extends State<StudyPage> {
                                 builder: (BuildContext context) {
                                   return OrderCertificate();
                                 }
-                            );
+                            ).then((_) => updateCertificates());
                     },
                     child: Text('Заказать справку'),
                   style: ButtonStyle(
@@ -196,13 +231,13 @@ class _StudyPageState extends State<StudyPage> {
                       ),
                   child: ListView.builder(
                       //physics: NeverScrollableScrollPhysics(),
-                      itemCount: widget.certificate.length,
+                      itemCount: certificates!.length,
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context,index)
                       {
                         return Container(
                           child: Card(
-                            color: (widget.certificate[index].status! == 1? Color.fromRGBO(148, 166, 119, 0.9) : Color.fromRGBO(172, 118, 116, 0.9)),
+                            color: (certificates![index].status! == 1? Colors.green : certificates![index].status! == 2? Colors.yellow: Colors.red),
                             elevation: 0.0,
                             shape: const RoundedRectangleBorder(
                               side: BorderSide(
@@ -217,16 +252,19 @@ class _StudyPageState extends State<StudyPage> {
                                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   const SizedBox(height: 10,),
-                                   Text('Дата заказа ${widget.certificate[index].dateOrder!}'),
+                                   Text('Дата заказа ${certificates![index].dateOrder!}'),
                                    const SizedBox(height: 5,),
-                                   Text('Место предъявления ${widget.certificate[index].provisionPlace!}'),
+                                   Text('Место предъявления ${certificates![index].provisionPlace!}'),
                                    ///
                                   /// хз какие статусы имеются, надо искать докум
                                   ///
                                    const SizedBox(height: 5,),
-                                   Text('Статус ${widget.certificate[index].status!}'),
+                                   Text('${certificates![index].rejectionReason != null? 'Причина отказа ${certificates![index].rejectionReason!}' : ''}'),
                                    const SizedBox(height: 5,),
-                                   Text('${widget.certificate[index].rejectionReason != null? 'Причина отказа ${widget.certificate[index].rejectionReason!}' : ''}'),
+                                  certificates![index].status! == 2? IconButton(onPressed: () async{
+                                    AccountManager.RemoveCertificate(certificates![index].id!);
+                                    updateCertificates();
+                                   }, icon: Icon(Icons.highlight_remove_outlined)):Text('Статус ${certificates![index].status == 1? "Напечатана" : "Отменена"}'),
                                 ],
                               ),
                             ) ,
@@ -425,6 +463,7 @@ class _OrderCertificateState extends State<OrderCertificate> {
                   }),
                 ),
                 ///
+                /// TODO
                 /// Аккуратнее со стилями текста тут
                 ///
                 RichText(text: TextSpan(text: 'Правила заказа\n',
@@ -445,7 +484,6 @@ class _OrderCertificateState extends State<OrderCertificate> {
                     onPressed: Placevalue != null ? () async{
                  var str = await AccountManager.SentCertificateRequest(spinvalue, Typevalue!, Placevalue!.name!, Commentcontroller.value.text);
                  logger.d(str);
-
                 }
                 : null,
                     child: Text('Заказать'),
