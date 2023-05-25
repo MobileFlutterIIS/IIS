@@ -33,9 +33,9 @@ class _MarkBookPageState extends State<MarkBookPage> {
             ],
           ),
           backgroundColor: Colors.transparent,
-          iconTheme: const IconThemeData(
-            color: Colors.black, // Цвет иконки
-          ),
+          // iconTheme: const IconThemeData(
+          //   color: Colors.black, // Цвет иконки
+          // ),
         ),
         body: Column(
           children: [
@@ -46,8 +46,9 @@ class _MarkBookPageState extends State<MarkBookPage> {
                   child: Text(
                     '${index + 1}',
                     style: const TextStyle(
-                      color: Color.fromRGBO(22, 49, 99, 0.9),
+                      fontFamily: 'NotoSerif',
                       fontSize: 18.0,
+                      color: Colors.black
                     ),
                   ),
                 );
@@ -61,52 +62,61 @@ class _MarkBookPageState extends State<MarkBookPage> {
                           ?Container(
                             child: buildListView(widget.markBook.markPages![1]!),
                           )
-                          :Text('Экзамены пока не известны'),
+                          :Text('Экзамены пока не известны',
+                      style: TextStyle(fontFamily: 'NotoSerif',),),
                       widget.markBook.markPages!.length>=2
                           ?Container(
                             child: buildListView(widget.markBook.markPages![2]!),
                           )
-                          :Text('Экзамены пока не известны'),
+                          :Text('Экзамены пока не известны',
+                      style: TextStyle(fontFamily: 'NotoSerif',),),
                       widget.markBook.markPages!.length>=3
                           ?Container(
                         child: buildListView(widget.markBook.markPages![3]!),
                       )
-                          :Text('Экзамены пока не известны'),
+                          :Text('Экзамены пока не известны',
+                      style: TextStyle(fontFamily: 'NotoSerif',),),
                       widget.markBook.markPages!.length>=4
                           ?Container(
                         child: buildListView(widget.markBook.markPages![4]!),
                       )
-                          :Text('Экзамены пока не известны'),
+                          :Text('Экзамены пока не известны', style: TextStyle(fontFamily: 'NotoSerif',),),
                       widget.markBook.markPages!.length>=5
                           ?Container(
                         child: buildListView(widget.markBook.markPages![5]!),
                       )
-                          :Text('Экзамены пока не известны'),
+                          :Text('Экзамены пока не известны',
+                      style: TextStyle(fontFamily: 'NotoSerif',),),
                       widget.markBook.markPages!.length>=6
                           ?Container(
                         child: buildListView(widget.markBook.markPages![6]!),
                       )
-                          :Text('Экзамены пока не известны'),
+                          :Text('Экзамены пока не известны',
+                      style: TextStyle(fontFamily: 'NotoSerif',),),
                       widget.markBook.markPages!.length>=7
                           ?Container(
                         child: buildListView(widget.markBook.markPages![7]!),
                       )
-                          :Text('Экзамены пока не известны'),
+                          :Text('Экзамены пока не известны',
+                      style: TextStyle(fontFamily: 'NotoSerif',),),
                       widget.markBook.markPages!.length>=8
                           ?Container(
                         child: buildListView(widget.markBook.markPages![8]!),
                       )
-                          :Text('Экзамены пока не известны'),
+                          :Text('Экзамены пока не известны',
+                      style: TextStyle(fontFamily: 'NotoSerif',),),
                       widget.markBook.markPages!.length>=9
                           ?Container(
                         child: buildListView(widget.markBook.markPages![9]!),
                       )
-                          :Text('Экзамены пока не известны'),
+                          :Text('Экзамены пока не известны',
+                      style: TextStyle(fontFamily: 'NotoSerif',),),
                       widget.markBook.markPages!.length>=10
                           ?Container(
                         child: buildListView(widget.markBook.markPages![10]!),
                       )
-                          :Text('Экзамены пока не известны'),
+                          :Text('Экзамены пока не известны',
+                      style: TextStyle(fontFamily: 'NotoSerif',),),
                     ],
 
                 ),
@@ -137,7 +147,8 @@ class _MarkBookPageState extends State<MarkBookPage> {
                                   title: Text(
                                     simestre.marks![index].fullSubject!,
                                     style: const TextStyle(
-                                      color: Color.fromRGBO(22, 49, 99, 0.9),
+                                      // color: Colors.black,
+                                      fontFamily: 'NotoSerif',
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
                                     ),
@@ -153,12 +164,16 @@ class _MarkBookPageState extends State<MarkBookPage> {
                                             ?simestre.marks![index].teacher!
                                             :'Преподаватель пока не известен'
                                             :'Преподаватель пока не известен',
+                                        style: TextStyle(
+                                          fontFamily: 'NotoSerif',
+                                        ),
                                       ),
                                       const SizedBox(height: 10,),
                                       Row(
                                         children: [
                                           const Text(
-                                            'Средняя оценка: '
+                                            'Средняя оценка: ',
+                                            style: TextStyle(fontFamily: 'NotoSerif',),
                                           ),
                                           Text(
                                             simestre.marks![index].commonMark!=null
@@ -166,6 +181,7 @@ class _MarkBookPageState extends State<MarkBookPage> {
                                                 :'??',
                                             style: const TextStyle(
                                               fontStyle: FontStyle.italic,
+                                              fontFamily: 'NotoSerif',
                                             ),
                                           ),
                                         ],
@@ -175,6 +191,7 @@ class _MarkBookPageState extends State<MarkBookPage> {
                                         children: [
                                           const Text(
                                             'Средний процент пересдач: ',
+                                            style: TextStyle(fontFamily: 'NotoSerif',),
                                           ),
                                           Text(
                                             simestre.marks![index].commonRetakes!=null
@@ -184,12 +201,14 @@ class _MarkBookPageState extends State<MarkBookPage> {
                                                 :'0',
                                             style: const TextStyle(
                                               fontStyle: FontStyle.italic,
+                                              fontFamily: 'NotoSerif',
                                             ),
                                           ),
                                           const Text(
                                             '%',
                                             style: TextStyle(
                                               fontStyle: FontStyle.italic,
+                                              fontFamily: 'NotoSerif',
                                             ),
                                           ),
                                         ],
@@ -208,6 +227,7 @@ class _MarkBookPageState extends State<MarkBookPage> {
                                                 :'??',
                                             style: const TextStyle(
                                               fontStyle: FontStyle.italic,
+                                              fontFamily: 'NotoSerif',
                                             ),
                                           ),
                                         ],
@@ -224,7 +244,7 @@ class _MarkBookPageState extends State<MarkBookPage> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10.0),
                                       ),
-                                      child: const Text('OK'),
+                                      child: const Text('OK', style: TextStyle(fontFamily: 'NotoSerif',),),
                                     ),
                                   ],
                                 );
@@ -250,8 +270,10 @@ class _MarkBookPageState extends State<MarkBookPage> {
                                     Text(
                                       simestre.marks![index].fullSubject!,
                                       style: const TextStyle(
-                                        color: Color.fromRGBO(22, 49, 99, 0.9),
+                                        //color: Color.fromRGBO(22, 49, 99, 0.9),
                                         letterSpacing: 2,
+                                        fontFamily: 'NotoSerif',
+                                        fontWeight: FontWeight.bold
                                       ),
                                       softWrap: true,
                                     ),
@@ -260,12 +282,15 @@ class _MarkBookPageState extends State<MarkBookPage> {
                                       children: [
                                         Text(
                                           simestre.marks![index].hours!.toString(),
+                                          style: TextStyle(fontFamily: 'NotoSerif',),
                                         ),
                                         Text(
                                           ' ч., ',
+                                          style: TextStyle(fontFamily: 'NotoSerif',),
                                         ),
                                         Text(
                                           simestre.marks![index].formOfControl!,
+                                          style: TextStyle(fontFamily: 'NotoSerif',),
                                         ),
                                       ],
                                     ),
@@ -274,17 +299,20 @@ class _MarkBookPageState extends State<MarkBookPage> {
                                         Text(
                                           simestre.marks![index].mark!=null
                                               ? 'Оценка: '+simestre.marks![index].mark!.toString()
-                                              : ''
+                                              : '',
+                                          style: TextStyle(fontFamily: 'NotoSerif',),
                                         ),
                                       ],
                                     ),
                                     Row(
                                       children: [
                                         Text(
-                                          'Пересдачи: '
+                                          'Пересдачи: ',
+                                          style: TextStyle(fontFamily: 'NotoSerif',),
                                         ),
                                         Text(
                                           simestre.marks![index].retakesCount!.toString(),
+                                          style: TextStyle(fontFamily: 'NotoSerif',),
                                         ),
                                       ],
                                     ),

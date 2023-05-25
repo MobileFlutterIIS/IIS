@@ -26,9 +26,9 @@ class AnouncementPage extends StatelessWidget {
           ],
         ),
         backgroundColor: Colors.transparent,
-        iconTheme: const IconThemeData(
-          color: Colors.black, // Цвет иконки
-        ),
+        // iconTheme: const IconThemeData(
+        //   color: Colors.black, // Цвет иконки
+        // ),
       ),
       body: Column(
        // height: MediaQuery.of(context).size.height,

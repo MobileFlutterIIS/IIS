@@ -27,9 +27,9 @@ class Penalties extends StatelessWidget {
           ],
         ),
         backgroundColor: Colors.transparent,
-        iconTheme: const IconThemeData(
-          color: Colors.black, // Цвет иконки
-        ),
+        // iconTheme: const IconThemeData(
+        //   color: Colors.black, // Цвет иконки
+        // ),
       ),
       body: Container(child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,9 +37,10 @@ class Penalties extends StatelessWidget {
         Expanded(child: penalties.length !=0 ?ListView.builder(
           itemCount: penalties.length,
              itemBuilder: (context,index) {
-              return Card(child: Text(penalties[index]),);
+              return Card(child: Text(penalties[index],
+              style: TextStyle(fontFamily: 'NotoSerif',),),);
             }
-        ): Center(child: Icon(Icons.error_outline_rounded))),
+        ): Center(child: const Icon(Icons.error_outline_rounded))),
       ],
     ) ,),));
   }

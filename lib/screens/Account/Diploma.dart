@@ -26,15 +26,20 @@ class Diploma extends StatelessWidget {
           ],
         ),
         backgroundColor: Colors.transparent,
-        iconTheme: const IconThemeData(
-          color: Colors.black, // Цвет иконки
-        ),
+        // iconTheme: const IconThemeData(
+        //   color: Colors.black, // Цвет иконки
+        // ),
       ),
       body: Column(
         children: [
-          Text('Дипломный проект'),
-          Text('Оставить заявку Вы сможете только на выпускном курсе.'),
-          ElevatedButton(onPressed: (){DiplomaReq();}, child: Text("Подать Заявку")),
+          Text('Дипломный проект',
+          style: TextStyle(fontFamily: 'NotoSerif', fontSize: 18,fontWeight: FontWeight.bold),),
+          const SizedBox(height: 10,),
+          Text('Оставить заявку Вы сможете только на выпускном курсе.',
+          style: TextStyle(fontFamily: 'NotoSerif',),),
+          const SizedBox(height: 10,),
+          ElevatedButton(onPressed: (){DiplomaReq();}, child: Text("Подать Заявку",
+          style: TextStyle(fontFamily: 'NotoSerif',),)),
           SizedBox(height: 10,),
           // Text('Производственная практика'),
           // ElevatedButton(onPressed: (){}, child: Text("Подать Заявку")),
@@ -68,7 +73,8 @@ class _DiplomaReqState extends State<DiplomaReq> {
         builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
           return Column(
             children: [
-              Text('Оформить заявку на дипломный проект'),
+              Text('Оформить заявку на дипломный проект',
+              style: TextStyle(fontFamily: 'NotoSerif',),),
 
             ],
           );

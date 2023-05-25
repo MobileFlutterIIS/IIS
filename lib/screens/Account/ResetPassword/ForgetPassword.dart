@@ -3,6 +3,7 @@ import 'package:iis/screens/Account/ResetPassword/ChoosingEmailOrPhonenumber.dar
 import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/ContactsToReset.dart';
 import 'package:retrofit/http.dart';
+import 'package:another_flushbar/flushbar.dart';
 
 class ForgetPassword extends StatefulWidget{
 
@@ -16,7 +17,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   final loginController = TextEditingController();
   ContactsToReset? contactsToReset;
 
-  void CheckingLogin() async{
+  Future<void> CheckingLogin() async{
     print(loginController.text);
     contactsToReset = await AccountManager.CheckPassword(loginController.text);
     print('get');
@@ -27,6 +28,18 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     }
     else{
       print('wrongLogin');
+      Flushbar(
+        backgroundColor: Theme.of(context).cardColor,
+        messageColor: Theme.of(context).hintColor,
+        message: "Ошибка! Не удалось найти аккаунт",
+        icon: Icon(
+          Icons.warning,
+          size: 28.0,
+          color:Theme.of(context).hintColor,
+        ),
+        duration: Duration(seconds: 3),
+        isDismissible: true,
+      )..show(context);
     }
   }
 

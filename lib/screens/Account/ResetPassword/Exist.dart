@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/ContactsToReset.dart';
 import 'package:iis/screens/Account/ResetPassword/SetNewPassword.dart';
+import 'package:another_flushbar/flushbar.dart';
 
 class Exist extends StatefulWidget{
   final String contactValue;
@@ -29,13 +30,25 @@ class _ExistState extends State<Exist> {
       contactValue+=contactVal[i];
     }
     contact = await AccountManager.PhoneNumberToResetPassword(contactValue, login);
-    if(contact!=null){
+    if(contact!=null && controller.text.length==7){
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => SetNewPassword(contactValue: contactValue, login: login,)
       ));
     }
     else{
       print("wrongMatch");
+      Flushbar(
+        backgroundColor: Theme.of(context).cardColor,
+        messageColor: Theme.of(context).hintColor,
+        message: "Ошибка! Неверно введен номер.",
+        icon: Icon(
+          Icons.warning,
+          size: 28.0,
+          color:Theme.of(context).hintColor,
+        ),
+        duration: Duration(seconds: 3),
+        isDismissible: true,
+      )..show(context);
     }
   }
 

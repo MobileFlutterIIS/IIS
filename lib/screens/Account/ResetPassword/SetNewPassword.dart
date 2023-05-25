@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart';
 import 'package:iis/screens/Account/UserLogin.dart';
+import 'package:another_flushbar/flushbar.dart';
 
 class SetNewPassword extends StatefulWidget{
   final String? contactValue;
@@ -23,11 +24,35 @@ class _SetNewPasswordState extends State<SetNewPassword> {
   void getCode(String contactValue, String login) async{
     if(passwordController.text=="" || repeatPasswordController.text==""){
       print("Надо ввести пароль");
+      Flushbar(
+        backgroundColor: Theme.of(context).cardColor,
+        messageColor: Theme.of(context).hintColor,
+        message: "Ошибка! Сперва введите пароль",
+        icon: Icon(
+          Icons.warning,
+          size: 28.0,
+          color:Theme.of(context).hintColor,
+        ),
+        duration: Duration(seconds: 3),
+        isDismissible: true,
+      )..show(context);
     }
     else{
       String? responce = await AccountManager.CodeToResetPassword(contactValue, login);
       if(responce==null){
         print("а э");
+        Flushbar(
+          backgroundColor: Theme.of(context).cardColor,
+          messageColor: Theme.of(context).hintColor,
+          message: "Ошибка??",
+          icon: Icon(
+            Icons.warning,
+            size: 28.0,
+            color:Theme.of(context).hintColor,
+          ),
+          duration: Duration(seconds: 3),
+          isDismissible: true,
+        )..show(context);
       }
     }
   }
@@ -41,14 +66,53 @@ class _SetNewPasswordState extends State<SetNewPassword> {
             login,
             passwordController.text
         );
-        Navigator.pop(context);
+        if(responce!=null) {
+          Navigator.pop(context);
+        } else {
+          Flushbar(
+            backgroundColor: Theme.of(context).cardColor,
+            messageColor: Theme.of(context).hintColor,
+            message: "Ошибка!",
+            icon: Icon(
+              Icons.warning,
+              size: 28.0,
+              color:Theme.of(context).hintColor,
+            ),
+            duration: Duration(seconds: 3),
+            isDismissible: true,
+          )..show(context);
+        }
       }
       else{
         print("Пароли не верны");
+        Flushbar(
+          backgroundColor: Theme.of(context).cardColor,
+          messageColor: Theme.of(context).hintColor,
+          message: "Ошибка! Сперва введите пароль",
+          icon: Icon(
+            Icons.warning,
+            size: 28.0,
+            color:Theme.of(context).hintColor,
+          ),
+          duration: Duration(seconds: 3),
+          isDismissible: true,
+        )..show(context);
       }
     }
     else{
       print("Надо ввести пароль");
+      Flushbar(
+        backgroundColor: Theme.of(context).cardColor,
+        messageColor: Theme.of(context).hintColor,
+        message: "Ошибка! Сперва введите пароль",
+        icon: Icon(
+          Icons.warning,
+          size: 28.0,
+          color:Theme.of(context).hintColor,
+        ),
+        duration: Duration(seconds: 3),
+        isDismissible: true,
+      )..show(context);
     }
   }
 

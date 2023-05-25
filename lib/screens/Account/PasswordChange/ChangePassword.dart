@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iis/widgets/LoginScreenComponents/Password.dart';
 import 'package:iis/screens/Account/PasswordChange/ConfirmButton.dart';
 import 'package:iis/services/CheckValidatingUserAndPassword/AccountManager.dart';
+import 'package:another_flushbar/flushbar.dart';
 
 class ChangePassword extends StatefulWidget{
   String password;
@@ -80,10 +81,21 @@ class _ChangePasswordState extends State<ChangePassword> {
   Widget build(BuildContext context){
     return Scaffold(
             appBar: AppBar(
-              elevation: 0.0,
-              backgroundColor: const Color.fromRGBO(22, 49, 99, 0.9),
-              centerTitle: true,
-              title: const Text('С М Е Н А  П А Р О Л Я'),
+              toolbarHeight: MediaQuery.of(context).size.height * 0.1046,
+              leadingWidth: MediaQuery.of(context).size.width * 0.046,
+              title: Row(
+                children: const [
+                  Text(
+                    'Смена пароля',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'NotoSerif',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              backgroundColor: Colors.transparent,
             ),
             body: SafeArea(
               child: Center(
@@ -117,11 +129,35 @@ class _ChangePasswordState extends State<ChangePassword> {
                             passwordOld.text, newPassword.text,
                             newPasswordRepeat.text) == 3) {
                           print('неверный старый');
+                          Flushbar(
+                            backgroundColor: Theme.of(context).cardColor,
+                            messageColor: Theme.of(context).hintColor,
+                            message: "Ошибка! Неверный старый пароль",
+                            icon: Icon(
+                              Icons.warning,
+                              size: 28.0,
+                              color:Theme.of(context).hintColor,
+                            ),
+                            duration: Duration(seconds: 3),
+                            isDismissible: true,
+                          )..show(context);
                         }
                         else if (newPasswordRepeatCorrectly(
                             passwordOld.text, newPassword.text,
                             newPasswordRepeat.text) == 2) {
                           print('неверный новый повтор');
+                          Flushbar(
+                            backgroundColor: Theme.of(context).cardColor,
+                            messageColor: Theme.of(context).hintColor,
+                            message: "Ошибка! Неверный повтор нового пароля",
+                            icon: Icon(
+                              Icons.warning,
+                              size: 28.0,
+                              color:Theme.of(context).hintColor,
+                            ),
+                            duration: Duration(seconds: 3),
+                            isDismissible: true,
+                          )..show(context);
                         }
                         else {
                           print('все ок');

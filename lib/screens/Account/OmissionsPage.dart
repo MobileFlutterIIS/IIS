@@ -29,21 +29,21 @@ class OmissionsPage extends StatelessWidget{
           ],
         ),
         backgroundColor: Colors.transparent,
-        iconTheme: const IconThemeData(
-          color: Colors.black, // Цвет иконки
-        ),
+        // iconTheme: const IconThemeData(
+        //   color: Colors.black, // Цвет иконки
+        // ),
       ),
       body: Column(
         children: [
           const SizedBox(height: 40,),
-          Padding(
+          const Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
               'Информация о справках',
               style: TextStyle(
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.bold,
                 fontSize: 20,
-                color: Color.fromRGBO(51, 40, 32, 0.9),
+                fontFamily: 'NotoSerif',
               ),
               textAlign: TextAlign.center,
             ),
@@ -58,7 +58,7 @@ class OmissionsPage extends StatelessWidget{
                       {
                         final sortedOmissions = _sortOmissionsByTerm(omissions);
                         return Container(
-                          height: 300,
+                          height: MediaQuery.of(context).size.height*0.2861,
                           width: MediaQuery.of(context).size.width - 20,
                           child: Card(
                             color: Colors.white,
@@ -67,7 +67,7 @@ class OmissionsPage extends StatelessWidget{
                               side: BorderSide(
                                 color: Colors.black12,
                               ),
-                              borderRadius: const BorderRadius.all(Radius.circular(12)),
+                              borderRadius: BorderRadius.all(Radius.circular(12)),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 20),
@@ -76,63 +76,51 @@ class OmissionsPage extends StatelessWidget{
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const SizedBox(height: 24,),
-                                  Text(
+                                  const Text(
                                     'Тип документа',
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w400,
-                                      color: Color.fromRGBO(51, 40, 32, 0.9),
+                                      fontFamily: 'NotoSerif',
                                     ),
                                   ),
                                   const SizedBox(height: 8,),
                                   Text(
                                     sortedOmissions[index].name!,
+                                    style: TextStyle(fontFamily: 'NotoSerif',),
                                   ),
                                   const SizedBox(height: 20,),
-                                  Text(
-                                    'Дата начала действия',
+                                  const Text(
+                                    'Время действия',
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w400,
-                                      color: Color.fromRGBO(51, 40, 32, 0.9),
+                                      fontFamily: 'NotoSerif',
                                     ),
                                   ),
                                   const SizedBox(height: 8,),
                                   Text(
-                                    sortedOmissions[index].dateFrom!.toString()
-                                        + ', ' +sortedOmissions[index].term! + 'семестр',
-                                  ),
-                                  const SizedBox(height: 20,),
-                                  Text(
-                                    'Дата окончания действия',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color.fromRGBO(51, 40, 32, 0.9),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8,),
-                                  Text(
-                                    sortedOmissions[index].dateTo!.toString()
-                                        + ', ' +sortedOmissions[index].term! + 'семестр',
+                                    sortedOmissions[index].term! + ' семестр',
+                                    style: TextStyle(fontFamily: 'NotoSerif',),
                                   ),
                                   const SizedBox(height: 20,),
                                   sortedOmissions[index].note != null
-                                  ? Text(
+                                  ? const Text(
                                     'Примечание',
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w400,
-                                      color: Color.fromRGBO(51, 40, 32, 0.9),
+                                      fontFamily: 'NotoSerif',
                                     ),
                                   )
-                                  : Text(''),
+                                  : const Text(''),
                                   const SizedBox(height: 8,),
                                   sortedOmissions[index].note != null
                                   ? Text(
                                     sortedOmissions[index].note!,
+                                    style: TextStyle(fontFamily: 'NotoSerif',),
                                   )
-                                      : Text(''),
+                                      : const Text(''),
                                 ],
                               ),
                             ),

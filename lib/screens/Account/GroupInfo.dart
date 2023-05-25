@@ -46,9 +46,9 @@ class _GroupInfoPageState extends State<GroupInfoPage> {
             ],
           ),
           backgroundColor: Colors.transparent,
-          iconTheme: const IconThemeData(
-            color: Colors.black, // Цвет иконки
-          ),
+          // iconTheme: const IconThemeData(
+          //   color: Colors.black, // Цвет иконки
+          // ),
         ),
         body: Builder(
           builder: (context) {
@@ -73,7 +73,7 @@ class _GroupInfoPageState extends State<GroupInfoPage> {
                                     side: BorderSide(
                                       color: Colors.black12,
                                     ),
-                                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                    borderRadius: BorderRadius.all(Radius.circular(12)),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 20),
@@ -83,14 +83,19 @@ class _GroupInfoPageState extends State<GroupInfoPage> {
                                       children: [
                                         const SizedBox(height: 10,),
                                         Text('${widget.group.groupInfoStudentDto![index].position != null && widget.group.groupInfoStudentDto![index].position != "" ? '${widget.group.groupInfoStudentDto![index].position!}: ' : ''}${widget.group.groupInfoStudentDto![index].fio!}',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 20,
+                                        style: const TextStyle(
+                                          fontFamily: 'NotoSerif',
+                                          fontSize: 20
                                         ),),
                                         const SizedBox(height: 8,),
                                         Row(children: [IconButton(onPressed: () async {
                                           await launch("tel://${widget.group.groupInfoStudentDto![index].phone!}");
-                                        }, icon: Icon(Icons.phone)),Text('${widget.group.groupInfoStudentDto![index].phone!}')]),
+                                        }, icon: const Icon(Icons.phone)),Text(
+                                            '${widget.group.groupInfoStudentDto![index].phone!}',
+                                          style: const TextStyle(
+                                            fontFamily: 'NotoSerif',
+                                          ),
+                                        )]),
                                         const SizedBox(height: 4,),
                                         Row(children: [IconButton(onPressed: () async  {
                                           await Clipboard.setData(ClipboardData(text: widget.group.groupInfoStudentDto![index].email!)).then((_){
@@ -108,7 +113,12 @@ class _GroupInfoPageState extends State<GroupInfoPage> {
                                               isDismissible: true,
                                             )..show(context);
                                           });
-                                        }, icon: Icon(Icons.mail)),Text('${widget.group.groupInfoStudentDto![index].email!}')]),
+                                        }, icon: const Icon(Icons.mail)),Text(
+                                            '${widget.group.groupInfoStudentDto![index].email!}',
+                                          style: TextStyle(
+                                            fontFamily: 'NotoSerif',
+                                          ),
+                                        )]),
                                         const SizedBox(height: 20,),
                                       ],
                                     ),

@@ -69,25 +69,25 @@ class _StudyPageState extends State<StudyPage> {
             ],
           ),
           backgroundColor: Colors.transparent,
-          iconTheme: const IconThemeData(
-            color: Colors.black, // Цвет иконки
-          ),
+          // iconTheme: const IconThemeData(
+          //   color: Colors.black, // Цвет иконки
+          // ),
         ),
       body: SingleChildScrollView(
       child: Container(
         child: Column
           (
           children: [
-            const SizedBox(height: 40,),
+            //const SizedBox(height: 40,),
             Column(
               children: [
                 const SizedBox(height: 30,),
-                Text(
+                const Text(
                     'Ведомостички',
                   style: TextStyle(
+                    fontFamily: 'NotoSerif',
                     fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: Color.fromRGBO(51, 40, 32, 0.9),
+                    fontWeight: FontWeight.bold
                   ),
                 ),
                 const SizedBox(height: 5,),
@@ -100,17 +100,22 @@ class _StudyPageState extends State<StudyPage> {
                           }
                       ).then((_) => updateCertificates());
                     },
-                    child: Text('Заказать ведомостичку'),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return Colors.blueAccent.withOpacity(0.5);
-                        }
-                        return Color.fromRGBO(51, 40, 32, 0.9);
-                      },
+                    child: const Text(
+                        'Заказать ведомостичку',
+                      style: TextStyle(
+                        fontFamily: 'NotoSerif',
+                      ),
                     ),
-                  ),
+                  // style: ButtonStyle(
+                  //   // backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                  //   //       (Set<MaterialState> states) {
+                  //   //     if (states.contains(MaterialState.pressed)) {
+                  //   //       return Colors.blueAccent.withOpacity(0.5);
+                  //   //     }
+                  //   //     return Color.fromRGBO(51, 40, 32, 0.9);
+                  //   //   },
+                  //   // ),
+                  // ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
@@ -136,13 +141,13 @@ class _StudyPageState extends State<StudyPage> {
                           {
                             return Container(
                               child: Card(
-                                color: (marksheets![index].status! == 'напечатана'? Color.fromRGBO(148, 166, 119, 0.9) : Color.fromRGBO(255, 255, 255, 0.9)),
+                                color: (marksheets![index].status! == 'напечатана'? const Color.fromRGBO(148, 166, 119, 0.9) : const Color.fromRGBO(255, 255, 255, 0.9)),
                                 elevation: 0.0,
                                 shape: const RoundedRectangleBorder(
                                   side: BorderSide(
                                     color: Colors.black12,
                                   ),
-                                  borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                  borderRadius: BorderRadius.all(Radius.circular(12)),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 20),
@@ -151,33 +156,37 @@ class _StudyPageState extends State<StudyPage> {
                                     //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
                                       const SizedBox(height: 10,),
-                                      Text('Дата Создания ${marksheets![index].createDate!}'),
+                                      Text('Дата Создания ${marksheets![index].createDate!}',
+                                      style: const TextStyle(fontFamily: 'NotoSerif',),),
                                       const SizedBox(height: 5,),
                                       Text('Предмет ${marksheets![index].subject!.abbrev!}'
                                           '(${marksheets![index].subject!.lessonTypeAbbrev!})'
-                                          '${marksheets![index].subject!.term} семестр'),
+                                          '${marksheets![index].subject!.term} семестр',
+                                      style: const TextStyle(fontFamily: 'NotoSerif',),),
                                       const SizedBox(height: 5,),
-                                      Text('Преподаватель ${marksheets![index].employee!.fio!}'),
+                                      Text('Преподаватель ${marksheets![index].employee!.fio!}',
+                                      style: const TextStyle(fontFamily: 'NotoSerif',),),
                                       const SizedBox(height: 5,),
                                       ///
                                       /// TODO
                                       ///
                                       marksheets![index].absentDate != null?
                                       Text(
-                                      'Дата пропуска ${marksheets![index].employee!.fio!}'
-                                          ): SizedBox(),
+                                      'Дата пропуска ${marksheets![index].employee!.fio!}',
+                                      style: const TextStyle(fontFamily: 'NotoSerif',),    ): SizedBox(),
                                       const SizedBox(height: 5,),
-                                      Text('Статус ${marksheets![index].status!}'),
+                                      Text('Статус ${marksheets![index].status!}',
+                                      style: const TextStyle(fontFamily: 'NotoSerif',),),
                                       const SizedBox(height: 5,),
                                       marksheets![index].rejectionReason != null?
                                       Text(
-                                          'Причина отказа ${marksheets![index].rejectionReason!}'
-                                      ): SizedBox(),
+                                          'Причина отказа ${marksheets![index].rejectionReason!}',
+                                      style: const TextStyle(fontFamily: 'NotoSerif',),): SizedBox(),
                                       const SizedBox(height: 5,),
                                       marksheets![index].price != null?
                                       Text(
-                                          'Цена ${marksheets![index].price}'
-                                      ): SizedBox(),
+                                          'Цена ${marksheets![index].price}',
+                                      style: const TextStyle(fontFamily: 'NotoSerif',),): SizedBox(),
                                     ],
                                   ),
                                 ) ,
@@ -189,14 +198,15 @@ class _StudyPageState extends State<StudyPage> {
                 ),
               ],
             ),
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             Column(
               children: [
-                Text(
+                const Text(
                     'Справки',
                   style: TextStyle(
+                    fontFamily: 'NotoSerif',
                     fontSize: 18,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.bold
                     //color: Color.fromRGBO(51, 40, 32, 0.9),
                   ),
                 ),
@@ -209,17 +219,18 @@ class _StudyPageState extends State<StudyPage> {
                                 }
                             ).then((_) => updateCertificates());
                     },
-                    child: Text('Заказать справку'),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return Colors.blueAccent.withOpacity(0.5);
-                        }
-                        return Color.fromRGBO(51, 40, 32, 0.9);
-                      },
-                    ),
-                  ),
+                    child: const Text('Заказать справку',
+                    style: TextStyle(fontFamily: 'NotoSerif',),),
+                  // style: ButtonStyle(
+                  //   backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                  //         (Set<MaterialState> states) {
+                  //       if (states.contains(MaterialState.pressed)) {
+                  //         return Colors.blueAccent.withOpacity(0.5);
+                  //       }
+                  //       return Color.fromRGBO(51, 40, 32, 0.9);
+                  //     },
+                  //   ),
+                  // ),
                 ),
                 const SizedBox(height: 5,),
                 Padding(
@@ -252,7 +263,7 @@ class _StudyPageState extends State<StudyPage> {
                               side: BorderSide(
                                 color: Colors.black12,
                               ),
-                              borderRadius: const BorderRadius.all(Radius.circular(12)),
+                              borderRadius: BorderRadius.all(Radius.circular(12)),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 20),
@@ -261,19 +272,24 @@ class _StudyPageState extends State<StudyPage> {
                                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   const SizedBox(height: 10,),
-                                   Text('Дата заказа ${certificates![index].dateOrder!}'),
+                                   Text('Дата заказа ${certificates![index].dateOrder!}',
+                                   style: const TextStyle(fontFamily: 'NotoSerif',),),
                                    const SizedBox(height: 5,),
-                                   Text('Место предъявления ${certificates![index].provisionPlace!}'),
+                                   Text('Место предъявления ${certificates![index].provisionPlace!}',
+                                   style: const TextStyle(fontFamily: 'NotoSerif',),),
                                    ///
                                   /// хз какие статусы имеются, надо искать докум
                                   ///
                                    const SizedBox(height: 5,),
-                                   Text('${certificates![index].rejectionReason != null? 'Причина отказа ${certificates![index].rejectionReason!}' : ''}'),
+                                   Text('${certificates![index].rejectionReason != null? 'Причина отказа ${certificates![index].rejectionReason!}' : ''}',
+                                   style: const TextStyle(fontFamily: 'NotoSerif',),),
                                    const SizedBox(height: 5,),
                                   certificates![index].status! == 2? IconButton(onPressed: () async{
                                     AccountManager.RemoveCertificate(certificates![index].id!);
                                     updateCertificates();
-                                   }, icon: Icon(Icons.highlight_remove_outlined)):Text('Статус ${certificates![index].status == 1? "Напечатана" : "Отменена"}'),
+                                   }, icon: const Icon(Icons.highlight_remove_outlined)):Text('Статус ${certificates![index].status == 1? "Напечатана" : "Отменена"}',
+                                  style: const TextStyle(fontFamily: 'NotoSerif',),),
+                                  const SizedBox(height: 10,),
                                 ],
                               ),
                             ) ,
@@ -289,12 +305,12 @@ class _StudyPageState extends State<StudyPage> {
             ///
             /// dva placeholdera
             ///
-            Text(
+            const Text(
               'Заявки DOT',
               style: TextStyle(
                 fontSize: 18,
-                fontWeight: FontWeight.w400,
-                color: Color.fromRGBO(51, 40, 32, 0.9),
+                fontFamily: 'NotoSerif',
+                fontWeight: FontWeight.bold
               ),
             ),
             const SizedBox(height: 5,),
@@ -317,17 +333,18 @@ class _StudyPageState extends State<StudyPage> {
                 ),
               ),
             ),
-              SizedBox(height: 30,),
-              Container(
-                child: Text(
-                  'Задолженности в библиотеке',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: Color.fromRGBO(51, 40, 32, 0.9),
-                  ),
-                ),
-              ),
+
+              const SizedBox(height: 30,),
+              // Container(
+              //   child: Text(
+              //     'Задолженности в библиотеке',
+              //     style: TextStyle(
+              //       fontSize: 18,
+              //       fontWeight: FontWeight.bold,
+              //       fontFamily: 'NotoSerif',
+              //     ),
+              //   ),
+              // ),
           ],
         ),
       ),
@@ -377,11 +394,11 @@ class _OrderCertificateState extends State<OrderCertificate> {
       if (element.type != remba) {
         remba = element!.type!;
         list.add(DropdownMenuItem<Place>(child: Row(children:
-        [Text(element!.type!,style: TextStyle(fontSize: 10),),Expanded(child: Divider(color: Colors.black,))]),
+        [Text(element!.type!,style: TextStyle(fontSize: 10, fontFamily: 'NotoSerif',),),Expanded(child: Divider(color: Colors.black,))]),
             enabled: false, value: null));
       }
       element!.places!.forEach((ele) {
-        list.add(DropdownMenuItem<Place>(child: Text(ele!.name!), value: ele,));
+        list.add(DropdownMenuItem<Place>(child: Text(ele!.name!,style: TextStyle(fontFamily: 'NotoSerif',),), value: ele,));
       });
     });
     return list;
@@ -418,19 +435,18 @@ class _OrderCertificateState extends State<OrderCertificate> {
             Column
               (
               children: <Widget>[
-                Text('Тип печати'),
+                const Text('Тип печати', style: TextStyle(fontFamily: 'NotoSerif',),),
                 DropdownButton<String>(
-                    hint: Text(
+                    hint: const Text(
                       'Тип печати',
-                      // style: TextStyle(
-                      //   color: widget.primarycolor,
-                      // ),
+                      style: TextStyle(fontFamily: 'NotoSerif',),
                     ),
                     items: types.map<DropdownMenuItem<String>>((
                         String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(value),
+                        child: Text(value,
+                        style: const TextStyle(fontFamily: 'NotoSerif',),),
                       );
                     }).toList(),
                     value: Typevalue,
@@ -439,17 +455,15 @@ class _OrderCertificateState extends State<OrderCertificate> {
                         Typevalue = value;
                       });
                     }: null,),
-                RichText(text: TextSpan (text: 'Место предъявления',style: TextStyle(color: Colors.black),children:
+                RichText(text: TextSpan (text: 'Место предъявления',style: TextStyle(fontFamily: 'NotoSerif',),children:
                 [
-                  TextSpan(text: '*',style: TextStyle(color: Colors.red)),
+                  TextSpan(text: '*',style: TextStyle(fontFamily: 'NotoSerif',)),
                 ])),
                 DropdownButton<Place>(
                   isExpanded: true,
-                    hint: Text(
+                    hint: const Text(
                       'Вебырите место',
-                      // style: TextStyle(
-                      //   color: widget.primarycolor,
-                      // ),
+                      style: TextStyle(fontFamily: 'NotoSerif',),
                     ),
                     items: createlistplaces(),
                     value: Placevalue,
@@ -458,11 +472,11 @@ class _OrderCertificateState extends State<OrderCertificate> {
                         Placevalue = value;
                       });
                     }),
-               Text('Комментарий'),
+               const Text('Комментарий', style: TextStyle(fontFamily: 'NotoSerif',),),
                TextField(enabled: enabled,decoration: new InputDecoration.collapsed(
                    hintText: 'Оставьте комментарий'
                ),controller: Commentcontroller,),
-               Text('Количество справок'),
+               const Text('Количество справок', style: TextStyle(fontFamily: 'NotoSerif',),),
                 SpinBox(
                   min: 1,
                   max: 20,
@@ -476,17 +490,17 @@ class _OrderCertificateState extends State<OrderCertificate> {
                 /// Аккуратнее со стилями текста тут
                 ///
                 RichText(text: TextSpan(text: 'Правила заказа\n',
-                    style: TextStyle(fontSize: 20,color: Colors.black),
+                    style: TextStyle(fontSize: 20,fontFamily: 'NotoSerif',),
                   children: [
                     TextSpan(text: '1. Если Вы не знаете, какой тип печати нужен на справке, или Вам не нужна '
-                        'гербовая печать, выбирайте тип печати ',style: TextStyle(fontSize: 15)),
-                    TextSpan(text: '«обычная».\n', style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
-                    TextSpan(text: '2. Место предъявления ',style: TextStyle(fontSize: 15)),
-                    TextSpan(text: '«иное» ', style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                        'гербовая печать, выбирайте тип печати ',style: TextStyle(fontSize: 15,fontFamily: 'NotoSerif',)),
+                    TextSpan(text: '«обычная».\n', style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,fontFamily: 'NotoSerif',),),
+                    TextSpan(text: '2. Место предъявления ',style: TextStyle(fontSize: 15,fontFamily: 'NotoSerif',)),
+                    TextSpan(text: '«иное» ', style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,fontFamily: 'NotoSerif',),),
                     TextSpan(text: 'выбирайте только в том случае, если подходящий по смыслу вариант отсутствует в списке предложенных. '
                         'При этом в комментарии обязательно укажите нужное Вам место предъявления. '
-                        'Справки «по месту требования» не выдаются – ',style: TextStyle(fontSize: 15)),
-                    TextSpan(text: 'указывайте конкретное место.', style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                        'Справки «по месту требования» не выдаются – ',style: TextStyle(fontSize: 15,fontFamily: 'NotoSerif',)),
+                    TextSpan(text: 'указывайте конкретное место.', style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,fontFamily: 'NotoSerif',),),
                   ]
                 ),),
                 ElevatedButton(
@@ -495,7 +509,7 @@ class _OrderCertificateState extends State<OrderCertificate> {
                  logger.d(str);
                 }
                 : null,
-                    child: Text('Заказать'),
+                    child: const Text('Заказать', style: TextStyle(fontFamily: 'NotoSerif',),),
                 ),
               ],
             ),
@@ -550,20 +564,21 @@ class _OrderMarksheetState extends State<OrderMarksheet> {
         Column
           (
           children: <Widget>[
-            Text('Дисциплина'),
+            const Text('Дисциплина', style: TextStyle(fontFamily: 'NotoSerif',),),
             DropdownButton<Subj>(
                 isExpanded: true,
-                hint: Text(
+                hint: const Text(
                   'Вебырите предмет',
-                  // style: TextStyle(
-                  //   color: widget.primarycolor,
-                  // ),
+                  style: TextStyle(
+                    fontFamily: 'NotoSerif',
+                  ),
                 ),
                 items: subjs!.map<DropdownMenuItem<Subj>>((
                     Subj? value) {
                   return DropdownMenuItem<Subj>(
                     value: value,
-                    child: Text(value!.abbrev!+ '(' + value!.term!.toString() + ' семестр)'),
+                    child: Text(value!.abbrev!+ '(' + value!.term!.toString() + ' семестр)',
+                    style: const TextStyle(fontFamily: 'NotoSerif',),),
                   );
                 }).toList(),
                 value: Chosensubj,
@@ -574,20 +589,21 @@ class _OrderMarksheetState extends State<OrderMarksheet> {
                     types!.addAll(Chosensubj!.lessonTypes!);
                   });
                 }),
-            Text('Тип'),
+            const Text('Тип', style: TextStyle(fontFamily: 'NotoSerif',),),
             DropdownButton<LessonType>(
                 isExpanded: true,
-                hint: Text(
+                hint: const Text(
                   'Вебырите Тип',
-                  // style: TextStyle(
-                  //   color: widget.primarycolor,
-                  // ),
+                  style: TextStyle(
+                    fontFamily: 'NotoSerif',
+                  ),
                 ),
                 items: types!.map<DropdownMenuItem<LessonType>>((
                     LessonType? value) {
                   return DropdownMenuItem<LessonType>(
                     value: value,
-                    child: Text(value!.abbrev!),
+                    child: Text(value!.abbrev!,
+                    style: const TextStyle(fontFamily: 'NotoSerif',),),
                   );
                 }).toList(),
                 value: Chosentype,
@@ -615,7 +631,7 @@ class _OrderMarksheetState extends State<OrderMarksheet> {
             Container(
               child: Row(
                 children: [
-                  IconButton(icon: Icon(Icons.calendar_month),onPressed: () async{
+                  IconButton(icon: const Icon(Icons.calendar_month),onPressed: () async{
                     DateTime? pickedDate = await showDatePicker(
                         context: context,
                         initialDate: DateTime.now(), //get today's date

@@ -32,9 +32,9 @@ class _MainPageState extends State<MainPage> {
             ],
           ),
           backgroundColor: Colors.transparent,
-          iconTheme: const IconThemeData(
-            color: Colors.black, // Цвет иконки
-          ),
+          // iconTheme: const IconThemeData(
+          //   color: Colors.black, // Цвет иконки
+          // ),
           actions: [
             IconButton(
                 icon: const Icon(
@@ -62,15 +62,15 @@ class _MainPageState extends State<MainPage> {
                             height: 40,
                           ),
                           Container(
-                            height: 140,
-                            width: 140,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 8,
-                              ),
-                            ),
+                            height: MediaQuery.of(context).size.height*0.11194,
+                            width: MediaQuery.of(context).size.width*0.2385,
+                            // decoration: BoxDecoration(
+                            //   shape: BoxShape.circle,
+                            //   border: Border.all(
+                            //     color: Colors.white,
+                            //     width: 8,
+                            //   ),
+                            // ),
                             child: ClipOval(
                               ///
                               /// TODO
@@ -83,34 +83,34 @@ class _MainPageState extends State<MainPage> {
                           Text(
                             widget.user.lastName! + ' ' + widget.user.firstName! + ' ' + widget.user.middleName!,
                             style: const TextStyle(
-                              fontSize: 22,
+                              fontFamily: 'NotoSerif',
                               fontWeight: FontWeight.bold,
-                              color: Color.fromRGBO(22, 49, 99, 0.9),
+                              fontSize: 18
                             ),
                           ),
                           const SizedBox(height: 10),
                           Text(
                             "Студент " + widget.user.course!.toString() + " курса",
                             style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 15,
+                              fontFamily: 'NotoSerif',
+                              fontSize: 14,
                             ),
                           ),
                           const SizedBox(height: 3,),
                           Text(
                             'Факультет ' + widget.user.faculty! + ', ' + widget.user.speciality!,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 15,
+                              fontFamily: 'NotoSerif',
+                              fontSize: 14,
                             ),
                           ),
                           const SizedBox(height: 7,),
                           Text(
                             widget.user.birthDate!,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: Colors.brown[200],
+                            style: const TextStyle(
+                              fontFamily: 'NotoSerif',
                               fontSize: 15,
+                              fontStyle: FontStyle.italic,
                             ),
                           ),
                           const SizedBox(height: 13,),
@@ -118,7 +118,7 @@ class _MainPageState extends State<MainPage> {
                             children: [
                               SizedBox(width: MediaQuery.of(context).size.width/4 + 32),
                               widget.user.rating! >= 1
-                                  ?Icon(
+                                  ?const Icon(
                                 Icons.filter_vintage,
                                 size: 20,
                                 color: Color.fromRGBO(255, 180, 0, 0.9),
@@ -130,7 +130,7 @@ class _MainPageState extends State<MainPage> {
                               ),
                               const SizedBox(width: 10),
                               widget.user.rating! >= 2
-                                  ?Icon(
+                                  ?const Icon(
                                 Icons.filter_vintage,
                                 size: 20,
                                 color: Color.fromRGBO(255, 180, 0, 0.9),
@@ -142,7 +142,7 @@ class _MainPageState extends State<MainPage> {
                               ),
                               const SizedBox(width: 10),
                               widget.user.rating! >= 3
-                                  ?Icon(
+                                  ?const Icon(
                                 Icons.filter_vintage,
                                 size: 20,
                                 color: Color.fromRGBO(255, 180, 0, 0.9),
@@ -154,7 +154,7 @@ class _MainPageState extends State<MainPage> {
                               ),
                               const SizedBox(width: 10),
                               widget.user.rating! >= 4
-                                  ?Icon(
+                                  ?const Icon(
                                 Icons.filter_vintage,
                                 size: 20,
                                 color: Color.fromRGBO(255, 180, 0, 0.9),
@@ -166,7 +166,7 @@ class _MainPageState extends State<MainPage> {
                               ),
                               const SizedBox(width: 10),
                               widget.user.rating! >= 5
-                                  ?Icon(
+                                  ?const Icon(
                                 Icons.filter_vintage,
                                 size: 20,
                                 color: Color.fromRGBO(255, 180, 0, 0.9),
@@ -178,88 +178,75 @@ class _MainPageState extends State<MainPage> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 40,),
-                          Text(
-                            'Основная информация',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 15,
-                            ),
-                          ),
-                          const SizedBox(height: 5,),
-                          Text(
-                            widget.user.summary!=null
-                                ? widget.user.summary!
-                                : "",
-                          ),
-                          const SizedBox(height: 10,),
-                          Text(
-                            'Навыки',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 15,
-                            ),
-                          ),
-                          const SizedBox(height: 5,),
-                          Text(
-                            widget.user.skills!=null
-                                ? widget.user.skills!.toString()
-                                : "",
-                          ),
-                          const SizedBox(height: 10,),
-                          Text(
-                            'Ссылки',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 15,
-                            ),
-                          ),
-                          const SizedBox(height: 5,),
-                          Text(
-                            widget.user.references!=null
-                                ? widget.user.references!.toString()
-                                : "",
-                          ),
-                          // const SizedBox(height: 150,),
-                          // Row(
-                          //   children: [
-                          //     SizedBox(width: MediaQuery.of(context).size.width/10),
-                          //     Text(
-                          //       'Почта:  ',
-                          //       style: TextStyle(
-                          //         fontWeight: FontWeight.w500,
-                          //         fontSize: 16,
-                          //       ),
-                          //     ),
-                          //     Text(
-                          //       user.officeEmail!,
-                          //       style: TextStyle(
-                          //         fontSize: 14,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-                          // const SizedBox(height: 10,),
-                          // Row(
-                          //   children: [
-                          //     SizedBox(width: MediaQuery.of(context).size.width/10),
-                          //     Text(
-                          //       'Пароль:  ',
-                          //       style: TextStyle(
-                          //         fontWeight: FontWeight.w500,
-                          //         fontSize: 16,
-                          //       ),
-                          //     ),
-                          //     Text(
-                          //       user.officePassword!,
-                          //       style: TextStyle(
-                          //         fontSize: 14,
-                          //       ),
-                          //     ),
+
+                          const SizedBox(height: 50,),
+                          widget.user.officeEmail!=null?
+                          Row(
+                            children: [
+                              SizedBox(width: MediaQuery.of(context).size.width/10),
+                              const Text(
+                                'Почта:  ',
+                                style: TextStyle(
+                                  // color: Colors.black,
+                                  fontFamily: 'NotoSerif',
+                                  fontWeight: FontWeight.bold,
+                                    fontSize: 16
+                                ),
+                              ),
+                              Text(
+                                widget.user.officeEmail!,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: 'NotoSerif',
+                                ),
+                              ),
                             ],
+                          ) :
+                         const  Text(
+                            'Почта:  ',
+                            style: TextStyle(
+                              // color: Colors.black,
+                              fontFamily: 'NotoSerif',
+                              fontWeight: FontWeight.bold,
+                                fontSize: 16
+                            ),
                           ),
+                          const SizedBox(height: 10,),
+                          widget.user.officePassword!=null?
+                          Row(
+                            children: [
+                              SizedBox(width: MediaQuery.of(context).size.width/10),
+                              const Text(
+                                'Пароль:  ',
+                                style: TextStyle(
+                                  // color: Colors.black,
+                                  fontFamily: 'NotoSerif',
+                                  fontWeight: FontWeight.bold,
+                                    fontSize: 16
+
+                                ),
+                              ),
+                              Text(
+                                widget.user.officePassword!,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: 'NotoSerif',
+                                ),
+                              ),
+                            ],
+                          ):
+                          const Text(
+                            'Пароль:  ',
+                            style: TextStyle(
+                              // color: Colors.black,
+                              fontFamily: 'NotoSerif',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16
+                            ),
+                          ),
+                      ],
                     ),
-                        ],
+                    ),],
                       ),
                     ),
                   ],

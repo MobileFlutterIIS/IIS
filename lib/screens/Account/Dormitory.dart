@@ -50,9 +50,9 @@ class _DormitoryState extends State<Dormitory> {
           ],
         ),
         backgroundColor: Colors.transparent,
-        iconTheme: const IconThemeData(
-          color: Colors.black, // Цвет иконки
-        ),
+        // iconTheme: const IconThemeData(
+        //   color: Colors.black, // Цвет иконки
+        // ),
       ),
       body: SingleChildScrollView(
         child: FutureBuilder(
@@ -62,14 +62,19 @@ class _DormitoryState extends State<Dormitory> {
               return const CircularProgressIndicator();
             }
             return Padding(
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text('Информация о заселении'),
+                  Text('Информация о заселении',
+                  style: TextStyle(fontFamily: 'NotoSerif', fontWeight: FontWeight.bold,fontSize: 18),),
+                  const SizedBox(height: 10,),
                   Text('Для подачи заявления (бланк можно скачать ниже) Вам нужно обратиться в деканат. '
-                      'К заявлению обязательно прилагается справка о составе семьи и, при наличии, документы, подтверждающие льготы.'),
-                  ElevatedButton(onPressed: (){}, child: Text('Подать Заявку')),
+                      'К заявлению обязательно прилагается справка о составе семьи и, при наличии, документы, подтверждающие льготы.',
+                  style: TextStyle(fontFamily: 'NotoSerif',),),
+                  const SizedBox(height: 10,),
+                  ElevatedButton(onPressed: (){}, child: Text('Подать Заявку',
+                  style: TextStyle(fontFamily: 'NotoSerif',),)),
                   Container(
                     height: 200,
                     child: ListView.builder(
@@ -79,12 +84,14 @@ class _DormitoryState extends State<Dormitory> {
                            color: dorms![index].status! == "Ожидание"? Colors.orange: Colors.green,
                            child: Row(
                            children: [
-                             Text(dorms![index].number!.toString()),
+                             Text(dorms![index].number!.toString(),
+                             style: TextStyle(fontFamily: 'NotoSerif',),),
                            ],
                          ),);
                       }
                   ),),
-                  Text('Льготы'),
+                  Text('Льготы',
+                  style: TextStyle(fontFamily: 'NotoSerif',),),
                   Container(
                     height: 200,
                     child: ListView.builder(
@@ -93,7 +100,9 @@ class _DormitoryState extends State<Dormitory> {
                           return Card(
                             child: Row(
                               children: [
-                                Text(privs![index]),
+                                Text(privs![index],
+                                style: TextStyle(fontFamily: 'NotoSerif',),),
+
                               ],
                             ),);
                         }
